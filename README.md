@@ -17,7 +17,7 @@ docker run -d --restart unless-stopped -p 127.0.0.1:8081:8080 --name terrama2_ge
 
 docker volume create terrama2_pg_vol
 
-docker run --name terrama2_pg -p 5433:5432 -v terrama2_pg_vol:/var/lib/postgresql/data -e POSTGRES_PASSWORD=mysecretpassword -d mdillon/postgis
+docker run --name terrama2_pg -p 127.0.0.1:5433:5432 -v terrama2_pg_vol:/var/lib/postgresql/data -e POSTGRES_PASSWORD=mysecretpassword -d mdillon/postgis
 
 
 # TerraMA2
