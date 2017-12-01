@@ -1,7 +1,7 @@
 version: "3"
 
 services:
-
+  
   # TerraMA2 Web Application
   webapp:
     image: "${TERRAMA2_DOCKER_REGISTRY}/terrama2-webapp:4.0.0-rc4"
@@ -13,18 +13,22 @@ services:
       - "${TERRAMA2_CONFIG_DIR}/id_rsa:/home/terrama2/.ssh/id_rsa"
       - "${TERRAMA2_CONFIG_DIR}/id_rsa:/root/.ssh/id_rsa"
     networks:
-        - net
+      - net:
 
   # TerraMA2 Web Monitor
   webmonitor:
     image: "${TERRAMA2_DOCKER_REGISTRY}/terrama2-webmonitor:4.0.0-rc4"
     ports:
       - "${TERRAMA2_WEBMONITOR_ADDRESS}:36001"
+    depends_on:
+      - webapp
     volumes:
       - "${TERRAMA2_DATA_DIR}:/data"
       - "${TERRAMA2_CONFIG_DIR}/${TERRAMA2_PROJECT_NAME}_webmonitor.json:/opt/terrama2/4.0.0/webmonitor/config/instances/default.json"
     networks:
-        - net
+      - net
+    links:
+      - webapp
 
   # TerraMA2 Collector Service using TerraMA2 Base
   collector:
@@ -39,7 +43,7 @@ services:
       - "${TERRAMA2_CONFIG_DIR}/id_rsa.pub:/root/.ssh/authorized_keys"
     tty: true
     networks:
-        - net
+      - net
 
   # TerraMA2 Analysis Service using TerraMA2 Base
   analysis:
@@ -54,7 +58,7 @@ services:
       - "${TERRAMA2_CONFIG_DIR}/id_rsa.pub:/root/.ssh/authorized_keys"
     tty: true
     networks:
-        - net
+      - net
 
   # TerraMA2 View Service using TerraMA2 Base
   view:
@@ -69,7 +73,7 @@ services:
       - "${TERRAMA2_CONFIG_DIR}/id_rsa.pub:/root/.ssh/authorized_keys"
     tty: true
     networks:
-        - net
+      - net
 
   # TerraMA2 Alert Service using TerraMA2 Base
   alert:
@@ -84,7 +88,7 @@ services:
       - "${TERRAMA2_CONFIG_DIR}/id_rsa.pub:/root/.ssh/authorized_keys"
     tty: true
     networks:
-        - net
+      - net
 
 networks:
 

@@ -22,6 +22,7 @@ docker run --name terrama2_pg -p 127.0.0.1:5433:5432 -v terrama2_pg_vol:/var/lib
 
 # TerraMA2
 
+
 docker network create terrama2_net
 
 docker network connect terrama2_net terrama2_geoserver
@@ -35,3 +36,5 @@ bg
 docker-compose -p terrama2 stop
 
 docker-compose -p terrama2 rm
+
+docker exec -it terrama2_webapp_1 bash
