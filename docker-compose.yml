@@ -13,7 +13,7 @@ services:
       - "${TERRAMA2_CONFIG_DIR}/id_rsa:/home/terrama2/.ssh/id_rsa"
       - "${TERRAMA2_CONFIG_DIR}/id_rsa:/root/.ssh/id_rsa"
     networks:
-      - net:
+      - net
 
   # TerraMA2 Web Monitor
   webmonitor:
@@ -91,5 +91,4 @@ services:
       - net
 
 networks:
-
     net:
