@@ -92,3 +92,6 @@ services:
 
 networks:
     net:
+
+volumes:
+    data_vol
