@@ -1,16 +1,9 @@
-FROM ubuntu:14.04
+FROM ubuntu:16.04
 
 ############################################################################
 # Information
 LABEL maintainer="TerraMA² Team <terrama2-team@dpi.inpe.br>" \
       version="4.0.0"
-
-############################################################################
-# Port Binding
-
-############################################################################
-# Customizable Variables
-
 
 ############################################################################
 # Environment Variables
@@ -21,35 +14,20 @@ ENV TERRAMA2_CODEBASE_PATH=${DEV_DIR}/terrama2/codebase
 ENV TERRAMA2_3RDPARTY_PATH=${DEV_DIR}/terrama2/3rdparty
 ENV PATH="$PATH:${TERRAMA2_INSTALL_PATH}/bin"
 
-RUN echo "deb http://br.archive.ubuntu.com/ubuntu/ trusty-backports main restricted universe multiverse" >> /etc/apt/sources.list && \
-    echo "deb-src http://br.archive.ubuntu.com/ubuntu/ trusty-backports main restricted universe multiverse" >> /etc/apt/sources.list && \
-    apt-get update && \
+RUN apt-get update && \
     apt-get install -y cmake \
-                       build-essential \
+                       curl \
                        software-properties-common \
-                       libcurl3-dev \
-                       libpython2.7-dev \
-                       libquazip0-dev \
-                       libproj-dev \
-                       libgeos++-dev \
-                       libxerces-c-dev \
+                       libquazip-dev \
                        git \
-                       postgresql-9.3-postgis-2.1 \
                        unzip \
                        sudo \
                        screen \
                        openssh-server \
                        # VMime Dependencies
                        doxygen \
-                       graphviz \
-                       gnutls-bin \
-                       gsasl \
-                       libghc-gsasl-dev \
-                       libgnutls-dev \
-                       libssl-dev \
-                       debhelper \
-                       devscripts \
-                       dbus
+                       # Process Control
+                       supervisor
 
 # Creating USER
 RUN groupadd $TERRAMA2_USER && \
@@ -65,8 +43,8 @@ RUN groupadd $TERRAMA2_USER && \
 
 # TerraLib
 RUN cd ${TERRAMA2_3RDPARTY_PATH} && \
-    curl -o terralib-5.2.3-ubuntu-14.04.tar.gz -L http://www.dpi.inpe.br/terralib5/download/download.php?FileName=terralib-5.2.3-ubuntu-14.04.tar.gz && \
-    tar zxf terralib-5.2.3-ubuntu-14.04.tar.gz && \
+    curl -o terralib-5.2.4-ubuntu-16.04.tar.gz -L http://www.dpi.inpe.br/terralib5/download/download.php?FileName=terralib-5.2.4-ubuntu-16.04.tar.gz && \
+    tar zxf terralib-5.2.4-ubuntu-16.04.tar.gz && \
     ./install.sh && \
     rm -rf *
 
@@ -76,15 +54,18 @@ RUN curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash - && \
 
 # VMime
 RUN cd ${TERRAMA2_CODEBASE_PATH} && \
-    curl -O http://www.dpi.inpe.br/jenkins-data/terrama2/3rdparty/terrama2-vmime_0.9.2-ubuntu-14.04_amd64.deb && \
-    dpkg -i terrama2-vmime_0.9.2-ubuntu-14.04_amd64.deb && \
+    curl -O http://www.dpi.inpe.br/jenkins-data/terrama2/3rdparty/terrama2-vmime_0.9.2-ubuntu-16.04_amd64.deb && \
+    apt-get install -y libgsasl7 && \
+    dpkg -i terrama2-vmime_0.9.2-ubuntu-16.04_amd64.deb && \
     apt-get install -f -y && \
-    rm -rf terrama2-vmime_0.9.2-ubuntu-14.04_amd64.deb* v* ${TERRAMA2_CODEBASE_PATH}
+    rm -rf terrama2-vmime_0.9.2-ubuntu-16.04_amd64.deb* v* ${TERRAMA2_CODEBASE_PATH}
 
 # ############################################################################
 # # TerraMA2
-COPY files/install_terrama2.sh /usr/local/bin
+COPY files/install_terrama2.sh .
 
-RUN install_terrama2.sh
+RUN ./install_terrama2.sh
 
 COPY files/start_terrama2_service.sh /usr/local/bin
+
+WORKDIR ${TERRAMA2_INSTALL_PATH}
