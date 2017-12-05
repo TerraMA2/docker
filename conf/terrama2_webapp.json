@@ -1,5 +1,5 @@
 {
-  "basePath": "/",
+  "basePath": "/webapp/",
   "port": 36000,
   "defaultFilePath": "/data",
   "defaultExecutablePath": "/opt/terrama2/4.0.0/bin",

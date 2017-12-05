@@ -17,7 +17,6 @@ ENV PATH="$PATH:${TERRAMA2_INSTALL_PATH}/bin"
 RUN apt-get update && \
     apt-get install -y cmake \
                        curl \
-                       software-properties-common \
                        libquazip-dev \
                        git \
                        unzip \
@@ -64,7 +63,7 @@ RUN cd ${TERRAMA2_CODEBASE_PATH} && \
 # # TerraMA2
 COPY files/install_terrama2.sh .
 
-RUN ./install_terrama2.sh
+RUN ./install_terrama2.sh && rm install_terrama2.sh
 
 COPY files/start_terrama2_service.sh /usr/local/bin
 

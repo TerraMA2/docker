@@ -7,4 +7,5 @@ service supervisor start
 
 trap "supervisorctl stop terrama2-webapp" EXIT HUP INT QUIT TERM
 
-bash
+# Lock Execution
+supervisorctl tail -f terrama2-webapp

@@ -10,7 +10,7 @@ services:
     volumes:
       - "${TERRAMA2_DATA_DIR}:/data"
       - "${TERRAMA2_CONFIG_DIR}/${TERRAMA2_PROJECT_NAME}_webapp.json:/opt/terrama2/4.0.0/webapp/config/instances/default.json"
-      - "${TERRAMA2_CONFIG_DIR}/id_rsa:/home/terrama2/.ssh/id_rsa"
+      - "${TERRAMA2_CONFIG_DIR}/${TERRAMA2_PROJECT_NAME}_supervisor_webapp.conf:/etc/supervisor/conf.d/terrama2-webapp.conf"
       - "${TERRAMA2_CONFIG_DIR}/id_rsa:/root/.ssh/id_rsa"
     networks:
       - net
@@ -25,6 +25,7 @@ services:
     volumes:
       - "${TERRAMA2_DATA_DIR}:/data"
       - "${TERRAMA2_CONFIG_DIR}/${TERRAMA2_PROJECT_NAME}_webmonitor.json:/opt/terrama2/4.0.0/webmonitor/config/instances/default.json"
+      - "${TERRAMA2_CONFIG_DIR}/${TERRAMA2_PROJECT_NAME}_supervisor_webmonitor.conf:/etc/supervisor/conf.d/terrama2-webmonitor.conf"
     networks:
       - net
     links:
