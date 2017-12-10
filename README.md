@@ -90,10 +90,10 @@ docker network connect terrama2_net terrama2_geoserver
 docker network connect terrama2_net terrama2_pg
 ```
 
-Now run the docker-compose:
+Now run the docker-compose in daemon mode:
 
 ```bash
-docker-compose -p terrama2 up
+docker-compose -p terrama2 up -d
 ```
 
 To put the console in the backgroup, type `CTRL + Z`  and than the command `bg`.
