@@ -1,0 +1,414 @@
+{
+  "LayerToFilter": {
+    "LayerId": "bdqueimadas:focos_bdq_light",
+    "IdFieldName": "pid",
+    "DateTimeFieldName": "data_pas",
+    "SatelliteFieldName": "satelite",
+    "CityFieldName": "municipio_id",
+    "CityNameFieldName": "municipio_nome",
+    "StateFieldName": "estado_id",
+    "StateNameFieldName": "estado_nome",
+    "CountryFieldName": "pais_id",
+    "CountryNameFieldName": "pais_nome",
+    "BiomeIdFieldName": "bioma_id",
+    "BiomeFieldName": "bioma_nome",
+    "DateFormat": "YYYY-MM-DD",
+    "DateTimeFormat": "YYYY-MM-DD HH:II:SS",
+    "InitialDate": "{{-|1|d=YYYY-MM-DD}}",
+    "FinalDate": "{{0=YYYY-MM-DD}}"
+  },
+  "CountriesLayer": {
+    "Id": "bdqueimadas:paises_light"
+  },
+  "StatesLayer": {
+    "Id": "bdqueimadas:estados_light",
+    "CountryField": "pais_id"
+  },
+  "CitiesLayer": {
+    "Id": "bdqueimadas:municipios_light",
+    "CountryField": "pais_id",
+    "StateField": "complete_id_state",
+    "CityField": "complete_id"
+  },
+  "ProtectedAreas": {
+    "UCF": {
+      "LayerName": "bdqueimadas:unidades_conservacao_federais",
+      "IdField": "gid"
+    }
+  },
+  "SpatialFilter": {
+    "Countries": {
+      "MinResolution": 0.080,
+      "MaxResolution": 0.35
+    },
+    "States": {
+      "MinResolution": 0,
+      "MaxResolution": 0.080
+    }
+  },
+  "Extents": {
+    "Countries": {
+      "244": "-195,14.02086137281292,-60,75.97913862718708"
+    },
+    "States": {
+      "2440002": "-195,44.43674293405114,-125,76.56325706594886",
+      "0330008": "-44.75,-21.47964333781965,-36.45,-17.67035666218035"
+    },
+    "ProtectedAreas": {},
+    "Cities": {}
+  },
+  "Satellites": [
+    {
+      "Id": "NOAA-12",
+      "Name": "NOAA-12 Noite",
+      "Begin": "1998-06-01",
+      "End": "2007-08-09",
+      "Current": false,
+      "Selected": false,
+      "ReferenceBegin": "1998-06-01",
+      "ReferenceEnd": "2002-07-03",
+      "ReferenceCurrent": false
+    },
+    {
+      "Id": "NOAA-12D",
+      "Name": "NOAA-12 Manhã",
+      "Begin": "2003-10-01",
+      "End": "2007-08-10",
+      "Current": false,
+      "Selected": false,
+      "ReferenceBegin": "",
+      "ReferenceEnd": "",
+      "ReferenceCurrent": false
+    },
+    {
+      "Id": "ATSR",
+      "Name": "ATSR ESA Noite",
+      "Begin": "1998-06-01",
+      "End": "2012-03-28",
+      "Current": false,
+      "Selected": false,
+      "ReferenceBegin": "",
+      "ReferenceEnd": "",
+      "ReferenceCurrent": false
+    },
+    {
+      "Id": "TERRA_M-M",
+      "Name": "TERRA_M-M",
+      "Begin": "2000-11-01",
+      "End": "",
+      "Current": true,
+      "Selected": false,
+      "ReferenceBegin": "",
+      "ReferenceEnd": "",
+      "ReferenceCurrent": false
+    },
+    {
+      "Id": "TERRA_M-T",
+      "Name": "TERRA_M-T",
+      "Begin": "2000-11-01",
+      "End": "",
+      "Current": true,
+      "Selected": false,
+      "ReferenceBegin": "",
+      "ReferenceEnd": "",
+      "ReferenceCurrent": false
+    },
+    {
+      "Id": "AQUA_M-M",
+      "Name": "AQUA_M-M",
+      "Begin": "2002-07-04",
+      "End": "",
+      "Current": true,
+      "Selected": false,
+      "ReferenceBegin": "",
+      "ReferenceEnd": "",
+      "ReferenceCurrent": false
+    },
+    {
+      "Id": "AQUA_M-T",
+      "Name": "AQUA_M-T",
+      "Begin": "2002-07-04",
+      "End": "",
+      "Current": true,
+      "Selected": true,
+      "ReferenceBegin": "2002-07-04",
+      "ReferenceEnd": "",
+      "ReferenceCurrent": true
+    },
+    {
+      "Id": "TERRA-M",
+      "Name": "TERRA-M",
+      "Begin": "2002-09-16",
+      "End": "2013-09-09",
+      "Current": false,
+      "Selected": false,
+      "ReferenceBegin": "",
+      "ReferenceEnd": "",
+      "ReferenceCurrent": false
+    },
+    {
+      "Id": "TERRA-T",
+      "Name": "TERRA-T",
+      "Begin": "2002-09-25",
+      "End": "2013-09-09",
+      "Current": false,
+      "Selected": false,
+      "ReferenceBegin": "",
+      "ReferenceEnd": "",
+      "ReferenceCurrent": false
+    },
+    {
+      "Id": "AQUA-M",
+      "Name": "AQUA-M",
+      "Begin": "2002-09-23",
+      "End": "2013-09-09",
+      "Current": false,
+      "Selected": false,
+      "ReferenceBegin": "",
+      "ReferenceEnd": "",
+      "ReferenceCurrent": false
+    },
+    {
+      "Id": "AQUA-T",
+      "Name": "AQUA-T",
+      "Begin": "2002-09-24",
+      "End": "2013-09-09",
+      "Current": false,
+      "Selected": false,
+      "ReferenceBegin": "",
+      "ReferenceEnd": "",
+      "ReferenceCurrent": false
+    },
+    {
+      "Id": "GOES-08",
+      "Name": "GOES-08",
+      "Begin": "2002-08-01",
+      "End": "2003-03-31",
+      "Current": false,
+      "Selected": false,
+      "ReferenceBegin": "",
+      "ReferenceEnd": "",
+      "ReferenceCurrent": false
+    },
+    {
+      "Id": "GOES-10",
+      "Name": "GOES-10",
+      "Begin": "2007-03-13",
+      "End": "2009-11-30",
+      "Current": false,
+      "Selected": false,
+      "ReferenceBegin": "",
+      "ReferenceEnd": "",
+      "ReferenceCurrent": false
+    },
+    {
+      "Id": "GOES-12",
+      "Name": "GOES-12",
+      "Begin": "2003-06-04",
+      "End": "2013-08-11",
+      "Current": false,
+      "Selected": false,
+      "ReferenceBegin": "",
+      "ReferenceEnd": "",
+      "ReferenceCurrent": false
+    },
+    {
+      "Id": "GOES-13",
+      "Name": "GOES",
+      "Begin": "2011-11-26",
+      "End": "",
+      "Current": true,
+      "Selected": false,
+      "ReferenceBegin": "",
+      "ReferenceEnd": "",
+      "ReferenceCurrent": false
+    },
+    {
+      "Id": "GOES-16",
+      "Name": "GOES-16",
+      "Begin": "2017-07-04",
+      "End": "",
+      "Current": true,
+      "Selected": false,
+      "ReferenceBegin": "",
+      "ReferenceEnd": "",
+      "ReferenceCurrent": false
+    },
+    {
+      "Id": "NOAA-16",
+      "Name": "NOAA-16 Noite",
+      "Begin": "2003-10-03",
+      "End": "2014-06-06",
+      "Current": false,
+      "Selected": false,
+      "ReferenceBegin": "",
+      "ReferenceEnd": "",
+      "ReferenceCurrent": false
+    },
+    {
+      "Id": "NOAA-16N",
+      "Name": "NOAA-16 Manhã",
+      "Begin": "2003-07-12",
+      "End": "2014-06-06",
+      "Current": false,
+      "Selected": false,
+      "ReferenceBegin": "",
+      "ReferenceEnd": "",
+      "ReferenceCurrent": false
+    },
+    {
+      "Id": "NOAA-15",
+      "Name": "NOAA-15 Noite",
+      "Begin": "2005-06-28",
+      "End": "",
+      "Current": true,
+      "Selected": false,
+      "ReferenceBegin": "",
+      "ReferenceEnd": "",
+      "ReferenceCurrent": false
+    },
+    {
+      "Id": "NOAA-15D",
+      "Name": "NOAA-15 Manhã",
+      "Begin": "2005-06-28",
+      "End": "",
+      "Current": true,
+      "Selected": false,
+      "ReferenceBegin": "",
+      "ReferenceEnd": "",
+      "ReferenceCurrent": false
+    },
+    {
+      "Id": "NOAA-17",
+      "Name": "NOAA-17 Noite",
+      "Begin": "2005-05-19",
+      "End": "2010-09-26",
+      "Current": false,
+      "Selected": false,
+      "ReferenceBegin": "",
+      "ReferenceEnd": "",
+      "ReferenceCurrent": false
+    },
+    {
+      "Id": "NOAA-14",
+      "Name": "NOAA-14 Noite",
+      "Begin": "2005-07-26",
+      "End": "2007-05-23",
+      "Current": false,
+      "Selected": false,
+      "ReferenceBegin": "",
+      "ReferenceEnd": "",
+      "ReferenceCurrent": false
+    },
+    {
+      "Id": "NOAA-18",
+      "Name": "NOAA-18 Tarde",
+      "Begin": "2005-07-18",
+      "End": "",
+      "Current": true,
+      "Selected": false,
+      "ReferenceBegin": "",
+      "ReferenceEnd": "",
+      "ReferenceCurrent": false
+    },
+    {
+      "Id": "NOAA-18D",
+      "Name": "NOAA-18 Manhã",
+      "Begin": "2005-06-24",
+      "End": "",
+      "Current": true,
+      "Selected": false,
+      "ReferenceBegin": "",
+      "ReferenceEnd": "",
+      "ReferenceCurrent": false
+    },
+    {
+      "Id": "MSG-02",
+      "Name": "MSG-02",
+      "Begin": "2007-01-13",
+      "End": "2013-07-16",
+      "Current": false,
+      "Selected": false,
+      "ReferenceBegin": "",
+      "ReferenceEnd": "",
+      "ReferenceCurrent": false
+    },
+    {
+      "Id": "MSG-03",
+      "Name": "MSG-03",
+      "Begin": "2013-07-17",
+      "End": "",
+      "Current": true,
+      "Selected": false,
+      "ReferenceBegin": "",
+      "ReferenceEnd": "",
+      "ReferenceCurrent": false
+    },
+    {
+      "Id": "METOP-B",
+      "Name": "METOP-B",
+      "Begin": "2016-12-01",
+      "End": "",
+      "Current": true,
+      "Selected": false,
+      "ReferenceBegin": "",
+      "ReferenceEnd": "",
+      "ReferenceCurrent": false
+    },
+    {
+      "Id": "NOAA-19",
+      "Name": "NOAA-19 Tarde",
+      "Begin": "2010-02-06",
+      "End": "",
+      "Current": true,
+      "Selected": false,
+      "ReferenceBegin": "",
+      "ReferenceEnd": "",
+      "ReferenceCurrent": false
+    },
+    {
+      "Id": "NOAA-19D",
+      "Name": "NOAA-19 Manhã",
+      "Begin": "2010-02-13",
+      "End": "",
+      "Current": true,
+      "Selected": false,
+      "ReferenceBegin": "",
+      "ReferenceEnd": "",
+      "ReferenceCurrent": false
+    },
+    {
+      "Id": "NPP",
+      "Name": "NPP VIRS_700m",
+      "Begin": "2013-09-25",
+      "End": "",
+      "Current": true,
+      "Selected": false,
+      "ReferenceBegin": "",
+      "ReferenceEnd": "",
+      "ReferenceCurrent": false
+    },
+    {
+      "Id": "NPP_375",
+      "Name": "NPP VIRS_375m",
+      "Begin": "2015-01-17",
+      "End": "",
+      "Current": true,
+      "Selected": false,
+      "ReferenceBegin": "",
+      "ReferenceEnd": "",
+      "ReferenceCurrent": false
+    },
+    {
+      "Id": "TRMM",
+      "Name": "TRMM NASA",
+      "Begin": "2007-01-01",
+      "End": "2013-09-22",
+      "Current": false,
+      "Selected": false,
+      "ReferenceBegin": "",
+      "ReferenceEnd": "",
+      "ReferenceCurrent": false
+    }
+  ]
+}
