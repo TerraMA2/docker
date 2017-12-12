@@ -10,8 +10,8 @@ services:
       - "${TERRAMA2_WEBAPP_ADDRESS}:36000"
     volumes:
       - "${TERRAMA2_DATA_DIR}:/data"
-      - "${TERRAMA2_CONFIG_DIR}/${TERRAMA2_PROJECT_NAME}_webapp.json:/opt/terrama2/4.0.0/webapp/config/instances/default.json"
-      - "${TERRAMA2_CONFIG_DIR}/${TERRAMA2_PROJECT_NAME}_supervisor_webapp.conf:/etc/supervisor/conf.d/terrama2-webapp.conf"
+      - "${TERRAMA2_CONFIG_DIR}/terrama2_webapp.json:/opt/terrama2/4.0.0/webapp/config/instances/default.json"
+      - "${TERRAMA2_CONFIG_DIR}/terrama2_supervisor_webapp.conf:/etc/supervisor/conf.d/terrama2-webapp.conf"
       - "${TERRAMA2_CONFIG_DIR}/id_rsa:/root/.ssh/id_rsa"
     networks:
       - net
@@ -26,8 +26,8 @@ services:
       - webapp
     volumes:
       - "${TERRAMA2_DATA_DIR}:/data"
-      - "${TERRAMA2_CONFIG_DIR}/${TERRAMA2_PROJECT_NAME}_webmonitor.json:/opt/terrama2/4.0.0/webmonitor/config/instances/default.json"
-      - "${TERRAMA2_CONFIG_DIR}/${TERRAMA2_PROJECT_NAME}_supervisor_webmonitor.conf:/etc/supervisor/conf.d/terrama2-webmonitor.conf"
+      - "${TERRAMA2_CONFIG_DIR}/terrama2_webmonitor.json:/opt/terrama2/4.0.0/webmonitor/config/instances/default.json"
+      - "${TERRAMA2_CONFIG_DIR}/terrama2_supervisor_webmonitor.conf:/etc/supervisor/conf.d/terrama2-webmonitor.conf"
     networks:
       - net
     links:
