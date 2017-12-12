@@ -113,19 +113,6 @@ docker-compose -p terrama2 rm
 
 ### BDQueimadas Light
 
-In order to link all the peaces of BDQueimadas Light, you can create a network named `bdqlight_net`:
-
-```bash
-docker network create bdqlight_net
-```
-
-If you have installed the GeoServer and PostgreSQL as docker containers, as explained in above sections, link them together:
-
-```bash
-docker network connect bdqlight_net terrama2_geoserver
-docker network connect bdqlight_net terrama2_pg
-```
-
 Pull the BDQueimadas Light image and run a new container named `terrama2_bdqlight`:
 
 ```bash
@@ -133,6 +120,7 @@ docker run -d \
            --restart unless-stopped --name terrama2_bdqlight \
            -p 127.0.0.1:39000:39000 \
            -v ${PWD}/conf/bdqueimadas-light/:/opt/bdqueimadas-light/configurations/ \
+           -v ${PWD}/conf/terrama2_supervisor_bdqlight.conf:/etc/supervisor/conf.d/bdqueimadas-light.conf \
            terrama2.dpi.inpe.br:443/bdqlight:1.0.0
 ```
 
