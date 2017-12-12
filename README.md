@@ -117,11 +117,16 @@ Pull the BDQueimadas Light image and run a new container named `terrama2_bdqligh
 
 ```bash
 docker run -d \
-           --restart unless-stopped --name terrama2_bdqlight \
+           --restart unless-stopped --name terrama2_bdq \
            -p 127.0.0.1:39000:39000 \
            -v ${PWD}/conf/bdqueimadas-light/:/opt/bdqueimadas-light/configurations/ \
            -v ${PWD}/conf/terrama2_supervisor_bdqlight.conf:/etc/supervisor/conf.d/bdqueimadas-light.conf \
            terrama2.dpi.inpe.br:443/bdqlight:1.0.0
+```
+
+Link the BDqueimadas container in `terrama2_net`:
+```bash
+docker network connect terrama2_net terrama2_bdq
 ```
 
 ## Tips
