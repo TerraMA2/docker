@@ -126,15 +126,14 @@ docker network connect bdqlight_net terrama2_geoserver
 docker network connect bdqlight_net terrama2_pg
 ```
 
-Pull the Ubuntu image and run a new container named `terrama2_bdqlight`:
+Pull the BDQueimadas Light image and run a new container named `terrama2_bdqlight`:
 
 ```bash
 docker run -d \
            --restart unless-stopped --name terrama2_bdqlight \
            -p 127.0.0.1:39000:39000 \
-           -v terrama2_geoserver_vol:/opt/geoserver/data_dir \
            -v ${PWD}/conf/bdqueimadas-light/:/opt/bdqueimadas-light/configurations/ \
-           terrama2.dpi.inpe.br:443/geoserver:2.11
+           terrama2.dpi.inpe.br:443/bdqlight:1.0.0
 ```
 
 ## Tips

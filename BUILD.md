@@ -40,6 +40,19 @@ cd docker/webmonitor
 docker build --tag terrama2.dpi.inpe.br:443/terrama2-webmonitor:4.0.0 .
 ```
 
+## Building the BDQueimadas Light Docker Image
+
+Go to the folder `bdqueimadas-light`. It contains the `Dockerfile` to build the base image:
+
+```bash
+cd docker/bdqueimadas-light
+```
+
+In that folder run the following command:
+
+```bash
+docker build --tag terrama2.dpi.inpe.br:443/bdqlight:1.0.0 .
+```
 
 ## Publishing the Generated TerraMA² Images in a Private Registry
 
