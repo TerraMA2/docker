@@ -67,4 +67,8 @@ RUN ./install_terrama2.sh && rm install_terrama2.sh
 
 COPY files/start_terrama2_service.sh /usr/local/bin
 
+RUN mkdir -p /data && chown -R ${TERRAMA2_USER}:${TERRAMA2_USER} /data
+
+VOLUME /data
+
 WORKDIR ${TERRAMA2_INSTALL_PATH}
