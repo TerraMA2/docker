@@ -10,7 +10,6 @@ git clone https://github.com/terrama2/docker.git
 cd docker
 ```
 
-
 ## Check 3rd-party dependencies
 
 ### GeoServer
@@ -42,8 +41,7 @@ docker run -d \
            terrama2.dpi.inpe.br:443/geoserver:2.11
 ```
 
-The above command will link the host address `127.0.0.1` on port `8081` to the container port `8080` and it will run the container as a daemon in background. You can try the following address in your browser: [http://localhost:8080/geoserver](http://localhost:8080/geoserver).
-
+The above command will link the host address `127.0.0.1` on port `8081` to the container port `8080` and it will run the container as a daemon in background. You can try the following address in your browser: [http://localhost:8081/geoserver](http://localhost:8081/geoserver).
 
 ### PostgreSQL + PostGIS
 
@@ -74,7 +72,6 @@ psql -U postgres -p 5433 -h localhost -d postgres
 
 In the above command use the password: `mysecretpassword`.
 
-
 ## Running TerraMA²
 
 In order to link all the peaces of TerraMA², you can create a network named `terrama2_net`:
@@ -96,7 +93,11 @@ Now run the docker-compose in daemon mode:
 docker-compose -p terrama2 up -d
 ```
 
-To put the console in the backgroup, type `CTRL + Z`  and than the command `bg`.
+If you want to check TerraMA² log output:
+
+```bash
+docker-compose -p terrama2 logs --follow
+```
 
 If you want to stop the TerraMA² containers:
 
