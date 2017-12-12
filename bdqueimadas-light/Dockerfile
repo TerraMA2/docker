@@ -25,6 +25,9 @@ RUN apt-get update && \
 RUN curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash - && \
     apt-get install -y nodejs
 
+#Grunt
+RUN npm install -g grunt-cli
+
 ############################################################################
 # BDQueimadas Light
 
