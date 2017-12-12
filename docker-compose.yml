@@ -4,7 +4,7 @@ services:
   
   # TerraMA2 Web Application
   webapp:
-    image: "${TERRAMA2_DOCKER_REGISTRY}/terrama2-webapp:4.0.0-rc4"
+    image: "${TERRAMA2_DOCKER_REGISTRY}/terrama2-webapp:4.0.0"
     restart: unless-stopped
     ports:
       - "${TERRAMA2_WEBAPP_ADDRESS}:36000"
@@ -18,7 +18,7 @@ services:
 
   # TerraMA2 Web Monitor
   webmonitor:
-    image: "${TERRAMA2_DOCKER_REGISTRY}/terrama2-webmonitor:4.0.0-rc4"
+    image: "${TERRAMA2_DOCKER_REGISTRY}/terrama2-webmonitor:4.0.0"
     restart: unless-stopped
     ports:
       - "${TERRAMA2_WEBMONITOR_ADDRESS}:36001"
@@ -35,7 +35,7 @@ services:
 
   # TerraMA2 Collector Service using TerraMA2 Base
   collector:
-    image: "${TERRAMA2_DOCKER_REGISTRY}/terrama2:4.0.0-rc4"
+    image: "${TERRAMA2_DOCKER_REGISTRY}/terrama2:4.0.0"
     restart: unless-stopped
     entrypoint: 
       - /usr/local/bin/start_terrama2_service.sh
@@ -51,7 +51,7 @@ services:
 
   # TerraMA2 Analysis Service using TerraMA2 Base
   analysis:
-    image: "${TERRAMA2_DOCKER_REGISTRY}/terrama2:4.0.0-rc4"
+    image: "${TERRAMA2_DOCKER_REGISTRY}/terrama2:4.0.0"
     restart: unless-stopped
     entrypoint: 
       - /usr/local/bin/start_terrama2_service.sh
@@ -67,7 +67,7 @@ services:
 
   # TerraMA2 View Service using TerraMA2 Base
   view:
-    image: "${TERRAMA2_DOCKER_REGISTRY}/terrama2:4.0.0-rc4"
+    image: "${TERRAMA2_DOCKER_REGISTRY}/terrama2:4.0.0"
     restart: unless-stopped
     entrypoint: 
       - /usr/local/bin/start_terrama2_service.sh
@@ -83,7 +83,7 @@ services:
 
   # TerraMA2 Alert Service using TerraMA2 Base
   alert:
-    image: "${TERRAMA2_DOCKER_REGISTRY}/terrama2:4.0.0-rc4"
+    image: "${TERRAMA2_DOCKER_REGISTRY}/terrama2:4.0.0"
     restart: unless-stopped
     entrypoint: 
       - /usr/local/bin/start_terrama2_service.sh
