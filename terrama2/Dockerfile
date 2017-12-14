@@ -26,7 +26,9 @@ RUN apt-get update && \
                        # VMime Dependencies
                        doxygen \
                        # Process Control
-                       supervisor
+                       supervisor \
+                       # Locales
+                       locales
 
 # Creating USER
 RUN groupadd $TERRAMA2_USER && \
@@ -70,5 +72,25 @@ COPY files/start_terrama2_service.sh /usr/local/bin
 RUN mkdir -p /data && chown -R ${TERRAMA2_USER}:${TERRAMA2_USER} /data
 
 VOLUME /data
+
+RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && \
+    dpkg-reconfigure --frontend=noninteractive locales && \
+    update-locale LANG=en_US.UTF-8
+
+RUN echo "export LANG=en_US.UTF-8\n\
+export LANGUAGE=en_US.UTF-8\n\
+export LC_CTYPE=\"en_US.UTF-8\"\n\
+export LC_NUMERIC=\"en_US.UTF-8\"\n\
+export LC_TIME=\"en_US.UTF-8\"\n\
+export LC_COLLATE=\"en_US.UTF-8\"\n\
+export LC_MONETARY=\"en_US.UTF-8\"\n\
+export LC_MESSAGES=\"en_US.UTF-8\"\n\
+export LC_PAPER=\"en_US.UTF-8\"\n\
+export LC_NAME=\"en_US.UTF-8\"\n\
+export LC_ADDRESS=\"en_US.UTF-8\"\n\
+export LC_TELEPHONE=\"en_US.UTF-8\"\n\
+export LC_MEASUREMENT=\"en_US.UTF-8\"\n\
+export LC_IDENTIFICATION=\"en_US.UTF-8\"\n\
+export LC_ALL=en_US.UTF-8" | tee -a /etc/bash.bashrc
 
 WORKDIR ${TERRAMA2_INSTALL_PATH}
