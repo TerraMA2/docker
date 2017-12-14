@@ -18,8 +18,7 @@ git clone https://github.com/terrama2/bdqueimadas-light $BDQLIGHT_INSTALL_PATH/.
 valid $? "Error: Could not clone BDQueimadas Light"
 
 cd $BDQLIGHT_INSTALL_PATH
-npm install
-grunt
+npm install grunt
 
 # No error
 exit 0
