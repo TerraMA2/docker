@@ -18,6 +18,7 @@ RUN apt-get update && \
                        unzip \
                        sudo \
                        openssh-server \
+                       gdal-bin \
                        # Process Control
                        supervisor
 

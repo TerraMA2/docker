@@ -113,14 +113,22 @@ docker-compose -p terrama2 rm
 
 ### BDQueimadas Light
 
+Create a new volume to store the BDQueimadas Light temporary download files:
+
+```bash
+docker volume create terrama2_bdq_vol
+```
+
 Pull the BDQueimadas Light image and run a new container named `terrama2_bdqlight`:
 
 ```bash
 docker run -d \
            --restart unless-stopped --name terrama2_bdq \
            -p 127.0.0.1:39000:39000 \
-           -v ${PWD}/conf/bdqueimadas-light/:/opt/bdqueimadas-light/configurations/ \
+           -v ${PWD}/conf/bdqueimadas-light/conf/:/opt/bdqueimadas-light/configurations/ \
+           -v ${PWD}/conf/bdqueimadas-light/.pgpass:/root/.pgpass \
            -v ${PWD}/conf/terrama2_supervisor_bdqlight.conf:/etc/supervisor/conf.d/bdqueimadas-light.conf \
+           -v terrama2_bdq_vol:/opt/bdqueimadas-light/tmp \
            terrama2.dpi.inpe.br:443/bdqlight:1.0.0
 ```
 

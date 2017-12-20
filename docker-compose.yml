@@ -14,6 +14,7 @@ services:
       - "${TERRAMA2_CONFIG_DIR}/terrama2_webapp.json:/opt/terrama2/4.0.0/webapp/config/instances/default.json"
       - "${TERRAMA2_CONFIG_DIR}/terrama2_supervisor_webapp.conf:/etc/supervisor/conf.d/terrama2-webapp.conf"
       - "${TERRAMA2_CONFIG_DIR}/id_rsa:/root/.ssh/id_rsa"
+      - "${TERRAMA2_CONFIG_DIR}/.pgpass:/root/.pgpass"
     networks:
       - net
 
@@ -30,6 +31,7 @@ services:
       - "terrama2_shared_vol:/shared-data"
       - "${TERRAMA2_CONFIG_DIR}/terrama2_webmonitor.json:/opt/terrama2/4.0.0/webmonitor/config/instances/default.json"
       - "${TERRAMA2_CONFIG_DIR}/terrama2_supervisor_webmonitor.conf:/etc/supervisor/conf.d/terrama2-webmonitor.conf"
+      - "${TERRAMA2_CONFIG_DIR}/.pgpass:/root/.pgpass"
     networks:
       - net
     links:

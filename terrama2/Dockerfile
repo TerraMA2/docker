@@ -23,6 +23,7 @@ RUN apt-get update && \
                        sudo \
                        screen \
                        openssh-server \
+                       gdal-bin \
                        # VMime Dependencies
                        doxygen \
                        # Process Control
