@@ -36,6 +36,8 @@ docker run -d \
            -p 127.0.0.1:8081:8080 \
            -e "GEOSERVER_URL=/geoserver" \
            -e "GEOSERVER_DATA_DIR=/opt/geoserver/data_dir" \
+           -v terrama2_data_vol:/data \
+           -v terrama2_shared_vol:/shared-data \
            -v terrama2_geoserver_vol:/opt/geoserver/data_dir \
            -v ${PWD}/conf/terrama2_geoserver_setenv.sh:/usr/local/tomcat/bin/setenv.sh \
            terrama2.dpi.inpe.br:443/geoserver:2.11
@@ -133,6 +135,7 @@ docker run -d \
 ```
 
 Link the BDqueimadas container in `terrama2_net`:
+
 ```bash
 docker network connect terrama2_net terrama2_bdq
 ```
