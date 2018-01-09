@@ -36,8 +36,13 @@ RUN groupadd $TERRAMA2_USER && \
     # Defining User credential to connect
     echo $TERRAMA2_USER:$TERRAMA2_USER | chpasswd && \
     mkdir -p $TERRAMA2_3RDPARTY_PATH $TERRAMA2_CODEBASE_PATH && \
-    chown -R $TERRAMA2_USER:$TERRAMA2_USER /home/$TERRAMA2_USER && \
-    chmod g-w /home/$TERRAMA2_USER
+    chmod g-w /home/$TERRAMA2_USER && \
+    # Configure SSH
+    ssh-keygen -f /root/.ssh/id_rsa -N '' && \
+    mkdir /home/$TERRAMA2_USER/.ssh  && \
+    chmod go-rwx /home/$TERRAMA2_USER/.ssh && \
+    cat /root/.ssh/id_rsa.pub >> /home/$TERRAMA2_USER/.ssh/authorized_keys && \
+    chown -R $TERRAMA2_USER:$TERRAMA2_USER /home/$TERRAMA2_USER
 
 ############################################################################
 # Dependencies

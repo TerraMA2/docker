@@ -11,10 +11,8 @@ services:
     volumes:
       - "${TERRAMA2_DATA_DIR}:/data"
       - "terrama2_shared_vol:/shared-data"
-      - "${TERRAMA2_CONFIG_DIR}/terrama2_webapp.json:/opt/terrama2/4.0.0/webapp/config/instances/default.json"
-      - "${TERRAMA2_CONFIG_DIR}/terrama2_supervisor_webapp.conf:/etc/supervisor/conf.d/terrama2-webapp.conf"
-      - "${TERRAMA2_CONFIG_DIR}/id_rsa:/root/.ssh/id_rsa"
-      - "${TERRAMA2_CONFIG_DIR}/.pgpass:/root/.pgpass"
+    environment:
+      - POSTGRESQL_DATABASE=custom_terrama2
     networks:
       - net
 
@@ -29,9 +27,8 @@ services:
     volumes:
       - "${TERRAMA2_DATA_DIR}:/data"
       - "terrama2_shared_vol:/shared-data"
-      - "${TERRAMA2_CONFIG_DIR}/terrama2_webmonitor.json:/opt/terrama2/4.0.0/webmonitor/config/instances/default.json"
-      - "${TERRAMA2_CONFIG_DIR}/terrama2_supervisor_webmonitor.conf:/etc/supervisor/conf.d/terrama2-webmonitor.conf"
-      - "${TERRAMA2_CONFIG_DIR}/.pgpass:/root/.pgpass"
+    environment:
+      - POSTGRESQL_DATABASE=custom_terrama2
     networks:
       - net
     links:
@@ -48,8 +45,6 @@ services:
     volumes:
       - "${TERRAMA2_DATA_DIR}:/data"
       - "terrama2_shared_vol:/shared-data"
-      - "${TERRAMA2_CONFIG_DIR}/id_rsa.pub:/home/terrama2/.ssh/authorized_keys"
-      - "${TERRAMA2_CONFIG_DIR}/id_rsa.pub:/root/.ssh/authorized_keys"
     tty: true
     networks:
       - net
@@ -65,8 +60,6 @@ services:
     volumes:
       - "${TERRAMA2_DATA_DIR}:/data"
       - "terrama2_shared_vol:/shared-data"
-      - "${TERRAMA2_CONFIG_DIR}/id_rsa.pub:/home/terrama2/.ssh/authorized_keys"
-      - "${TERRAMA2_CONFIG_DIR}/id_rsa.pub:/root/.ssh/authorized_keys"
     tty: true
     networks:
       - net
@@ -82,8 +75,6 @@ services:
     volumes:
       - "${TERRAMA2_DATA_DIR}:/data"
       - "terrama2_shared_vol:/shared-data"
-      - "${TERRAMA2_CONFIG_DIR}/id_rsa.pub:/home/terrama2/.ssh/authorized_keys"
-      - "${TERRAMA2_CONFIG_DIR}/id_rsa.pub:/root/.ssh/authorized_keys"
     tty: true
     networks:
       - net
@@ -99,8 +90,6 @@ services:
     volumes:
       - "${TERRAMA2_DATA_DIR}:/data"
       - "terrama2_shared_vol:/shared-data"
-      - "${TERRAMA2_CONFIG_DIR}/id_rsa.pub:/home/terrama2/.ssh/authorized_keys"
-      - "${TERRAMA2_CONFIG_DIR}/id_rsa.pub:/root/.ssh/authorized_keys"
     tty: true
     networks:
       - net
