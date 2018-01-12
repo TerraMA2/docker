@@ -12,6 +12,13 @@ function write_to() {
   sed -i "/${pattern}/${flag}\\${value}" config/instances/default.json
 }
 
+function normalize_url() {
+  local url=$1
+  local pattern="\\/"
+
+  echo "${url//\//$pattern}"
+}
+
 TERRAMA2_LOCK_FILE="/tmp/.terrama2.webapp.lock"
 
 #
@@ -34,6 +41,8 @@ stdout_logfile=/var/log/terrama2-webapp-server.out.log" > /etc/supervisor/conf.d
   if [ -z "${TERRAMA2_WEBAPP_BASE_PATH}" ]; then
     TERRAMA2_WEBAPP_BASE_PATH="/"
   fi
+
+  TERRAMA2_WEBAPP_BASE_PATH=$(normalize_url ${TERRAMA2_WEBAPP_BASE_PATH})
 
   if [ -z "${TERRAMA2_DATA_DIR}" ]; then
     TERRAMA2_DATA_DIR="/data"
@@ -66,7 +75,7 @@ stdout_logfile=/var/log/terrama2-webapp-server.out.log" > /etc/supervisor/conf.d
   write_to "\"database\":" "\"database\": \"${POSTGRESQL_DATABASE}\"," "c"
   write_to "\"host\":" "\"host\": \"${POSTGRESQL_HOST}\"," "c"
 
-  echo "${POSTGRESQL_HOST}:${POSTGRESQL_PORT}:${POSTGRESQL_DATABASE}:${POSTGRESQL_USER}:${POSTGRESQL_PASSWORD}" | tee -a /root/.pgpass /home/${TERRAMA2_USER}/.pgpass
+  echo "${POSTGRESQL_HOST}:${POSTGRESQL_PORT}:${POSTGRESQL_DATABASE}:${POSTGRESQL_USER}:${POSTGRESQL_PASSWORD}" | tee -a /root/.pgpass /home/${TERRAMA2_USER}/.pgpass >/dev/null
 fi
 
 # Start Supervisor

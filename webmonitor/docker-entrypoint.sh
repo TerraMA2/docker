@@ -12,6 +12,13 @@ function replace_line_to() {
   sed -i "${line}s/${pattern}/${value}/" config/instances/default.json
 }
 
+function normalize_url() {
+  local url=$1
+  local pattern="\\/"
+
+  echo "${url//\//$pattern}"
+}
+
 TERRAMA2_LOCK_FILE="/tmp/.terrama2.webmonitor.lock"
 
 #
@@ -28,8 +35,10 @@ stderr_logfile=/var/log/terrama2-webmonitor-server.err.log
 stdout_logfile=/var/log/terrama2-webmonitor-server.out.log" > /etc/supervisor/conf.d/terrama2-webmonitor.conf
 
   if [ -z "${TERRAMA2_WEBAPP_BASE_PATH}" ]; then
-    TERRAMA2_WEBAPP_BASE_PATH="\/"
+    TERRAMA2_WEBAPP_BASE_PATH="/"
   fi
+
+  TERRAMA2_WEBAPP_BASE_PATH=$(normalize_url ${TERRAMA2_WEBAPP_BASE_PATH})
 
   if [ -z "${TERRAMA2_WEBAPP_HOST}" ]; then
     TERRAMA2_WEBAPP_HOST="localhost"
@@ -40,8 +49,10 @@ stdout_logfile=/var/log/terrama2-webmonitor-server.out.log" > /etc/supervisor/co
   fi
 
   if [ -z "${TERRAMA2_WEBMONITOR_BASE_PATH}" ]; then
-    TERRAMA2_WEBMONITOR_BASE_PATH="\/"
+    TERRAMA2_WEBMONITOR_BASE_PATH="/"
   fi
+
+  TERRAMA2_WEBMONITOR_BASE_PATH=$(normalize_url ${TERRAMA2_WEBMONITOR_BASE_PATH})
 
   if [ -z "${POSTGRESQL_PORT}" ]; then
     POSTGRESQL_PORT=5432
@@ -69,7 +80,7 @@ stdout_logfile=/var/log/terrama2-webmonitor-server.out.log" > /etc/supervisor/co
   replace_line_to 9 "\"port\": ${TERRAMA2_WEBAPP_PORT},"
   replace_line_to 10 "\"host\": \"${TERRAMA2_WEBAPP_HOST}\""
 
-  echo "${POSTGRESQL_HOST}:${POSTGRESQL_PORT}:${POSTGRESQL_DATABASE}:${POSTGRESQL_USER}:${POSTGRESQL_PASSWORD}" | tee -a /root/.pgpass /home/${TERRAMA2_USER}/.pgpass
+  echo "${POSTGRESQL_HOST}:${POSTGRESQL_PORT}:${POSTGRESQL_DATABASE}:${POSTGRESQL_USER}:${POSTGRESQL_PASSWORD}" | tee -a /root/.pgpass /home/${TERRAMA2_USER}/.pgpass >/dev/null
 fi
 
 # Start Supervisor
