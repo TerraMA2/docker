@@ -76,6 +76,31 @@ psql -U postgres -p 5433 -h localhost -d postgres
 
 In the above command use the password: `mysecretpassword`.
 
+## Configure environment variables
+
+Check and change (if necessary) the connection parameters located in file `.env`:
+
+#### WebApp
+
+| Variable | Description |
+|----------|-------------|
+| POSTGRESQL_DATABASE | PostgreSQL database name to use. Default `terrama2` |
+POSTGRESQL_PASSWORD | PostgreSQL root password. |
+POSTGRESQL_HOST | PostgreSQL host address. Default `terrama2_pg` |
+POSTGRESQL_PORT | PostgreSQL port number. Default `5432` |
+TERRAMA2_WEBAPP_BASE_PATH | Workdir for TerraMA² Webapp. Useful to proxy behind webserver. Default `/` |
+
+#### WebMonitor
+
+| Variable | Description |
+|----------|-------------|
+| POSTGRESQL_DATABASE | PostgreSQL database name to use. Default `terrama2` |
+POSTGRESQL_PASSWORD | PostgreSQL root password. |
+POSTGRESQL_HOST | PostgreSQL host address. Default `terrama2_pg` |
+POSTGRESQL_PORT | PostgreSQL port number. Default `5432` |
+TERRAMA2_WEBAPP_BASE_PATH | Workdir for TerraMA² Webapp. Useful to proxy behind webserver. Default `/`. |
+| TERRAMA2_WEBMONITOR_BASE_PATH | Workdir for TerraMA² WebMonitor. Useful to proxy behind webserver. Default `/`. |
+
 ## Running TerraMA²
 
 In order to link all the peaces of TerraMA², you can create a network named `terrama2_net`:
@@ -148,4 +173,68 @@ Launching TerraMA² through docker-composer will name the containers with the su
 
 ```bash
 docker exec -it terrama2_webapp_1 bash
+```
+
+## Developers
+
+### Start TerraMA² instances
+
+To start TerraMA² with GeoServer and PostgreSQL/PostGIS containers:
+
+```bash
+./terrama2_docker.sh up --project=terrama2 --with-geoserver=127.0.0.1:8081 --with-pg=127.0.0.1:5433
+```
+
+It will create GeoServer and PostgreSQL container binding respectively to host `127.0.0.1:8081` and `127.0.0.1:5433` using environment variables located in file `.env`.
+
+To configure only TerraMA² instance (Make sure you have GeoServer and PostgreSQL running. Check Section **Check 3rd-party dependencies**):
+
+```bash
+./terrama2_docker.sh up --project=terrama2
+```
+
+To configure TerraMA² and PostgreSQL/PostGIS:
+
+```bash
+./terrama2_docker.sh up --project=terrama2 --with-pg=127.0.0.1:5433
+```
+
+To configure TerraMA² and GeoServer
+
+```bash
+./terrama2_docker.sh up --project=terrama2 --with-pg=127.0.0.1:5433
+```
+
+### Stop TerraMA² instances
+
+Use the following command to stop active TerraMA² instances
+
+```bash
+# To stop only TerraMA² services
+./terrama2_docker.sh stop --project=terrama2
+```
+
+You can also stop both PostgreSQL and GeoServer with the following command:
+
+```bash
+# To stop only TerraMA² services and PostgreSQL/PostGIS
+./terrama2_docker.sh stop --project=terrama2 --with-pg --with-geoserver
+```
+
+### Remove TerraMA² instances
+
+To remove containers: (`--with-geoserver` and `--with-pg` are optional)
+
+```bash
+# To stop only TerraMA² services and PostgreSQL/PostGIS
+./terrama2_docker.sh rm --project=terrama2 --with-pg --with-geoserver
+```
+
+### Status of TerraMA² instances
+
+Use the following command to check TerraMA² instances: (`--all` is optional)
+
+```bash
+# To stop only TerraMA² services, GeoServer and PostgreSQL/PostGIS
+./terrama2_docker.sh status --project=terrama2 --all
 ```
