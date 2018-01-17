@@ -202,7 +202,7 @@ To configure TerraMA² and PostgreSQL/PostGIS:
 To configure TerraMA² and GeoServer
 
 ```bash
-./terrama2_docker.sh up --project=terrama2 --with-pg=127.0.0.1:5433
+./terrama2_docker.sh up --project=terrama2 --with-geoserver=127.0.0.1:8080
 ```
 
 ### Stop TerraMA² instances
