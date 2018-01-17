@@ -66,6 +66,8 @@ docker run -d \
            mdillon/postgis
 ```
 
+For more detailed instructions about environment variables, see the official documentation for the Postgres image [here](https://hub.docker.com/_/postgres/).
+
 The above command will link the host address `127.0.0.1` on port `5433` to the container port `5432` and it will run the container as a daemon in background. You can try the following address in psql or pgAdmin:
 
 ```bash
