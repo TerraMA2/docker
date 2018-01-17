@@ -1,17 +1,17 @@
 #!/bin/bash
 
 # Initializing Services
-service ssh start
+sudo service ssh start
 
 # Forcing owner to ${TERRAMA2_USER} to Qtcreator be able to edit
-chown -R ${TERRAMA2_USER}:${TERRAMA2_USER} /opt/terrama2/{build,codebase}
+sudo chown -R ${TERRAMA2_USER}:${TERRAMA2_USER} /opt/terrama2/{build,codebase}
 
-Xvfb -screen 0 1680x1024x16 -ac &
+sudo Xvfb -screen 0 1680x1024x16 -ac &
 
 # Delay for Xvfb initialization
 sleep 15
 
-env DISPLAY=:0.0 x11vnc -noxrecord -noxfixes -noxdamage -forever -display :0 &
+sudo env DISPLAY=:0.0 x11vnc -noxrecord -noxfixes -noxdamage -users +${TERRAMA2_USER} -forever -display :0 &
 env DISPLAY=:0.0 fluxbox &
 
 # Delay for GUI Server configuration

@@ -49,6 +49,11 @@ RUN groupadd $TERRAMA2_USER && \
     echo $TERRAMA2_USER:$TERRAMA2_USER | chpasswd && \
     mkdir -p $TERRAMA2_3RDPARTY_PATH $TERRAMA2_CODEBASE_PATH && \
     chmod g-w /home/$TERRAMA2_USER && \
+    # Configure SSH
+    ssh-keygen -f /root/.ssh/id_rsa -N '' && \
+    mkdir /home/$TERRAMA2_USER/.ssh  && \
+    chmod go-rwx /home/$TERRAMA2_USER/.ssh && \
+    cat /root/.ssh/id_rsa.pub >> /home/$TERRAMA2_USER/.ssh/authorized_keys && \
     chown -R $TERRAMA2_USER:$TERRAMA2_USER /home/$TERRAMA2_USER
 
 ############################################################################
@@ -107,10 +112,14 @@ export LC_MEASUREMENT=\"en_US.UTF-8\"\n\
 export LC_IDENTIFICATION=\"en_US.UTF-8\"\n\
 export LC_ALL=en_US.UTF-8" | tee -a /etc/bash.bashrc
 
+RUN echo "${TERRAMA2_USER}    ALL=(ALL) NOPASSWD: ALL"  >> /etc/sudoers
+
 VOLUME /data
 
 WORKDIR "/opt"
 
 COPY docker-entrypoint.sh /
+
+USER ${TERRAMA2_USER}
 
 ENTRYPOINT [ "/docker-entrypoint.sh" ]
