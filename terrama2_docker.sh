@@ -16,7 +16,7 @@ function display_usage() {
   echo ""
   echo "Usage: ./terrama2_docker COMMAND [OPTIONS]"
   echo ""
-  echo "COMMAND {rm,up,stop,status}"
+  echo "COMMAND {rm,up,start,stop,status}"
   echo ""
   echo "--project - TerraMA² Project Name. Default value is \"terrama2\""
   echo "--with-geoserver - GeoServer bind address. Example: \"--with-geoserver=127.0.0.1:8080\". It does not handle GeoServer when argument is not set."
@@ -152,14 +152,13 @@ case ${OPERATION} in
       fi
     fi
 
-    exit 
     if [ ! -z "$_RUN_PG" ] && [ "$_RUN_PG" == "true" ]; then
       if [ $(container_exists ${POSTGRESQL_CONTAINER}) -eq 1 ]; then
         if [ ! $(is_running ${POSTGRESQL_CONTAINER}) -eq 1 ]; then
           _SERVICE_FLAG=1
           echo -n "Removing PostgreSQL ... "
           remove_container ${POSTGRESQL_CONTAINER}
-          va  lid $? "Error: Could not remove container ${POSTGRESQL_CONTAINER}"
+          valid $? "Error: Could not remove container ${POSTGRESQL_CONTAINER}"
         fi
       fi
     fi
@@ -204,7 +203,7 @@ case ${OPERATION} in
     exit 0
   ;;
 
-  "up")
+  "up"|"start")
     if [ ! -z "$_RUN_GEOSERVER" ] && [ "$_RUN_GEOSERVER" == "true" ]; then
       echo ""
       echo "#############"

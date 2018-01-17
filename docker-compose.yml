@@ -11,8 +11,8 @@ services:
     volumes:
       - "${TERRAMA2_DATA_DIR}:/data"
       - "terrama2_shared_vol:/shared-data"
-    environment:
-      - POSTGRESQL_DATABASE=custom_terrama2
+    env_file:
+      - .env
     networks:
       - net
 
@@ -27,8 +27,8 @@ services:
     volumes:
       - "${TERRAMA2_DATA_DIR}:/data"
       - "terrama2_shared_vol:/shared-data"
-    environment:
-      - POSTGRESQL_DATABASE=custom_terrama2
+    env_file:
+      - .env
     networks:
       - net
     links:
