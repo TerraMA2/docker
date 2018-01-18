@@ -13,17 +13,22 @@ function valid() {
 }
 
 function display_usage() {
+  local _operation=$1
+
+  if [ "${_operation}" != "" ]; then
+    echo ""
+    echo "Invalid operation \"${_operation}\""
+  fi
+
   echo ""
   echo "Usage: ./terrama2_docker COMMAND [OPTIONS]"
   echo ""
   echo "COMMAND {rm,up,start,stop,status}"
   echo ""
-  echo "--project - TerraMA² Project Name. Default value is \"terrama2\""
+  echo "--project        - TerraMA² Project Name. Default value is \"terrama2\""
+  echo "--with-pg        - PostgreSQL bind address. Example: \"127.0.0.1:5432\". It does not handle PostgreSQL when argument is not set."
   echo "--with-geoserver - GeoServer bind address. Example: \"--with-geoserver=127.0.0.1:8080\". It does not handle GeoServer when argument is not set."
-  echo "--with-pg - PostgreSQL bind address. Example: \"127.0.0.1:5432\". It does not handle PostgreSQL when argument is not set."
-  echo "--all (status) - Used to display status of all services"
-  echo ""
-  echo "IMPORTANT: When passing any argument with value, you must use the syntax \"--argument=value\" instead \"--argument value\" to work properly."
+  echo "--all            - Use all known services. Only in \"status\", \"rm\" and \"stop\" operations"
   echo ""
   exit 1
 }
@@ -82,23 +87,42 @@ OPERATION=$1
 PROJECT_PATH=${PWD}
 
 # Parse Arguments
-for key in "$@"; do
-  case $key in
+# for key in "$@"; do
+  # shift
+while [[ $# -gt 0 ]] && [[ ."$2" = .--* ]] ;
+do
+  _key="$2";
+  shift
+  _value="$2"
+
+  case ${_key} in
+    --with-pg)
+    _RUN_PG=true
+    POSTGRESQL_HOST=${_value}
+    ;;
     --with-pg*)
     _RUN_PG=true
-    POSTGRESQL_HOST="${key#*=}"
-    shift # past argument
+    POSTGRESQL_HOST="${_key#*=}"
+    ;;
+    --with-geoserver)
+    _RUN_GEOSERVER=true
+    GEOSERVER_HOST=${_value}
     ;;
     --with-geoserver*)
     _RUN_GEOSERVER=true
-    GEOSERVER_HOST="${key#*=}"
-    shift # past argument
+    GEOSERVER_HOST="${_key#*=}"
+    ;;
+    --project)
+    TERRAMA2_PROJECT_NAME=${_value}
     ;;
     --project*)
-    TERRAMA2_PROJECT_NAME="${key#*=}"
+    TERRAMA2_PROJECT_NAME="${_key#*=}"
+    ;;
+    --geoserver-url)
+    GEOSERVER_URL=${_value}
     ;;
     --geoserver-url*)
-    GEOSERVER_URL="${key#*=}"
+    GEOSERVER_URL="${_key#*=}"
     ;;
     --all)
       _EXECUTE_ALL=true
@@ -308,6 +332,6 @@ case ${OPERATION} in
   ;;
   # Default
   *)
-    display_usage
+    display_usage ${OPERATION}
   ;;
 esac
