@@ -141,7 +141,7 @@ case ${OPERATION} in
   "rm")
     _SERVICE_FLAG=0
     # TODO: Confirmation when a container can be removed.
-    if [ ! -z "$_RUN_GEOSERVER" ] && [ "$_RUN_GEOSERVER" == "true" ]; then
+    if [[ ! -z "${_EXECUTE_ALL}" && "${_EXECUTE_ALL}" == "true" ]] || [[ ! -z "${_RUN_GEOSERVER}" && "${_RUN_GEOSERVER}" == "true" ]]; then
       if [ $(container_exists ${GEOSERVER_CONTAINER}) -eq 1 ]; then
         if [ $(is_running ${GEOSERVER_CONTAINER}) -eq 0 ]; then # False
           _SERVICE_FLAG=1
@@ -152,7 +152,7 @@ case ${OPERATION} in
       fi
     fi
 
-    if [ ! -z "$_RUN_PG" ] && [ "$_RUN_PG" == "true" ]; then
+    if [[ ! -z "${_EXECUTE_ALL}" && "${_EXECUTE_ALL}" == "true" ]] || [[ ! -z "${_RUN_PG}" && "${_RUN_PG}" == "true" ]]; then
       if [ $(container_exists ${POSTGRESQL_CONTAINER}) -eq 1 ]; then
         if [ ! $(is_running ${POSTGRESQL_CONTAINER}) -eq 1 ]; then
           _SERVICE_FLAG=1
@@ -178,7 +178,7 @@ case ${OPERATION} in
   ;;
 
   "stop")
-    if [ ! -z "$_RUN_GEOSERVER" ] && [ "$_RUN_GEOSERVER" == "true" ]; then
+    if [[ ! -z "${_EXECUTE_ALL}" && "${_EXECUTE_ALL}" == "true" ]] || [[ ! -z "${_RUN_GEOSERVER}" && "${_RUN_GEOSERVER}" == "true" ]]; then
       if [ $(is_running ${GEOSERVER_CONTAINER}) -eq 1 ]; then
         echo -n "Stopping GeoServer ... "
         docker stop ${GEOSERVER_CONTAINER} &>/dev/null
@@ -186,7 +186,7 @@ case ${OPERATION} in
       fi
     fi
 
-    if [ ! -z "$_RUN_PG" ] && [ "$_RUN_PG" == "true" ]; then
+    if [[ ! -z "${_EXECUTE_ALL}" && "${_EXECUTE_ALL}" == "true" ]] || [[ ! -z "${_RUN_PG}" && "${_RUN_PG}" == "true" ]]; then
       if [ $(is_running ${POSTGRESQL_CONTAINER}) -eq 1 ]; then
         echo -n "Stopping PostgreSQL ... "
         docker stop ${POSTGRESQL_CONTAINER} &>/dev/null
@@ -204,7 +204,7 @@ case ${OPERATION} in
   ;;
 
   "up"|"start")
-    if [ ! -z "$_RUN_GEOSERVER" ] && [ "$_RUN_GEOSERVER" == "true" ]; then
+    if [ ! -z "${_RUN_GEOSERVER}" ] && [ "${_RUN_GEOSERVER}" == "true" ]; then
       echo ""
       echo "#############"
       echo "# GeoServer #"
@@ -217,8 +217,8 @@ case ${OPERATION} in
         if [ $(is_running ${GEOSERVER_CONTAINER}) -eq 1 ]; then
           echo "Container ${GEOSERVER_CONTAINER} is already running."
         else
-          echo "Starting ${GEOSERVER_CONTAINER} ... "
-          docker start ${GEOSERVER_CONTAINER}
+          echo -n "Starting ${GEOSERVER_CONTAINER} ... "
+          docker start ${GEOSERVER_CONTAINER} &>/dev/null
           valid $? "Could not start Geoserver container"
         fi
       else
@@ -241,7 +241,7 @@ case ${OPERATION} in
       fi
     fi # endif $_RUN_GEOSERVER
 
-    if [ ! -z "$_RUN_PG" ] && [ "$_RUN_PG" == "true" ]; then
+    if [ ! -z "${_RUN_PG}" ] && [ "${_RUN_PG}" == "true" ]; then
       echo ""
       echo "######################"
       echo "# PostgreSQL/PostGIS #"
@@ -254,7 +254,7 @@ case ${OPERATION} in
         if [ $(is_running ${POSTGRESQL_CONTAINER}) -eq 1 ]; then
           echo "Container ${POSTGRESQL_CONTAINER} is already running."
         else
-          echo "Starting ${POSTGRESQL_CONTAINER} ... "
+          echo -n "Starting ${POSTGRESQL_CONTAINER} ... "
           docker start ${POSTGRESQL_CONTAINER} &>/dev/null
           valid $? "Could not start PostgreSQL container"
         fi
@@ -293,15 +293,18 @@ case ${OPERATION} in
   ;;
 
   "status")
-    if [ ! -z "$_EXECUTE_ALL" ] && [ "$_EXECUTE_ALL" == "true" ]; then
+    if [ ! -z "${_EXECUTE_ALL}" ] && [ "${_EXECUTE_ALL}" == "true" ]; then
       _FILTERS="-f name=${GEOSERVER_CONTAINER} -f name=${POSTGRESQL_CONTAINER}"
     fi
 
     _PROJECTS=$(docker-compose -p ${TERRAMA2_PROJECT_NAME} ps | grep ${TERRAMA2_PROJECT_NAME} | awk '{printf " -f name=%s", $1}')
-    _FILTERS="${_FILTERS} ${_PROJECTS}"
-    _FORMAT="table {{.ID}}\t{{.Image}}\t{{.CreatedAt}}\t{{.Status}}\t{{.Names}}\t{{.Ports}}"
 
-    docker ps --format "${_FORMAT}" -a ${_FILTERS}
+    if [ "${_PROJECTS}" != "" ] || [ "${_FILTERS}" != "" ]; then
+      _FILTERS="${_FILTERS} ${_PROJECTS}"
+      _FORMAT="table {{.ID}}\t{{.Image}}\t{{.CreatedAt}}\t{{.Status}}\t{{.Names}}\t{{.Ports}}"
+
+      docker ps --format "${_FORMAT}" -a ${_FILTERS}
+    fi
   ;;
   # Default
   *)
