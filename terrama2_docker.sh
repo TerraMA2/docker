@@ -25,10 +25,10 @@ function display_usage() {
   echo ""
   echo "COMMAND {rm,up,start,stop,status}"
   echo ""
-  echo "--project        - TerraMA² Project Name. Default value is \"terrama2\""
-  echo "--with-pg        - PostgreSQL bind address. Example: \"127.0.0.1:5432\". It does not handle PostgreSQL when argument is not set."
-  echo "--with-geoserver - GeoServer bind address. Example: \"--with-geoserver=127.0.0.1:8080\". It does not handle GeoServer when argument is not set."
-  echo "--all            - Use all known services. Only in \"status\", \"rm\" and \"stop\" operations"
+  echo "-p | --project        - TerraMA² Project Name. Default value is \"terrama2\""
+  echo "-P | --with-pg        - PostgreSQL bind address. Example: \"127.0.0.1:5432\". It does not handle PostgreSQL when argument is not set."
+  echo "-g | --with-geoserver - GeoServer bind address. Example: \"--with-geoserver 127.0.0.1:8080\". It does not handle GeoServer when argument is not set."
+  echo "-a | --all            - Use all known services. Only in \"status\", \"rm\" and \"stop\" operations"
   echo ""
   exit 1
 }
@@ -88,15 +88,15 @@ PROJECT_PATH=${PWD}
 
 # Parse Arguments
 # for key in "$@"; do
-  # shift
-while [[ $# -gt 0 ]] && [[ ."$2" = .--* ]] ;
-do
-  _key="$2";
   shift
-  _value="$2"
+while [[ $# -gt 0 ]] && [[ ."$1" = .-* || ."$2" = .-* ]] ;
+do
+  _key="$1";
+  shift
+  _value="$1"
 
   case ${_key} in
-    --with-pg)
+    -P|--with-pg)
     _RUN_PG=true
     POSTGRESQL_HOST=${_value}
     ;;
@@ -104,7 +104,7 @@ do
     _RUN_PG=true
     POSTGRESQL_HOST="${_key#*=}"
     ;;
-    --with-geoserver)
+    -g|--with-geoserver)
     _RUN_GEOSERVER=true
     GEOSERVER_HOST=${_value}
     ;;
@@ -112,10 +112,10 @@ do
     _RUN_GEOSERVER=true
     GEOSERVER_HOST="${_key#*=}"
     ;;
-    --project)
+    -p|--project)
     TERRAMA2_PROJECT_NAME=${_value}
     ;;
-    --project*)
+    -p|--project*)
     TERRAMA2_PROJECT_NAME="${_key#*=}"
     ;;
     --geoserver-url)
@@ -124,7 +124,7 @@ do
     --geoserver-url*)
     GEOSERVER_URL="${_key#*=}"
     ;;
-    --all)
+    -a|--all)
       _EXECUTE_ALL=true
     ;;
   esac
@@ -306,7 +306,7 @@ case ${OPERATION} in
 
     PROJECT_NETWORK=${TERRAMA2_PROJECT_NAME}_net
     echo -n "Configuring network ... "
-    docker network create ${PROJECT_NETWORK} 2>/dev/null
+    docker network create ${PROJECT_NETWORK} &>/dev/null
     docker network connect ${PROJECT_NETWORK} ${GEOSERVER_CONTAINER} 2>/dev/null
     docker network connect ${PROJECT_NETWORK} ${POSTGRESQL_CONTAINER} 2>/dev/null
     echo "done."

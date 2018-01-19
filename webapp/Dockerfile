@@ -4,4 +4,6 @@ EXPOSE 36000
 
 COPY docker-entrypoint.sh /
 
+WORKDIR ${TERRAMA2_INSTALL_PATH}/webapp
+
 ENTRYPOINT /docker-entrypoint.sh
