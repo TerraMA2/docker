@@ -177,6 +177,33 @@ docker exec -it terrama2_webapp_1 bash
 
 ## Developers
 
+### Debug TerraMA² Service
+
+If you want to debug a TerraMA² service, use the following commands:
+
+```bash
+docker run --detach \
+           --interactive \
+           --tty \
+           --cap-add=SYS_PTRACE \
+           --security-opt seccomp=unconfined \
+           --name terrama2_debug \
+           --volume acre_data_vol:/data \
+           --volume terrama2_shared_data:/shared-data \
+           --publish 5900:5900 \
+           terrama2.dpi.inpe.br:443/terrama2:4.0.0-debug
+```
+
+We used special capabilities to the container `--cap-add=SYS_PTRACE` and `--security-opt seccomp=unconfined`. These flags are required, otherwise **gdb will not responding**.
+
+Once container started, connect it in network:
+
+```bash
+docker network connect terrama2_net terrama2_debug
+```
+
+Now use a [VNC Client](https://en.wikipedia.org/wiki/Virtual_Network_Computing) to connect to the host `localhost:5900`
+
 ### Start TerraMA² instances
 
 To start TerraMA² with GeoServer and PostgreSQL/PostGIS containers:
