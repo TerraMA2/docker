@@ -11,7 +11,7 @@ sudo Xvfb -screen 0 1680x1024x16 -ac &
 # Delay for Xvfb initialization
 sleep 15
 
-sudo env DISPLAY=:0.0 x11vnc -noxrecord -noxfixes -noxdamage -users +${TERRAMA2_USER} -forever -display :0 &
+sudo env DISPLAY=:0.0 x11vnc -noxrecord -noxfixes -noxdamage -users +${TERRAMA2_USER} -forever -dontdisconnect -display :0 &
 
 # Start Environment. The program must be called by non-root user to avoid permission issues.
 env DISPLAY=:0.0 fluxbox &
