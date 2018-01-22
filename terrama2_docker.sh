@@ -85,6 +85,7 @@ fi
 
 OPERATION=$1
 PROJECT_PATH=${PWD}
+POSTGRESQL_TAG=mdillon/postgis
 
 # Parse Arguments
 # for key in "$@"; do
@@ -96,6 +97,7 @@ do
   _value="$1"
 
   case ${_key} in
+    ## PostgreSQL
     -P|--with-pg)
     _RUN_PG=true
     POSTGRESQL_HOST=${_value}
@@ -104,6 +106,14 @@ do
     _RUN_PG=true
     POSTGRESQL_HOST="${_key#*=}"
     ;;
+    # PostgreSQL Tag
+    --pg-tag)
+    POSTGRESQL_TAG=${_value}
+    ;;
+    --pg-tag*)
+    POSTGRESQL_TAG="${_key#*=}"
+    ;;
+    ## GeoServer
     -g|--with-geoserver)
     _RUN_GEOSERVER=true
     GEOSERVER_HOST=${_value}
@@ -112,17 +122,18 @@ do
     _RUN_GEOSERVER=true
     GEOSERVER_HOST="${_key#*=}"
     ;;
-    -p|--project)
-    TERRAMA2_PROJECT_NAME=${_value}
-    ;;
-    -p|--project*)
-    TERRAMA2_PROJECT_NAME="${_key#*=}"
-    ;;
     --geoserver-url)
     GEOSERVER_URL=${_value}
     ;;
     --geoserver-url*)
     GEOSERVER_URL="${_key#*=}"
+    ;;
+    ## TerraMA2 Project
+    -p|--project)
+    TERRAMA2_PROJECT_NAME=${_value}
+    ;;
+    -p|--project*)
+    TERRAMA2_PROJECT_NAME="${_key#*=}"
     ;;
     -a|--all)
       _EXECUTE_ALL=true
@@ -293,7 +304,7 @@ case ${OPERATION} in
                    --publish ${POSTGRESQL_HOST}:5432 \
                    --volume ${POSTGRESQL_VOL}:/var/lib/postgresql/data \
                    --env-file=${PROJECT_PATH}/.env \
-                   mdillon/postgis >log.err
+                   ${POSTGRESQL_TAG} >log.err
         valid $? "Error: Could not create ${POSTGRESQL_CONTAINER} due $(cat log.err)"
       fi
     fi # endif _RUN_PG
@@ -319,6 +330,15 @@ case ${OPERATION} in
   "status")
     if [ ! -z "${_EXECUTE_ALL}" ] && [ "${_EXECUTE_ALL}" == "true" ]; then
       _FILTERS="-f name=${GEOSERVER_CONTAINER} -f name=${POSTGRESQL_CONTAINER}"
+    else
+      # Only PostgreSQL
+      if [ ! -z "${_RUN_PG}" ] && [ "${_RUN_PG}" == "true" ]; then
+        _FILTERS="-f name=${POSTGRESQL_CONTAINER}"
+      fi
+      # Only GeoServer
+      if [ ! -z "${_RUN_GEOSERVER}" ] && [ "${_RUN_GEOSERVER}" == "true" ]; then
+        _FILTERS="${_FILTERS} -f name=${GEOSERVER_CONTAINER}"
+      fi
     fi
 
     _PROJECTS=$(docker-compose -p ${TERRAMA2_PROJECT_NAME} ps | grep ${TERRAMA2_PROJECT_NAME} | awk '{printf " -f name=%s", $1}')

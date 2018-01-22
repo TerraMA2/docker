@@ -4,12 +4,12 @@ services:
   
   # TerraMA2 Web Application
   webapp:
-    image: "${TERRAMA2_DOCKER_REGISTRY}/terrama2-webapp:4.0.0"
+    image: "${TERRAMA2_DOCKER_REGISTRY}/terrama2-webapp:${TERRAMA2_TAG}"
     restart: unless-stopped
     ports:
       - "${TERRAMA2_WEBAPP_ADDRESS}:36000"
     volumes:
-      - "${TERRAMA2_DATA_DIR}:/data"
+      - "data_vol:/data"
       - "terrama2_shared_vol:/shared-data"
     env_file:
       - .env
@@ -18,14 +18,14 @@ services:
 
   # TerraMA2 Web Monitor
   webmonitor:
-    image: "${TERRAMA2_DOCKER_REGISTRY}/terrama2-webmonitor:4.0.0"
+    image: "${TERRAMA2_DOCKER_REGISTRY}/terrama2-webmonitor:${TERRAMA2_TAG}"
     restart: unless-stopped
     ports:
       - "${TERRAMA2_WEBMONITOR_ADDRESS}:36001"
     depends_on:
       - webapp
     volumes:
-      - "${TERRAMA2_DATA_DIR}:/data"
+      - "data_vol:/data"
       - "terrama2_shared_vol:/shared-data"
     env_file:
       - .env
@@ -36,14 +36,14 @@ services:
 
   # TerraMA2 Collector Service using TerraMA2 Base
   collector:
-    image: "${TERRAMA2_DOCKER_REGISTRY}/terrama2:4.0.0"
+    image: "${TERRAMA2_DOCKER_REGISTRY}/terrama2:${TERRAMA2_TAG}"
     restart: unless-stopped
     entrypoint: 
       - /usr/local/bin/start_terrama2_service.sh
       - COLLECTOR
       - "6543"
     volumes:
-      - "${TERRAMA2_DATA_DIR}:/data"
+      - "data_vol:/data"
       - "terrama2_shared_vol:/shared-data"
     tty: true
     networks:
@@ -51,14 +51,14 @@ services:
 
   # TerraMA2 Analysis Service using TerraMA2 Base
   analysis:
-    image: "${TERRAMA2_DOCKER_REGISTRY}/terrama2:4.0.0"
+    image: "${TERRAMA2_DOCKER_REGISTRY}/terrama2:${TERRAMA2_TAG}"
     restart: unless-stopped
     entrypoint: 
       - /usr/local/bin/start_terrama2_service.sh
       - ANALYSIS
       - "6544"
     volumes:
-      - "${TERRAMA2_DATA_DIR}:/data"
+      - "data_vol:/data"
       - "terrama2_shared_vol:/shared-data"
     tty: true
     networks:
@@ -66,14 +66,14 @@ services:
 
   # TerraMA2 View Service using TerraMA2 Base
   view:
-    image: "${TERRAMA2_DOCKER_REGISTRY}/terrama2:4.0.0"
+    image: "${TERRAMA2_DOCKER_REGISTRY}/terrama2:${TERRAMA2_TAG}"
     restart: unless-stopped
     entrypoint: 
       - /usr/local/bin/start_terrama2_service.sh
       - VIEW
       - "6545"
     volumes:
-      - "${TERRAMA2_DATA_DIR}:/data"
+      - "data_vol:/data"
       - "terrama2_shared_vol:/shared-data"
     tty: true
     networks:
@@ -81,14 +81,14 @@ services:
 
   # TerraMA2 Alert Service using TerraMA2 Base
   alert:
-    image: "${TERRAMA2_DOCKER_REGISTRY}/terrama2:4.0.0"
+    image: "${TERRAMA2_DOCKER_REGISTRY}/terrama2:${TERRAMA2_TAG}"
     restart: unless-stopped
     entrypoint: 
       - /usr/local/bin/start_terrama2_service.sh
       - ALERT
       - "6546"
     volumes:
-      - "${TERRAMA2_DATA_DIR}:/data"
+      - "data_vol:/data"
       - "terrama2_shared_vol:/shared-data"
     tty: true
     networks:
