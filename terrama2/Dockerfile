@@ -3,13 +3,13 @@ FROM ubuntu:16.04
 ############################################################################
 # Information
 LABEL maintainer="TerraMA² Team <terrama2-team@dpi.inpe.br>" \
-      version="4.0.0"
+      version="4.0.1"
 
 ############################################################################
 # Environment Variables
 ENV TERRAMA2_USER=terrama2
 ENV DEV_DIR=/home/${TERRAMA2_USER}/mydevel
-ENV TERRAMA2_INSTALL_PATH=/opt/terrama2/4.0.0
+ENV TERRAMA2_INSTALL_PATH=/opt/terrama2/4.0.1
 ENV TERRAMA2_CODEBASE_PATH=${DEV_DIR}/terrama2/codebase
 ENV TERRAMA2_3RDPARTY_PATH=${DEV_DIR}/terrama2/3rdparty
 ENV PATH="$PATH:${TERRAMA2_INSTALL_PATH}/bin"
