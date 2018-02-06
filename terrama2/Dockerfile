@@ -55,11 +55,11 @@ RUN curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash - && \
 
 # VMime
 RUN cd ${TERRAMA2_CODEBASE_PATH} && \
-    curl -O http://www.dpi.inpe.br/jenkins-data/terrama2/3rdparty/terrama2-vmime_0.9.2-ubuntu-16.04_amd64.deb && \
+    curl -O http://www.dpi.inpe.br/jenkins-data/terrama2/3rdparty/terrama2-vmime_0.9.2-ubuntu16.04_amd64.deb && \
     apt-get install -y libgsasl7 && \
-    dpkg -i terrama2-vmime_0.9.2-ubuntu-16.04_amd64.deb && \
+    dpkg -i terrama2-vmime_0.9.2-ubuntu16.04_amd64.deb && \
     apt-get install -f -y && \
-    rm -rf terrama2-vmime_0.9.2-ubuntu-16.04_amd64.deb* v* ${TERRAMA2_CODEBASE_PATH}
+    rm -rf terrama2-vmime_0.9.2-ubuntu16.04_amd64.deb* v* ${TERRAMA2_CODEBASE_PATH}
 
 # ############################################################################
 # # TerraMA2
