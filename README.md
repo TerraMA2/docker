@@ -16,12 +16,6 @@ cd docker
 
 If you don't have a running version of GeoServer or you want to try an experimental version, you can use the built-in TerraMA² GeoServer image.
 
-Log in the TerraMA² docker registry:
-
-```bash
-docker login terrama2
-```
-
 Create a new volume to store the GeoServer data files:
 
 ```bash
