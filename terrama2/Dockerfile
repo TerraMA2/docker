@@ -98,4 +98,7 @@ export LC_MEASUREMENT=\"en_US.UTF-8\"\n\
 export LC_IDENTIFICATION=\"en_US.UTF-8\"\n\
 export LC_ALL=en_US.UTF-8" | tee -a /etc/bash.bashrc
 
+# Configure ulimits
+RUN sed -i "\$i${TERRAMA2_USER}        hard    nofile  1048576\n${TERRAMA2_USER}        soft    nofile  1048576" /etc/security/limits.conf
+
 WORKDIR ${TERRAMA2_INSTALL_PATH}

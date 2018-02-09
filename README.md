@@ -16,12 +16,6 @@ cd docker
 
 If you don't have a running version of GeoServer or you want to try an experimental version, you can use the built-in TerraMA² GeoServer image.
 
-Log in the TerraMA² docker registry:
-
-```bash
-docker login terrama2.dpi.inpe.br:443
-```
-
 Create a new volume to store the GeoServer data files:
 
 ```bash
@@ -40,7 +34,7 @@ docker run -d \
            -v terrama2_shared_vol:/shared-data \
            -v terrama2_geoserver_vol:/opt/geoserver/data_dir \
            -v ${PWD}/conf/terrama2_geoserver_setenv.sh:/usr/local/tomcat/bin/setenv.sh \
-           terrama2.dpi.inpe.br:443/geoserver:2.11
+           terrama2/geoserver:2.11
 ```
 
 The above command will link the host address `127.0.0.1` on port `8081` to the container port `8080` and it will run the container as a daemon in background. You can try the following address in your browser: [http://localhost:8081/geoserver](http://localhost:8081/geoserver).
@@ -158,7 +152,7 @@ docker run -d \
            -v ${PWD}/conf/bdqueimadas-light/.pgpass:/root/.pgpass \
            -v ${PWD}/conf/terrama2_supervisor_bdqlight.conf:/etc/supervisor/conf.d/bdqueimadas-light.conf \
            -v terrama2_bdq_vol:/opt/bdqueimadas-light/tmp \
-           terrama2.dpi.inpe.br:443/bdqlight:1.0.0
+           terrama2/bdqlight:1.0.0
 ```
 
 Link the BDqueimadas container in `terrama2_net`:
