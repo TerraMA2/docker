@@ -3,12 +3,12 @@ FROM ubuntu:16.04
 ############################################################################
 # Information
 LABEL maintainer="TerraMA² Team <terrama2-team@dpi.inpe.br>" \
-      version="4.0.3"
+      version="%%TERRAMA2_TAG%%"
 
 ############################################################################
 # Environment Variables
 ENV TERRAMA2_USER=terrama2
-ENV TERRAMA2_TAG=4.0.3
+ENV TERRAMA2_TAG=%%TERRAMA2_TAG%%
 ENV DEV_DIR=/home/${TERRAMA2_USER}/mydevel
 ENV TERRAMA2_INSTALL_PATH=/opt/terrama2/${TERRAMA2_TAG}
 ENV TERRAMA2_CODEBASE_PATH=${DEV_DIR}/terrama2/codebase
