@@ -70,7 +70,7 @@ In the above command use the password: `mysecretpassword`.
 
 ## Running TerraMA²
 
-In order to link all the peaces of TerraMA², you can create a network named `terrama2_net`:
+In order to link all the pieces of TerraMA², you can create a network named `terrama2_net`:
 
 ```bash
 docker network create terrama2_net
@@ -82,6 +82,14 @@ If you have installed the GeoServer and PostgreSQL as docker containers, as expl
 docker network connect terrama2_net terrama2_geoserver
 docker network connect terrama2_net terrama2_pg
 ```
+
+After that, configure files version properly:
+
+```bash
+./configure-version.sh
+```
+
+This command will generate **conf/terrama2_webapp.json** file. You may edit this file for connection parameters.
 
 Now run the docker-compose in daemon mode:
 
