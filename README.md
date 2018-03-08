@@ -2,7 +2,7 @@
 
 ## Requirements
 
-- [Docker](https://docs.docker.com/install/linux/docker-ce/ubuntu/)
+- [Docker](https://docs.docker.com/install/)
 - [Docker Compose](https://docs.docker.com/compose/install/)
 
 ## Cloning docker scripts for  TerraMA² Platform
