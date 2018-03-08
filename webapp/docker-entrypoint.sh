@@ -2,10 +2,14 @@
 
 cd $TERRAMA2_INSTALL_PATH/webapp
 
-# Start Supervisorctl
-service supervisor start
+_TMA_EXEC_CODE=1
 
-trap "supervisorctl stop terrama2-webapp" EXIT HUP INT QUIT TERM
+while [ ${_TMA_EXEC_CODE} -ne 0 ]
+do
+  npm start
+  # Retrieve code execution
+  _TMA_EXEC_CODE=$?
 
-# Lock Execution
-supervisorctl tail -f terrama2-webapp
+  # Delay to restart
+  sleep 3
+done

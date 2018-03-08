@@ -18,9 +18,7 @@ RUN apt-get update && \
                        unzip \
                        sudo \
                        openssh-server \
-                       gdal-bin \
-                       # Process Control
-                       supervisor
+                       gdal-bin
 
 # NodeJS
 RUN curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash - && \

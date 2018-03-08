@@ -19,7 +19,7 @@ cd docker/terrama2
 In that folder run the following command:
 
 ```bash
-docker build --tag terrama2.dpi.inpe.br:443/terrama2:4.0.0 .
+docker build --tag terrama2.dpi.inpe.br:443/terrama2:4.0.3 .
 ```
 
 After building the base image you should build the `terrama2-webapp` and `terrama2-webmonitor` images:
@@ -29,7 +29,7 @@ cd docker/webapp
 ```
 
 ```bash
-docker build --tag terrama2.dpi.inpe.br:443/terrama2-webapp:4.0.0 .
+docker build --tag terrama2.dpi.inpe.br:443/terrama2-webapp:4.0.3 .
 ```
 
 ```bash
@@ -37,7 +37,7 @@ cd docker/webmonitor
 ```
 
 ```bash
-docker build --tag terrama2.dpi.inpe.br:443/terrama2-webmonitor:4.0.0 .
+docker build --tag terrama2.dpi.inpe.br:443/terrama2-webmonitor:4.0.3 .
 ```
 
 ## Building the BDQueimadas Light Docker Image
@@ -61,15 +61,15 @@ docker login terrama2.dpi.inpe.br:443
 ```
 
 ```bash
-docker push terrama2.dpi.inpe.br:443/terrama2:4.0.0
+docker push terrama2.dpi.inpe.br:443/terrama2:4.0.3
 ```
 
 ```bash
-docker push terrama2.dpi.inpe.br:443/terrama2-webapp:4.0.0
+docker push terrama2.dpi.inpe.br:443/terrama2-webapp:4.0.3
 ```
 
 ```bash
-docker push terrama2.dpi.inpe.br:443/terrama2-webmonitor:4.0.0
+docker push terrama2.dpi.inpe.br:443/terrama2-webmonitor:4.0.3
 ```
 
 

@@ -2,10 +2,14 @@
 
 cd $BDQLIGHT_INSTALL_PATH
 
-# Start Supervisorctl
-service supervisor start
+_TMA_EXEC_CODE=1
 
-trap "supervisorctl stop bdqueimadas-light" EXIT HUP INT QUIT TERM
+while [ ${_TMA_EXEC_CODE} -ne 0 ]
+do
+  npm start
+  # Retrieve code execution
+  _TMA_EXEC_CODE=$?
 
-# Lock Execution
-supervisorctl tail -f bdqueimadas-light
+  # Delay to restart
+  sleep 3
+done

@@ -1,5 +1,67 @@
 # Dockerfiles Repository for the TerraMA² Platform
 
+## Install Docker
+
+Use the following commands to install Docker available in this [link](https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-docker-ce-1):
+
+```bash
+sudo apt-get update
+sudo apt-get install \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    software-properties-common
+```
+
+Set docker repository key:
+
+```bash
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo apt-key fingerprint 0EBFCD88
+```
+
+Add docker repository:
+
+```bash
+sudo add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+   $(lsb_release -cs) \
+   stable"
+sudo apt-get update
+```
+
+Install docker **17.12.0**:
+
+```bash
+sudo apt-get install docker-ce=17.12.0~ce-0~ubuntu
+```
+
+You can also add current **user** to the docker group in order to allow execute docker command without **sudo**:
+
+```bash
+groupadd docker
+sudo usermod -aG docker ${USER}
+```
+
+You **must** log in again to take effect.
+
+## Install Docker Compose
+
+Use the following commands to install Docker Compose available in this [link](https://docs.docker.com/compose/install/#install-compose):
+
+```bash
+# Download Docker Compose
+sudo curl -L https://github.com/docker/compose/releases/download/1.19.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+# Set execute permission to the file
+sudo chmod +x /usr/local/bin/docker-compose
+```
+
+Test the installation:
+
+```bash
+docker-compose --version
+```
+
 ## Cloning docker scripts for  TerraMA² Platform
 
 ```bash
