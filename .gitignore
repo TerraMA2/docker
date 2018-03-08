@@ -3,6 +3,12 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# Generated files
+conf/terrama2_webapp.json
+terrama2/Dockerfile
+webapp/Dockerfile
+webmonitor/Dockerfile
+
 # C extensions
 *.so
 

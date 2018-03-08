@@ -16,60 +16,30 @@ Go to the folder `terrama2`. It contains the `Dockerfile` to build the base imag
 cd docker/terrama2
 ```
 
-In that folder run the following command:
+Configure **Dockerfiles** with respective version:
 
 ```bash
-docker build --tag terrama2.dpi.inpe.br:443/terrama2:4.0.0 .
+./configure-version.sh
 ```
 
-After building the base image you should build the `terrama2-webapp` and `terrama2-webmonitor` images:
+After that, just run script **build-image.sh** to build:
 
 ```bash
-cd docker/webapp
+./build-image.sh
 ```
 
-```bash
-docker build --tag terrama2.dpi.inpe.br:443/terrama2-webapp:4.0.0 .
-```
+## Publishing the Generated TerraMA² Images
 
 ```bash
-cd docker/webmonitor
-```
-
-```bash
-docker build --tag terrama2.dpi.inpe.br:443/terrama2-webmonitor:4.0.0 .
-```
-
-## Building the BDQueimadas Light Docker Image
-
-Go to the folder `bdqueimadas-light`. It contains the `Dockerfile` to build the base image:
-
-```bash
-cd docker/bdqueimadas-light
-```
-
-In that folder run the following command:
-
-```bash
-docker build --tag terrama2.dpi.inpe.br:443/bdqlight:1.0.0 .
-```
-
-## Publishing the Generated TerraMA² Images in a Private Registry
-
-```bash
-docker login terrama2.dpi.inpe.br:443
+docker push terrama2/terrama2:4.0.3
 ```
 
 ```bash
-docker push terrama2.dpi.inpe.br:443/terrama2:4.0.0
+docker push terrama2/terrama2-webapp:4.0.3
 ```
 
 ```bash
-docker push terrama2.dpi.inpe.br:443/terrama2-webapp:4.0.0
-```
-
-```bash
-docker push terrama2.dpi.inpe.br:443/terrama2-webmonitor:4.0.0
+docker push terrama2/terrama2-webmonitor:4.0.3
 ```
 
 

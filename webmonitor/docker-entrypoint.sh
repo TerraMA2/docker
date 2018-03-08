@@ -2,9 +2,14 @@
 
 cd $TERRAMA2_INSTALL_PATH/webmonitor
 
-# Start Supervisorctl
-service supervisor start
+_TMA_EXEC_CODE=1
 
-trap "supervisorctl stop terrama2-webmonitor" EXIT HUP INT QUIT TERM
+while [ ${_TMA_EXEC_CODE} -ne 0 ]
+do
+  npm start
+  # Retrieve code execution
+  _TMA_EXEC_CODE=$?
 
-supervisorctl tail -f terrama2-webmonitor
+  # Delay to restart
+  sleep 3
+done
