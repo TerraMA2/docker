@@ -1,6 +1,6 @@
 {
   "webmonitor": {
-    "basePath": "/webmonitor/",
+    "basePath": "/",
     "port": 36001
   },
   "webadmin": {
