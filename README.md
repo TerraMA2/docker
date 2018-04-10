@@ -136,7 +136,6 @@ docker run -d \
            -p 127.0.0.1:39000:39000 \
            -v ${PWD}/conf/bdqueimadas-light/conf/:/opt/bdqueimadas-light/configurations/ \
            -v ${PWD}/conf/bdqueimadas-light/.pgpass:/root/.pgpass \
-           -v ${PWD}/conf/terrama2_supervisor_bdqlight.conf:/etc/supervisor/conf.d/bdqueimadas-light.conf \
            -v terrama2_bdq_vol:/opt/bdqueimadas-light/tmp \
            terrama2/bdqlight:1.0.0
 ```
