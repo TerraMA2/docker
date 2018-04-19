@@ -1,5 +1,10 @@
 # Dockerfiles Repository for the TerraMA² Platform
 
+## Requirements
+
+- [Docker](https://docs.docker.com/install/)
+- [Docker Compose](https://docs.docker.com/compose/install/)
+
 ## Cloning docker scripts for  TerraMA² Platform
 
 ```bash
@@ -70,7 +75,7 @@ In the above command use the password: `mysecretpassword`.
 
 ## Running TerraMA²
 
-In order to link all the peaces of TerraMA², you can create a network named `terrama2_net`:
+In order to link all the pieces of TerraMA², you can create a network named `terrama2_net`:
 
 ```bash
 docker network create terrama2_net
@@ -82,6 +87,14 @@ If you have installed the GeoServer and PostgreSQL as docker containers, as expl
 docker network connect terrama2_net terrama2_geoserver
 docker network connect terrama2_net terrama2_pg
 ```
+
+After that, configure files version properly:
+
+```bash
+./configure-version.sh
+```
+
+This command will generate **conf/terrama2_webapp.json** file. You may edit this file for connection parameters.
 
 Now run the docker-compose in daemon mode:
 
@@ -123,7 +136,6 @@ docker run -d \
            -p 127.0.0.1:39000:39000 \
            -v ${PWD}/conf/bdqueimadas-light/conf/:/opt/bdqueimadas-light/configurations/ \
            -v ${PWD}/conf/bdqueimadas-light/.pgpass:/root/.pgpass \
-           -v ${PWD}/conf/terrama2_supervisor_bdqlight.conf:/etc/supervisor/conf.d/bdqueimadas-light.conf \
            -v terrama2_bdq_vol:/opt/bdqueimadas-light/tmp \
            terrama2/bdqlight:1.0.0
 ```

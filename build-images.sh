@@ -14,8 +14,13 @@ function is_valid() {
 _current_dir=${PWD}
 eval $(egrep -v '^#' .env | xargs)
 
+# GeoServer
+cd geoserver
+docker build --tag ${TERRAMA2_DOCKER_REGISTRY}/geoserver:2.11 . --rm
+is_valid $? "Could not build GeoServer"
+
 # TerraMA²
-cd terrama2
+cd ${_current_dir}/terrama2
 
 docker build --tag ${TERRAMA2_DOCKER_REGISTRY}/terrama2:${TERRAMA2_TAG} . --rm
 is_valid $? "Could not build TerraMA² image"
