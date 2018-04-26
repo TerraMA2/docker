@@ -1,5 +1,11 @@
 FROM %%TERRAMA2_DOCKER_REGISTRY%%/terrama2:%%TERRAMA2_TAG%%
 
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+                    postgis \
+                    # PostgreSQL Client
+                    postgresql-client
+
 EXPOSE 36000
 
 COPY docker-entrypoint.sh /
