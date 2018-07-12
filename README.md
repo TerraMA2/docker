@@ -32,7 +32,7 @@ Pull the GeoServer image and run a new container named `terrama2_geoserver`:
 ```bash
 docker run -d \
            --restart unless-stopped --name terrama2_geoserver \
-           -p 127.0.0.1:8081:8080 \
+           -p 127.0.0.1:8080:8080 \
            -e "GEOSERVER_URL=/geoserver" \
            -e "GEOSERVER_DATA_DIR=/opt/geoserver/data_dir" \
            -v terrama2_data_vol:/data \
@@ -42,7 +42,7 @@ docker run -d \
            terrama2/geoserver:2.11
 ```
 
-The above command will link the host address `127.0.0.1` on port `8081` to the container port `8080` and it will run the container as a daemon in background. You can try the following address in your browser: [http://localhost:8081/geoserver](http://localhost:8081/geoserver).
+The above command will link the host address `127.0.0.1` on port `8080` to the container port `8080` and it will run the container as a daemon in background. You can try the following address in your browser: [http://localhost:8080/geoserver](http://localhost:8080/geoserver).
 
 ### PostgreSQL + PostGIS
 
