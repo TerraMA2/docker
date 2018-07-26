@@ -103,11 +103,28 @@ services:
     networks:
       - net
 
+  # TerraMA2 Interpolator Service using TerraMA2 Base
+  interpolator:
+    image: "${TERRAMA2_DOCKER_REGISTRY}/terrama2:${TERRAMA2_TAG}"
+    restart: unless-stopped
+    entrypoint:
+      - /usr/local/bin/start_terrama2_service.sh
+      - INTERPOLATOR
+      - "6547"
+    volumes:
+      - "${TERRAMA2_DATA_DIR}:/data"
+      - "terrama2_shared_vol:/shared-data"
+      - "${TERRAMA2_CONFIG_DIR}/id_rsa.pub:/home/terrama2/.ssh/authorized_keys"
+      - "${TERRAMA2_CONFIG_DIR}/id_rsa.pub:/root/.ssh/authorized_keys"
+    tty: true
+    networks:
+      - net
+
 networks:
-    net:
+  net:
 
 volumes:
-    data_vol:
-    terrama2_shared_vol:
-      external:
-        name: terrama2_shared_vol
+  data_vol:
+  terrama2_shared_vol:
+    external:
+      name: terrama2_shared_vol
