@@ -105,8 +105,6 @@ services:
     volumes:
       - "${TERRAMA2_DATA_DIR}:/data"
       - "terrama2_shared_vol:/shared-data"
-      - "${TERRAMA2_CONFIG_DIR}/id_rsa.pub:/home/terrama2/.ssh/authorized_keys"
-      - "${TERRAMA2_CONFIG_DIR}/id_rsa.pub:/root/.ssh/authorized_keys"
     tty: true
     networks:
       - net
