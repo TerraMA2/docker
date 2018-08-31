@@ -17,6 +17,12 @@ cd docker
 
 ## Check 3rd-party dependencies
 
+Create a volume `terrama2_shared_vol`:
+
+```bash
+docker volume create terrama2_shared_vol
+```
+
 ### GeoServer
 
 If you don't have a running version of GeoServer or you want to try an experimental version, you can use the built-in TerraMA² GeoServer image.
