@@ -126,6 +126,8 @@ If you want to remove all the stopped containers:
 docker-compose -p terrama2 rm
 ```
 
+You can proceed to next post installation steps in [`link`](./README.md#post-installation-tips).
+
 ### BDQueimadas Light
 
 Create a new volume to store the BDQueimadas Light temporary download files:
@@ -151,6 +153,35 @@ Link the BDqueimadas container in `terrama2_net`:
 ```bash
 docker network connect terrama2_net terrama2_bdq
 ```
+
+## Post Installation Tips
+
+### Run TerraMA² localhost
+
+#### Unix
+
+On unix environment, add in the file `/etc/hosts` with following statements:
+
+```
+127.0.0.1       terrama2_geoserver
+127.0.0.1       terrama2_webapp_1
+127.0.0.1       terralib_webapp_1
+```
+
+#### Windows
+
+Open NotePad with Adminiistrator and then modifify the file `C:\Windows\System32\Drivers\etc\hosts`:
+
+```
+127.0.0.1       terrama2_geoserver
+127.0.0.1       terrama2_webapp_1
+127.0.0.1       terralib_webapp_1
+```
+
+### Services
+
+By default, the TerraMA² services are not started automatically inside container. In this way, we must configure these parameters in [`Web Application`](http://127.0.0.1:36000) to associate with respective container.
+
 
 ## Tips
 
