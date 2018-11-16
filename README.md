@@ -165,7 +165,7 @@ On unix environment, add in the file `/etc/hosts` with following statements:
 ```
 127.0.0.1       terrama2_geoserver
 127.0.0.1       terrama2_webapp_1
-127.0.0.1       terralib_webapp_1
+127.0.0.1       terralib_webmonitor_1
 ```
 
 #### Windows
@@ -175,7 +175,7 @@ Open NotePad with Adminiistrator and then modifify the file `C:\Windows\System32
 ```
 127.0.0.1       terrama2_geoserver
 127.0.0.1       terrama2_webapp_1
-127.0.0.1       terralib_webapp_1
+127.0.0.1       terralib_webmonitor_1
 ```
 
 ### Services
