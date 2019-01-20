@@ -1,7 +1,10 @@
 {
   "basePath": "/",
   "port": 36000,
-  "defaultFilePath": "/data",
+  "defaultFilePathList": [
+    "/data",
+    "/shared-data
+  ],
   "defaultExecutablePath": "/opt/terrama2/%%TERRAMA2_TAG%%/bin",
   "defaultExecutableName": "terrama2_service",
   "disablePDF": true,
