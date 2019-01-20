@@ -3,7 +3,7 @@
   "port": 36000,
   "defaultFilePathList": [
     "/data",
-    "/shared-data
+    "/shared-data"
   ],
   "defaultExecutablePath": "/opt/terrama2/%%TERRAMA2_TAG%%/bin",
   "defaultExecutableName": "terrama2_service",
