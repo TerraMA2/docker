@@ -31,15 +31,15 @@ After that, just run script **build-image.sh** to build:
 ## Publishing the Generated TerraMA² Images
 
 ```bash
-docker push terrama2/terrama2:4.0.3
+docker push terrama2/terrama2:4.0.9
 ```
 
 ```bash
-docker push terrama2/terrama2-webapp:4.0.3
+docker push terrama2/terrama2-webapp:4.0.9
 ```
 
 ```bash
-docker push terrama2/terrama2-webmonitor:4.0.3
+docker push terrama2/terrama2-webmonitor:4.0.9
 ```
 
 
