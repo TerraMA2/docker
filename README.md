@@ -180,7 +180,10 @@ Open NotePad with Adminiistrator and then modifify the file `C:\Windows\System32
 
 ### Services
 
-By default, the TerraMA² services are not started automatically inside container. In this way, we must configure these parameters in [`Web Application`](http://127.0.0.1:36000) to associate with respective container.
+We must configure service parameters in [`Web Application`](http://127.0.0.1:36000) to associate with respective container.
+On service hosts, unmark the option `Local Service` and then set the respective container name to the service at `Host Address`. For example, in the service `Local Collector`, use address `terrama2_collector_1`. For `Local Analysis`, use `terrama2_analysis_1` and so on.
+
+When registering `Local View`, make sure that you have configured the directive provided on section `Run TerraMA² localhost` and specify the `Maps Server URL` with `terrama2_geoserver`.
 
 
 ## Tips
