@@ -94,4 +94,6 @@ export LC_ALL=en_US.UTF-8" | tee -a /etc/bash.bashrc && \
 
 VOLUME /data
 
+USER terrama2
+
 WORKDIR ${TERRAMA2_INSTALL_PATH}
