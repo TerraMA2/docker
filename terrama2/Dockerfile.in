@@ -44,15 +44,16 @@ RUN apt-get update && \
     cat /root/.ssh/id_rsa.pub > /home/$TERRAMA2_USER/.ssh/authorized_keys && \
     cat /root/.ssh/id_rsa.pub > /root/.ssh/authorized_keys && \
     chown -R ${TERRAMA2_USER}:${TERRAMA2_USER} /home/$TERRAMA2_USER/.ssh && \
-    chmod -R 700 /home/$TERRAMA2_USER/.ssh
+    chmod -R 700 /home/$TERRAMA2_USER/.ssh && \
+    echo "${TERRAMA2_USER} ALL=(ALL) NOPASSWD: ALL" | tee -a /etc/sudoers
 
 
 ############################################################################
 # Dependencies
 
 RUN cd ${TERRAMA2_3RDPARTY_PATH} && \
-    curl -o terralib-5.3.3-ubuntu-16.04.tar.gz -L http://www.dpi.inpe.br/terralib5/download/download.php?FileName=terralib-5.3.3-ubuntu-16.04.tar.gz && \
-    tar zxf terralib-5.3.3-ubuntu-16.04.tar.gz && \
+    curl -o terralib-5.4.2-ubuntu-16.04_20190306.tar.gz -L http://www.dpi.inpe.br/jenkins-data/terrama2/3rdparty/terralib-5.4.2-ubuntu-16.04_20190306.tar.gz && \
+    tar zxf terralib-5.4.2-ubuntu-16.04_20190306.tar.gz && \
     ./install.sh && \
     rm -rf * && \
     curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash - && \
@@ -94,6 +95,6 @@ export LC_ALL=en_US.UTF-8" | tee -a /etc/bash.bashrc && \
 
 VOLUME /data
 
-USER terrama2
+USER ${TERRAMA2_USER}
 
 WORKDIR ${TERRAMA2_INSTALL_PATH}

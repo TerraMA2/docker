@@ -37,7 +37,7 @@ if [ $? -ne 0 ]; then
 fi
 
 echo -ne "Configuring permission on /opt to terrama2..."
-chown -R terrama2:terrama2 /opt
+chown -R terrama2:terrama2 /opt/terrama2/${TERRAMA2_TAG}
 valid $? "Could not set permission on directory /opt"
 
 rm -rf /var/lib/apt/lists/*
