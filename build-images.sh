@@ -16,7 +16,7 @@ eval $(egrep -v '^#' .env | xargs)
 
 # GeoServer
 cd geoserver
-# docker build --tag ${TERRAMA2_DOCKER_REGISTRY}/geoserver:2.11 . --rm
+docker build --tag ${TERRAMA2_DOCKER_REGISTRY}/geoserver:2.11 . --rm
 is_valid $? "Could not build GeoServer"
 
 # TerraMA²
@@ -38,7 +38,7 @@ docker build --tag ${TERRAMA2_DOCKER_REGISTRY}/terrama2-webmonitor:${TERRAMA2_TA
 is_valid $? "Could not build TerraMA² webmonitor image"
 
 # Bdqlight
-# cd ${_current_dir}/bdqueimadas-light
+cd ${_current_dir}/bdqueimadas-light
 
-# docker build --tag ${TERRAMA2_DOCKER_REGISTRY}/bdqlight:1.0.0 . --rm
-# is_valid $? "Could not build TerraMA² bdqlight image"
+docker build --tag ${TERRAMA2_DOCKER_REGISTRY}/bdqlight:1.0.0 . --rm
+is_valid $? "Could not build TerraMA² bdqlight image"
