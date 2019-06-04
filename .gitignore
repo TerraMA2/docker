@@ -4,7 +4,7 @@ __pycache__/
 *$py.class
 
 # Generated files
-conf/terrama2_webapp.json
+conf/terrama2_webapp_settings.json
 terrama2/Dockerfile
 webapp/Dockerfile
 webmonitor/Dockerfile

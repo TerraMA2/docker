@@ -94,6 +94,8 @@ docker network connect terrama2_net terrama2_geoserver
 docker network connect terrama2_net terrama2_pg
 ```
 
+Edit the file `conf/terrama2_webapp_db.json` with database credentials.
+
 After that, configure files version properly:
 
 ```bash
