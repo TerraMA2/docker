@@ -1,5 +1,7 @@
 FROM %%TERRAMA2_DOCKER_REGISTRY%%/terrama2:%%TERRAMA2_TAG%%
 
+USER root
+
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
                     postgis \

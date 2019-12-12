@@ -1,0 +1,15 @@
+{
+  "production": {
+    "username": "postgres",
+    "password": "postgres",
+    "database": "terrama2",
+    "host": "terrama2_pg",
+    "port": 5432,
+    "dialect": "postgres",
+    "define": {
+      "schema": "terrama2"
+    },
+    "logging": false,
+    "migrationStorageTableSchema": "public"
+  }
+}

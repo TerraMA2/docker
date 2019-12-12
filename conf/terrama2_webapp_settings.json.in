@@ -11,18 +11,6 @@
   "debug": true,
   "OGR2OGR": "ogr2ogr",
   "SHP2PGSQL": "shp2pgsql",
-  "db": {
-    "username": "postgres",
-    "password": "mysecretpassword",
-    "database": "terrama2",
-    "host": "terrama2_pg",
-    "port": 5432,
-    "dialect": "postgres",
-    "define": {
-      "schema": "terrama2"
-    },
-    "logging": false
-  },
   "toolsMenu": [
     {
       "textEn": "Example",

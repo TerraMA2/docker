@@ -3,7 +3,7 @@
 set -x
 
 # Start Services
-service ssh start
+sudo service ssh start
 
 # Arguments
 TERRAMA2_SERVICE_TYPE=$1
