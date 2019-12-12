@@ -11,7 +11,8 @@ services:
     volumes:
       - "${TERRAMA2_DATA_DIR}:/data"
       - "terrama2_shared_vol:/shared-data"
-      - "${TERRAMA2_CONFIG_DIR}/terrama2_webapp.json:/opt/terrama2/${TERRAMA2_TAG}/webapp/config/instances/default.json"
+      - "${TERRAMA2_CONFIG_DIR}/terrama2_webapp_db.json:/opt/terrama2/${TERRAMA2_TAG}/webapp/config/db.json"
+      - "${TERRAMA2_CONFIG_DIR}/terrama2_webapp_settings.json:/opt/terrama2/${TERRAMA2_TAG}/webapp/config/settings.json"
       - "${TERRAMA2_CONFIG_DIR}/.pgpass:/root/.pgpass"
     networks:
       - net
