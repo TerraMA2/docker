@@ -52,7 +52,7 @@ RUN apt-get update && \
 # Dependencies
 
 RUN cd ${TERRAMA2_3RDPARTY_PATH} && \
-    curl -o terralib-5.4.5-ubuntu-16.04.tar.gz -L http://www.dpi.inpe.br/jenkins-data/terralib/installers/linux/terralib-5.4.5-ubuntu-16.04_2019-12-11_12-15-5.4.5.tar.gz && \
+    curl -o terralib-5.4.5-ubuntu-16.04.tar.gz -L http://www.dpi.inpe.br/jenkins-data/terrama2/3rdparty/terralib-5.4.5-ubuntu-16.04.tar.gz && \
     tar zxf terralib-5.4.5-ubuntu-16.04.tar.gz && \
     ./install.sh && \
     rm -rf * && \
