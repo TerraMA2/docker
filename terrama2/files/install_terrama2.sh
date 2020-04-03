@@ -36,9 +36,9 @@ if [ $? -ne 0 ]; then
   echo "Warning: Could not install TerraMA² Documentation Module"
 fi
 
-#echo -ne "Configuring permission on /opt to terrama2..."
-#chown -R terrama2:terrama2 /opt/terrama2/${TERRAMA2_TAG}
-#valid $? "Could not set permission on directory /opt"
+echo -ne "Configuring permission on /opt to terrama2..."
+chown -R terrama2:terrama2 /opt/terrama2/${TERRAMA2_TAG}
+valid $? "Could not set permission on directory /opt"
 
 rm -rf /var/lib/apt/lists/*
 
