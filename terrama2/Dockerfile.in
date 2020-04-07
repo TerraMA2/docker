@@ -43,6 +43,8 @@ RUN apt-get update && \
     mkdir /home/$TERRAMA2_USER/.ssh && \
     cat /root/.ssh/id_rsa.pub > /home/$TERRAMA2_USER/.ssh/authorized_keys && \
     cat /root/.ssh/id_rsa.pub > /root/.ssh/authorized_keys && \
+    cp /root/.ssh/id_rsa.pub /home/$TERRAMA2_USER/.ssh/ && \
+    cp /root/.ssh/id_rsa /home/$TERRAMA2_USER/.ssh/ && \
     chown -R ${TERRAMA2_USER}:${TERRAMA2_USER} /home/$TERRAMA2_USER/.ssh && \
     chmod -R 700 /home/$TERRAMA2_USER/.ssh && \
     echo "${TERRAMA2_USER} ALL=(ALL) NOPASSWD: ALL" | tee -a /etc/sudoers

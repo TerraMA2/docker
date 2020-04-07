@@ -10,7 +10,7 @@ services:
       - "${TERRAMA2_WEBAPP_ADDRESS}:36000"
     volumes:
       - "${TERRAMA2_DATA_DIR}:/data"
-      - "terrama2_shared_vol:/shared-data"
+      - "shared_vol:/shared-data"
       - "${TERRAMA2_CONFIG_DIR}/terrama2_webapp_db.json:/opt/terrama2/${TERRAMA2_TAG}/webapp/config/db.json"
       - "${TERRAMA2_CONFIG_DIR}/terrama2_webapp_settings.json:/opt/terrama2/${TERRAMA2_TAG}/webapp/config/settings.json"
       - "${TERRAMA2_CONFIG_DIR}/.pgpass:/root/.pgpass"
@@ -27,7 +27,7 @@ services:
       - webapp
     volumes:
       - "${TERRAMA2_DATA_DIR}:/data"
-      - "terrama2_shared_vol:/shared-data"
+      - "shared_vol:/shared-data"
       - "${TERRAMA2_CONFIG_DIR}/terrama2_webmonitor.json:/opt/terrama2/${TERRAMA2_TAG}/webmonitor/config/instances/default.json"
       - "${TERRAMA2_CONFIG_DIR}/.pgpass:/root/.pgpass"
     networks:
@@ -45,7 +45,7 @@ services:
       - "6543"
     volumes:
       - "${TERRAMA2_DATA_DIR}:/data"
-      - "terrama2_shared_vol:/shared-data"
+      - "shared_vol:/shared-data"
     tty: true
     networks:
       - net
@@ -60,7 +60,7 @@ services:
       - "6544"
     volumes:
       - "${TERRAMA2_DATA_DIR}:/data"
-      - "terrama2_shared_vol:/shared-data"
+      - "shared_vol:/shared-data"
     tty: true
     networks:
       - net
@@ -75,7 +75,7 @@ services:
       - "6545"
     volumes:
       - "${TERRAMA2_DATA_DIR}:/data"
-      - "terrama2_shared_vol:/shared-data"
+      - "shared_vol:/shared-data"
     tty: true
     networks:
       - net
@@ -90,7 +90,7 @@ services:
       - "6546"
     volumes:
       - "${TERRAMA2_DATA_DIR}:/data"
-      - "terrama2_shared_vol:/shared-data"
+      - "shared_vol:/shared-data"
     tty: true
     networks:
       - net
@@ -105,8 +105,39 @@ services:
       - "6547"
     volumes:
       - "${TERRAMA2_DATA_DIR}:/data"
-      - "terrama2_shared_vol:/shared-data"
+      - "shared_vol:/shared-data"
     tty: true
+    networks:
+      - net
+
+  # TerraMA2 DB
+  pg:
+    container_name: terrama2_pg
+    image: mdillon/postgis
+    restart: always
+    ports:
+      - "127.0.0.1:5433:5432"
+    volumes:
+      - pg_vol:/var/lib/postgresql/data
+    environment: 
+      - "POSTGRES_PASSWORD=postgres"
+    networks:
+      - net
+
+  # TerraMA2 Geoserver
+  geoserver:
+    container_name: terrama2_geoserver
+    image: terrama2/geoserver:2.11
+    restart: always
+    ports:
+      - "127.0.0.1:8082:8080"
+    volumes:
+      - shared_vol:/shared-data
+      - geoserver_vol:/opt/geoserver/data_dir
+      - ./conf/terrama2_geoserver_setenv.sh:/usr/local/tomcat/bin/setenv.sh
+    environment:
+      - "GEOSERVER_URL=/geoserver"
+      - "GEOSERVER_DATA_DIR=/opt/geoserver/data_dir"
     networks:
       - net
 
@@ -115,6 +146,8 @@ networks:
 
 volumes:
   data_vol:
-  terrama2_shared_vol:
+  geoserver_vol:
+  pg_vol:
+  shared_vol:
     external:
       name: terrama2_shared_vol
