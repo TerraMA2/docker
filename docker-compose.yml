@@ -29,6 +29,8 @@ services:
       - "${TERRAMA2_DATA_DIR}:/data"
       - "terrama2_shared_vol:/shared-data"
       - "${TERRAMA2_CONFIG_DIR}/terrama2_webmonitor.json:/opt/terrama2/${TERRAMA2_TAG}/webmonitor/config/instances/default.json"
+      - "${TERRAMA2_CONFIG_DIR}/terrama2_webmonitor_user_conf.json:/opt/terrama2/${TERRAMA2_TAG}/webmonitor/config/instances/user_conf.json"
+      - "./images:/opt/terrama2/${TERRAMA2_TAG}/webmonitor/public/images"
       - "${TERRAMA2_CONFIG_DIR}/.pgpass:/root/.pgpass"
     networks:
       - net
