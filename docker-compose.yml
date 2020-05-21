@@ -30,7 +30,7 @@ services:
       - "terrama2_shared_vol:/shared-data"
       - "${TERRAMA2_CONFIG_DIR}/terrama2_webmonitor.json:/opt/terrama2/${TERRAMA2_TAG}/webmonitor/config/instances/default.json"
       - "${TERRAMA2_CONFIG_DIR}/terrama2_webmonitor_user_conf.json:/opt/terrama2/${TERRAMA2_TAG}/webmonitor/config/instances/user_conf.json"
-      - "./images:/opt/terrama2/${TERRAMA2_TAG}/webmonitor/public/images"
+      - "webmonitor_images:/opt/terrama2/${TERRAMA2_TAG}/webmonitor/public/images"
       - "${TERRAMA2_CONFIG_DIR}/.pgpass:/root/.pgpass"
     networks:
       - net
@@ -117,6 +117,7 @@ networks:
 
 volumes:
   data_vol:
+  webmonitor_images:
   terrama2_shared_vol:
     external:
       name: terrama2_shared_vol

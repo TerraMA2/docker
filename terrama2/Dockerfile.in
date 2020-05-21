@@ -22,6 +22,7 @@ RUN apt-get update && \
                        git \
                        unzip \
                        sudo \
+                       nano \
                        screen \
                        openssh-server \
                        # VMime Dependencies
