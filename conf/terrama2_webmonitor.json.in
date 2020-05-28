@@ -1,0 +1,12 @@
+{
+  "webmonitor": {
+    "basePath": "%%TERRAMA2_BASE_PATH%%monitor/",
+    "port": 36001
+  },
+  "webadmin": {
+    "protocol": "http://",
+    "basePath": "%%TERRAMA2_BASE_PATH%%adm/",
+    "port": 80,
+    "host": "%%TERRAMA2_DNS%%"
+  }
+}
