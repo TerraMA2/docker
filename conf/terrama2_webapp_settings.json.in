@@ -1,5 +1,5 @@
 {
-  "basePath": "/",
+  "basePath": "%%TERRAMA2_BASE_PATH%%adm/",
   "port": 36000,
   "defaultFilePathList": [
     "/data",
