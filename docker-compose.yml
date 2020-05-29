@@ -114,7 +114,7 @@ services:
 
   # Geoserver
   geoserver:
-    image: "${TERRAMA2_DOCKER_REGISTRY}/geoserver:2.11"
+    image: "${TERRAMA2_DOCKER_REGISTRY}/geoserver:2.12"
     restart: always
     ports:
       - "${TERRAMA2_GEOSERVER_ADDRESS}:8080"
