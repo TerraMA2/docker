@@ -29,6 +29,8 @@ RUN apt-get update && \
                        doxygen \
                        # Process Control
                        supervisor \
+                       apt-transport-https \
+                       ca-certificates \
                        # Locales
                        locales && \
     rm -rf /var/lib/apt/lists/* && \
@@ -40,6 +42,7 @@ RUN apt-get update && \
     mkdir -p $TERRAMA2_3RDPARTY_PATH $TERRAMA2_CODEBASE_PATH && \
     chown -R $TERRAMA2_USER:$TERRAMA2_USER /home/$TERRAMA2_USER && \
     chmod g-w /home/$TERRAMA2_USER && \
+    mkdir /$HOME/.ssh && \
     ssh-keygen -t rsa -b 4096 -C "terrama2-team@dpi.inpe.br" -N "" -f $HOME/.ssh/id_rsa && \
     mkdir /home/$TERRAMA2_USER/.ssh && \
     cat /root/.ssh/id_rsa.pub > /home/$TERRAMA2_USER/.ssh/authorized_keys && \
@@ -59,9 +62,9 @@ RUN cd ${TERRAMA2_3RDPARTY_PATH} && \
     tar zxf terralib-5.4.5-ubuntu-16.04.tar.gz && \
     ./install.sh && \
     rm -rf * && \
-    wget -qO- https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add -
-    echo 'deb https://deb.nodesource.com/node_8.x xenial main' > /etc/apt/sources.list.d/nodesource.list
-    echo 'deb-src https://deb.nodesource.com/node_8.x xenial main' >> /etc/apt/sources.list.d/nodesource.list
+    wget -qO- https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add - && \
+    echo 'deb https://deb.nodesource.com/node_8.x xenial main' > /etc/apt/sources.list.d/nodesource.list && \
+    echo 'deb-src https://deb.nodesource.com/node_8.x xenial main' >> /etc/apt/sources.list.d/nodesource.list && \
     apt-get update && \
     apt-get install -y nodejs && \
     cd ${TERRAMA2_CODEBASE_PATH} && \
