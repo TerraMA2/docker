@@ -42,7 +42,7 @@ RUN apt-get update && \
     mkdir -p $TERRAMA2_3RDPARTY_PATH $TERRAMA2_CODEBASE_PATH && \
     chown -R $TERRAMA2_USER:$TERRAMA2_USER /home/$TERRAMA2_USER && \
     chmod g-w /home/$TERRAMA2_USER && \
-    mkdir /$HOME/.ssh && \
+    mkdir $HOME/.ssh && \
     ssh-keygen -t rsa -b 4096 -C "terrama2-team@dpi.inpe.br" -N "" -f $HOME/.ssh/id_rsa && \
     mkdir /home/$TERRAMA2_USER/.ssh && \
     cat /root/.ssh/id_rsa.pub > /home/$TERRAMA2_USER/.ssh/authorized_keys && \
