@@ -13,6 +13,7 @@ eval $(egrep -v '^#' .env | xargs)
 
 for image in conf/terrama2_webapp_settings.json.in \
              conf/terrama2_webmonitor.json.in \
+             conf/terrama2_webapp_db.json.in \
              terrama2/Dockerfile.in \
              webapp/Dockerfile.in \
              webmonitor/Dockerfile.in; do
@@ -22,5 +23,6 @@ for image in conf/terrama2_webapp_settings.json.in \
         -e 's!%%TERRAMA2_DOCKER_REGISTRY%%!'"${TERRAMA2_DOCKER_REGISTRY}"'!g' \
         -e 's!%%TERRAMA2_DNS%%!'"${TERRAMA2_DNS}"'!g' \
         -e 's!%%TERRAMA2_BASE_PATH%%!'"${TERRAMA2_BASE_PATH}"'!g' \
+        -e 's!%%POSTGRES_DATABASE%%!'"${POSTGRES_DATABASE}"'!g' \
       "${image}" > "${image::-3}"
 done

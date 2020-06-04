@@ -2,7 +2,7 @@
   "production": {
     "username": "postgres",
     "password": "postgres",
-    "database": "terrama2",
+    "database": "%%POSTGRES_DATABASE%%",
     "host": "terrama2_pg",
     "port": 5432,
     "dialect": "postgres",
