@@ -13,7 +13,7 @@ ENV GEOSERVER_DATA_DIR /opt/geoserver/data_dir
 RUN mkdir -p $GEOSERVER_DATA_DIR
 
 # Install GeoServer
-RUN wget --no-verbose -O geoserver-2.12.5-war.zip -L "https://sourceforge.net/projects/geoserver/files/GeoServer/2.15.5/geoserver-2.15.5-war.zip/download" && \
+RUN wget --no-verbose -O geoserver-2.12.5-war.zip -L "https://sourceforge.net/projects/geoserver/files/GeoServer/2.12.5/geoserver-2.12.5-war.zip/download" && \
     unzip geoserver-2.12.5-war.zip && \
     mv geoserver.war /root/ && \
     rm geoserver-2.12.5-war.zip
