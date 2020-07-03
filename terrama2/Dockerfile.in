@@ -21,10 +21,12 @@ RUN apt-get update && \
                        libquazip-dev \
                        git \
                        unzip \
+                       zip \
                        sudo \
                        nano \
                        screen \
                        openssh-server \
+                       gdal-bin \
                        # VMime Dependencies
                        doxygen \
                        # Process Control
