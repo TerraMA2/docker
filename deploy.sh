@@ -5,7 +5,7 @@ _current_dir=${PWD}
 eval $(egrep -v '^#' .env | xargs)
 
 # GeoServer
-#docker push ${TERRAMA2_DOCKER_REGISTRY}/geoserver:2.12
+#docker push ${TERRAMA2_DOCKER_REGISTRY}/geoserver:2.11
 #_geoserver_code=$?
 
 # TerraMA²

@@ -1,8 +1,5 @@
 {
   "basePath": "%%TERRAMA2_BASE_PATH%%adm/",
-  "geoserverHost": "%%TERRAMA2_DNS%%",
-  "geoserverBasePath": "%%TERRAMA2_BASE_PATH%%geoserver",
-  "geoserverPort": 80,
   "port": 36000,
   "defaultFilePathList": [
     "/data",
