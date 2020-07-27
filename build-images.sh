@@ -16,7 +16,7 @@ eval $(egrep -v '^#' .env | xargs)
 
 # GeoServer
 cd ${_current_dir}/geoserver
-docker build --tag ${TERRAMA2_DOCKER_REGISTRY}/geoserver:2.12 . --rm
+docker build --tag ${TERRAMA2_DOCKER_REGISTRY}/geoserver:2.11 . --rm
 is_valid $? "Could not build GeoServer"
 
 # TerraMA²
