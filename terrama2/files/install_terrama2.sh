@@ -13,7 +13,7 @@ function valid()
 apt-get update
 
 echo -ne "Downloading TerraMA² ... "
-curl -O http://www.dpi.inpe.br/jenkins-data/terrama2/installers/linux/TerraMA2-${TERRAMA2_TAG}-release-linux-x64-Ubuntu-16.04.deb --silent
+curl -O http://www.dpi.inpe.br/jenkins-data/terrama2/installers/linux/TerraMA2-${TERRAMA2_TAG}-linux-x64-Ubuntu-16.04.deb --silent
 valid $? "Error: Could not fetch TerraMA²"
 
 echo -ne "Downloading TerraMA² documentation ..."
