@@ -8,6 +8,5 @@
     "basePath": "%%TERRAMA2_BASE_PATH%%adm/",
     "port": 80,
     "host": "%%TERRAMA2_DNS%%"
-  },
-  "ssl": %%TERRAMA2_SSL%%
+  }
 }
