@@ -1,0 +1,119 @@
+{
+  "development": {
+    "username": "admin",
+    "password": "geoserver",
+    "workspace": "mpmt_alertas",
+    "datastore": "mpmt_alertas_datastore",
+    "baseHost": "http://%%TERRAMA2_DNS%%/mpmt/geoserver",
+    "host": "http://%%TERRAMA2_DNS%%/mpmt/geoserver/rest/",
+    "mosaic": {
+      "wmsStore": {
+        "name": "MosaicSpot2008",
+        "description": "SPOT/MosaicSpot2008 - Wms Store",
+        "workspaceName": "terrama2_6",
+        "capabilitiesURL":  "http://imagens.seplan.mt.gov.br/arcgis/services/SPOT/MosaicSpot2008/ImageServer/WMSServer"
+      },
+      "wmsLayer": {
+        "name": "MosaicSpot2008",
+        "title": "MosaicSpot2008",
+        "description": "SPOT/MosaicSpot2008 - Layer",
+        "workspaceName": "terrama2_6",
+        "wmsStoreName": "MosaicSpot2008",
+        "abstract": "MosaicSpot2008"
+      },
+      "groupLayer": {
+        "name": "MosaicSpot2008_car_validado",
+        "title": "MosaicSpot2008_car_validado",
+        "workspaceName": "terrama2_6",
+        "layers": [
+          {
+            "name": "MosaicSpot2008"
+          },
+          {
+            "name": "view6"
+          }],
+        "styles": []
+      }
+    },
+    "legendUrl": "http://%%TERRAMA2_DNS%%/mpmt/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&legend_options=forceLabels:on&LAYER="
+  },
+  "test": {
+    "username": "admin",
+    "password": "geoserver",
+    "workspace": "mpmt_alertas",
+    "datastore": "mpmt_alertas_datastore",
+    "baseHost1": "http://%%TERRAMA2_DNS%%/mpmt/geoserver",
+    "host1": "##http://%%TERRAMA2_DNS%%/mpmt/geoserver/rest/",
+    "baseHost": "http://localhost:8080/geoserver",
+    "host": "http://localhost:8080/geoserver/rest/",
+    "mosaic": {
+      "wmsStore": {
+        "name": "MosaicSpot2008",
+        "description": "SPOT/MosaicSpot2008 - Wms Store",
+        "workspaceName": "terrama2_6",
+        "capabilitiesURL":  "http://imagens.seplan.mt.gov.br/arcgis/services/SPOT/MosaicSpot2008/ImageServer/WMSServer"
+      },
+      "wmsLayer": {
+        "name": "MosaicSpot2008",
+        "title": "MosaicSpot2008",
+        "description": "SPOT/MosaicSpot2008 - Layer",
+        "workspaceName": "terrama2_6",
+        "wmsStoreName": "MosaicSpot2008",
+        "abstract": "MosaicSpot2008"
+      },
+      "groupLayer": {
+        "name": "MosaicSpot2008_car_validado",
+        "title": "MosaicSpot2008_car_validado",
+        "workspaceName": "terrama2_6",
+        "layers": [
+          {
+            "name": "MosaicSpot2008"
+          },
+          {
+            "name": "view6"
+          }],
+        "styles": []
+      }
+    },
+    "legendUrl": "http://localhost:8080/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&legend_options=forceLabels:on&LAYER="
+  },
+  "production": {
+    "username": "admin",
+    "password": "geoserver",
+    "workspace": "mpmt_alertas",
+    "datastore": "mpmt_alertas_datastore",
+    "baseHost": "%%TERRAMA2_PROTOCOL%%%%TERRAMA2_DNS%%%%TERRAMA2_BASE_PATH%%geoserver",
+    "host": "%%TERRAMA2_PROTOCOL%%%%TERRAMA2_DNS%%%%TERRAMA2_BASE_PATH%%geoserver/rest/",
+    "mosaic": {
+      "wmsStore": {
+        "name": "MosaicSpot2008",
+        "description": "SPOT/MosaicSpot2008 - Wms Store",
+        "workspaceName": "CarWorkspaceName",
+        "capabilitiesURL":  "http://imagens.seplan.mt.gov.br/arcgis/services/SPOT/MosaicSpot2008/ImageServer/WMSServer"
+      },
+      "wmsLayer": {
+        "name": "MosaicSpot2008",
+        "title": "MosaicSpot2008",
+        "description": "SPOT/MosaicSpot2008 - Layer",
+        "workspaceName": "CarWorkspaceName",
+        "wmsStoreName": "MosaicSpot2008",
+        "abstract": "MosaicSpot2008"
+      },
+      "groupLayer": {
+        "name": "MosaicSpot2008_car_validado",
+        "title": "MosaicSpot2008_car_validado",
+        "workspaceName": "CarWorkspaceName",
+        "layers": [
+          {
+            "name": "MosaicSpot2008"
+          },
+          {
+            "name": "viewCAR"
+          }],
+        "styles": []
+      }
+    },
+    "legendUrl": "%%TERRAMA2_PROTOCOL%%%%TERRAMA2_DNS%%%%TERRAMA2_BASE_PATH%%geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&legend_options=forceLabels:on&LAYER="
+  }
+}
+

@@ -1,7 +1,5 @@
 #!/bin/bash
 
-eval $(egrep -v '^#' .env | xargs)
-
 docker volume create terrama2_pg_vol
 
 docker run -d \

@@ -4,7 +4,7 @@
     "port": 36001
   },
   "webadmin": {
-    "protocol": "http://",
+    "protocol": "%%TERRAMA2_PROTOCOL%%",
     "basePath": "%%TERRAMA2_BASE_PATH%%adm/",
     "port": 80,
     "host": "%%TERRAMA2_DNS%%"

@@ -1,0 +1,7 @@
+export const environment = {
+  production: true,
+  terramaUrl: '%%TERRAMA2_PROTOCOL%%%%TERRAMA2_DNS%%%%TERRAMA2_BASE_PATH%%adm',
+  reportServerUrl: '%%TERRAMA2_PROTOCOL%%%%TERRAMA2_DNS%%%%TERRAMA2_BASE_PATH%%alertaServer',
+  geoserverUrl: '%%TERRAMA2_PROTOCOL%%%%TERRAMA2_DNS%%%%TERRAMA2_BASE_PATH%%geoserver'
+};
+
