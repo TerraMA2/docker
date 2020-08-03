@@ -15,7 +15,15 @@ eval $(egrep -v '^#' .env | xargs)
 DATE=$(date +%d-%m-%Y-%H:%M)
 
 if test -d "/var/lib/docker/volumes/terrama2_pg_vol/_data/"; then
-    docker exec -it terrama2_pg bash -c "pg_dump -U postgres -h localhost -d ${POSTGRES_DATABASE} -n terrama2 -f /var/lib/postgresql/data/dump-terrama2-${DATE}.sql -v;pg_dump -U postgres -h localhost -d ${POSTGRES_DATABASE} -n public -f /var/lib/postgresql/data/dump-public-${DATE}.sql -v;cd /var/lib/postgresql/data/;tar cvf - dump-terrama2-${DATE}.sql | gzip -9 - > dump-terrama2-${DATE}.tar.gz;tar cvf - dump-public-${DATE}.sql | gzip -9 - > dump-public-${DATE}.tar.gz;"
+    docker exec -it terrama2_pg bash -c "
+        pg_dump -U postgres -h localhost -d ${POSTGRES_DATABASE} -n terrama2 -f /var/lib/postgresql/data/dump-terrama2-${DATE}.sql -v; \
+        pg_dump -U postgres -h localhost -d ${POSTGRES_DATABASE} -n public -f /var/lib/postgresql/data/dump-public-${DATE}.sql -v; \
+        pg_dump -U postgres -h localhost -d ${POSTGRES_DATABASE} -n alertas -f /var/lib/postgresql/data/dump-alertas-${DATE}.sql -v; \
+        cd /var/lib/postgresql/data/; \
+        tar cvf - dump-terrama2-${DATE}.sql | gzip -9 - > dump-terrama2-${DATE}.tar.gz; \
+        tar cvf - dump-public-${DATE}.sql | gzip -9 - > dump-public-${DATE}.tar.gz; \
+        tar cvf - dump-alertas-${DATE}.sql | gzip -9 - > dump-alertas-${DATE}.tar.gz;
+    "
 
     mkdir -p ${BACKUP_DIR}/postgresql
 
