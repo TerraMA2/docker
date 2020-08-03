@@ -34,16 +34,6 @@ cd ${_current_dir}/webmonitor
 docker build --tag ${TERRAMA2_DOCKER_REGISTRY}/terrama2-webmonitor:${TERRAMA2_TAG} . --rm
 is_valid $? "Could not build TerraMA² webmonitor image"
 
-# SatAlertas server
-cd ${_current_dir}/satalertas/server
-docker build --tag ${TERRAMA2_DOCKER_REGISTRY}/satalertas-server:${SATALERTAS_TAG} . --rm
-is_valid $? "Could not build SatAlertas server image"
-
-# SatAlertas client
-cd ${_current_dir}/satalertas/client
-docker build --tag ${TERRAMA2_DOCKER_REGISTRY}/satalertas-client:${SATALERTAS_TAG} . --rm
-is_valid $? "Could not build SatAlertas client image"
-
 # Bdqlight
 #cd ${_current_dir}/bdqueimadas-light
 
