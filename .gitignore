@@ -8,6 +8,7 @@ conf/terrama2_webapp_settings.json
 conf/terrama2_webmonitor.json
 conf/terrama2_webapp_db.json
 satalertas/server/geoserver-conf/config.json
+satalertas/server/Dockerfile
 satalertas/server/config.json
 satalertas/client/config/environment.prod.ts
 satalertas/client/Dockerfile

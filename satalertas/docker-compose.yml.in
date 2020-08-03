@@ -8,10 +8,7 @@ networks:
 services:
 
  satalertas_server:
-  build:
-    context: .
-    dockerfile: server/Dockerfile
-  image: terrama2/report-server:1.0.0
+  image: %%TERRAMA2_DOCKER_REGISTRY%%/satalertas-server:%%SATALERTAS_TAG%%
   restart: "always"
   environment:
       - NODE_ENV=production
@@ -26,10 +23,7 @@ services:
       - net
 
  satalertas_client:
-  build:
-    context: .
-    dockerfile: client/Dockerfile
-  image: terrama2/report-client:1.0.0
+  image: %%TERRAMA2_DOCKER_REGISTRY%%/satalertas-client:%%SATALERTAS_TAG%%
   restart: "always"
   volumes:
       - "terrama2_shared_vol:/shared-data"

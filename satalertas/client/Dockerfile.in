@@ -2,7 +2,7 @@ FROM node:12 as node
 
 WORKDIR /app
 
-RUN git clone -b b1.0.0 -o upstream https://github.com/TerraMA2/terrama2-report.git . && \
+RUN git clone -b b%%SATALERTAS_TAG%% -o upstream https://github.com/TerraMA2/terrama2-report.git . && \
     npm install
 
 COPY ./client/config/environment.prod.ts /app/src/environments/environment.prod.ts
