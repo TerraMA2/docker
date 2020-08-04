@@ -13,7 +13,7 @@ function valid()
 apt-get update
 
 TERRAMA2_VERSION="${TERRAMA2_TAG}-release";
-if [[ "$TERRAMA2_TAG" == *dev* || "$TERRAMA2_TAG" == *beta* ]]; then
+if [[ "$TERRAMA2_TAG" == *dev* || "$TERRAMA2_TAG" == *master* || "$TERRAMA2_TAG" == *beta* ]]; then
   TERRAMA2_VERSION=${TERRAMA2_TAG}
 fi;
 
