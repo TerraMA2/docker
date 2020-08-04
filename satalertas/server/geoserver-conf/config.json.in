@@ -116,4 +116,3 @@
     "legendUrl": "%%TERRAMA2_PROTOCOL%%%%TERRAMA2_DNS%%%%TERRAMA2_BASE_PATH%%geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&legend_options=forceLabels:on&LAYER="
   }
 }
-

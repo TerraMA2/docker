@@ -11,6 +11,6 @@ docker-compose -f satalertas/docker-compose.yml -p ${TERRAMA2_PROJECT_NAME} down
 
 docker-compose -f satalertas/docker-compose.yml -p ${TERRAMA2_PROJECT_NAME} pull
 
-docker-compose -f satalertas/docker-compose.yml -p ${TERRAMA2_PROJECT_NAME} up --build --force-recreate -d
+docker-compose -f satalertas/docker-compose.yml -p ${TERRAMA2_PROJECT_NAME} up -d
 
 service nginx reload

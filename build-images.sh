@@ -36,6 +36,5 @@ is_valid $? "Could not build TerraMA² webmonitor image"
 
 # Bdqlight
 #cd ${_current_dir}/bdqueimadas-light
-
 #docker build --tag ${TERRAMA2_DOCKER_REGISTRY}/bdqlight:1.0.0 . --rm
 #is_valid $? "Could not build TerraMA² bdqlight image"

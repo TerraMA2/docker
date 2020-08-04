@@ -16,10 +16,10 @@ eval $(egrep -v '^#' .env | xargs)
 
 # SatAlertas server
 cd ${_current_dir}/satalertas/server
-docker build --tag ${TERRAMA2_DOCKER_REGISTRY}/${TERRAMA2_PROJECT_NAME}-satalertas-server:${SATALERTAS_TAG} . --rm
+docker build --tag ${TERRAMA2_DOCKER_REGISTRY}/${TERRAMA2_PROJECT_NAME}-satalertas-server:${SATALERTAS_TAG} . --rm --no-cache
 is_valid $? "Could not build SatAlertas server image"
 
 # SatAlertas client
 cd ${_current_dir}/satalertas/client
-docker build --tag ${TERRAMA2_DOCKER_REGISTRY}/${TERRAMA2_PROJECT_NAME}-satalertas-client:${SATALERTAS_TAG} . --rm
+docker build --tag ${TERRAMA2_DOCKER_REGISTRY}/${TERRAMA2_PROJECT_NAME}-satalertas-client:${SATALERTAS_TAG} . --rm --no-cache
 is_valid $? "Could not build SatAlertas client image"
