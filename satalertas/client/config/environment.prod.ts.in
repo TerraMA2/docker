@@ -4,4 +4,3 @@ export const environment = {
   reportServerUrl: '%%TERRAMA2_PROTOCOL%%%%TERRAMA2_DNS%%%%TERRAMA2_BASE_PATH%%alertaServer',
   geoserverUrl: '%%TERRAMA2_PROTOCOL%%%%TERRAMA2_DNS%%%%TERRAMA2_BASE_PATH%%geoserver'
 };
-
