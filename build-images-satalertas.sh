@@ -1,5 +1,10 @@
 #!/bin/bash
 
+echo "******************************"
+echo "* Building SatAlertas images *"
+echo "******************************"
+echo ""
+
 function is_valid() {
   local code=$1
   local err_msg=$2
