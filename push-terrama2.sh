@@ -1,7 +1,11 @@
 #!/bin/bash
 
+echo "**********************************"
+echo "* Pushing TerraMA² to Docker Hub *"
+echo "**********************************"
+echo ""
+
 # Variables
-_current_dir=${PWD}
 eval $(egrep -v '^#' .env | xargs)
 
 # GeoServer

@@ -44,9 +44,9 @@ if test -d "/var/lib/docker/volumes/terrama2_pg_vol/_data/"; then
         psql -a -U postgres -h localhost -d ${POSTGRES_DATABASE} -c 'DROP SCHEMA public CASCADE'; \
 
         echo ""
-        echo \"*******************\"; \
-        echo \"* Importing dumps *\"; \
-        echo \"*******************\"; \
+        echo \"****************************************************\"; \
+        echo \"* Importing dumps to database ${POSTGRES_DATABASE} *\"; \
+        echo \"****************************************************\"; \
         echo \"\"; \
 
         echo ""

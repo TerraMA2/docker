@@ -5,7 +5,7 @@
 - [Docker](https://docs.docker.com/install/)
 - [Docker Compose](https://docs.docker.com/compose/install/)
 
-## Cloning docker scripts for  TerraMA² Platform
+## Cloning docker scripts for TerraMA² Platform
 
 ```bash
 git clone https://github.com/terrama2/docker.git
@@ -14,6 +14,72 @@ git clone https://github.com/terrama2/docker.git
 ```bash
 cd docker
 ```
+
+## Folder structure and files
+
+### Folders
+
+`conf` - Folder with all the configuration files of TerraMA² webapp and monitor;
+`geoserver` - Dockerfile to build the Geoserver image;
+`satalertas` - Dockerfiles and `docker-compose-yml` for the SatAlertas application;
+`terrama2` - Dockerfile and scripts to build the terrama2 image;
+`webapp` - Dockerfile to build the webapp image;
+`webmonitor` - Dockerfile to build the webmonitor image.
+
+### Scripts
+
+`backup.sh` - Saves a backup of the Geoserver, database and SatAlertas documents on the folder configured on the `.env` file;
+`build-images.sh` - Build the images for TerraMA² project;
+`build-images-satalertas.sh` - Build the images for SatAlertas project;
+`configure.sh` - Generates the TerraMA² configuration files (running `configure-version.sh` script) and containers, including the Geoserver;
+`configure-version.sh` - Generate configuration files of the projects, `Dockerfiles` and `docker-compose.yml` files using the `.env` variables;
+`create-postgres.sh` - Generates PostgreSQL container;
+`deploy-terrama2.sh` - Updates TerraMA² images;
+`deploy-satalertas.sh` - Updates SatAlertas images;
+`push-satalertas.sh` - Pushes the SatAlertas images to the DockerHub;
+`push-terrama2.sh` - Pushes the TerraMA² images to the DockerHub;
+`restore.sh` - Restores the backup generated with the `backup.sh` script.
+
+### Environment variables file
+
+The `.env` file contains configurable variables used on all scripts and `docker-compose.yml` files. There's an `.env.example` file on the root folder with the default variable values. 
+
+- `TERRAMA2_PROJECT_NAME` - Name of the project used on Docker Compose project (`-p`) parameter;
+- `TERRAMA2_DOCKER_REGISTRY` - Name of the registry on Docker Hub;
+- `TERRAMA2_TAG` - TerraMA² version;
+- `SATALERTAS_TAG` - SatAlertas version;
+- `TERRAMA2_CONFIG_DIR` - Path of the config folder (located on `./conf`);
+- `TERRAMA2_DATA_DIR` - Name of the data volume;
+- `TERRAMA2_WEBAPP_ADDRESS` - Host and port to access the webapp container;
+- `TERRAMA2_WEBMONITOR_ADDRESS` - Host and port to access the webmonitor container;
+- `TERRAMA2_GEOSERVER_ADDRESS` - Host and port to access the geoserver container;
+- `SATALERTAS_CLIENT_PORT` - Port to access the SatAlertas client container;
+- `SATALERTAS_SERVER_PORT` - Port to access the SatAlertas server container;
+- `TERRAMA2_DNS` - DNS of the server;
+- `TERRAMA2_BASE_PATH` - Base URL of the application included after the DNS (default is '/');
+- `POSTGRES_DATABASE` - Name of the database;
+- `TERRAMA2_SSL` - If server uses SSL or not (true or false);
+- `BACKUP_DIR` - Directory used to store backup files.
+
+## Usage
+
+Just configure `.env` file if necessary and run:
+
+```bash
+./configure.sh
+```
+
+### PortgreSQL
+
+To build postgresql container, run:
+
+```bash
+./create-postgres.sh
+```
+
+## Manually configuration
+
+If you want to manually configure, follow the next steps.
 
 ## Check 3rd-party dependencies
 
@@ -45,7 +111,7 @@ docker run -d \
            -v terrama2_shared_vol:/shared-data \
            -v terrama2_geoserver_vol:/opt/geoserver/data_dir \
            -v ${PWD}/conf/terrama2_geoserver_setenv.sh:/usr/local/tomcat/bin/setenv.sh \
-           terrama2/geoserver:2.11
+           terrama2/geoserver:2.12
 ```
 
 The above command will link the host address `127.0.0.1` on port `8080` to the container port `8080` and it will run the container as a daemon in background. You can try the following address in your browser: [http://localhost:8080/geoserver](http://localhost:8080/geoserver).
@@ -156,6 +222,16 @@ Link the BDqueimadas container in `terrama2_net`:
 docker network connect terrama2_net terrama2_bdq
 ```
 
+### SatAlertas
+
+To configure SatAlertas, navigate to `satalertas` folder and run:
+
+```
+docker-compose -p terrama2 up -d
+```
+
+The `docker-composer.yml` file uses the `.env` file, so, it's necessary to run `./configure-version.sh` script.
+
 ## Post Installation Tips
 
 ### Run TerraMA² localhost
@@ -186,7 +262,6 @@ We must configure service parameters in [`Web Application`](http://127.0.0.1:360
 On service hosts, unmark the option `Local Service` and then set the respective container name to the service at `Host Address`. For example, in the service `Local Collector`, use address `terrama2_collector_1`. For `Local Analysis`, use `terrama2_analysis_1` and so on.
 
 When registering `Local View`, make sure that you have configured the directive provided on section `Run TerraMA² localhost` and specify the `Maps Server URL` with `terrama2_geoserver`.
-
 
 ## Tips
 

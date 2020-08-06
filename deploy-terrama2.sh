@@ -1,5 +1,10 @@
 #!/bin/bash
 
+echo "*********************"
+echo "* Building TerraMA² *"
+echo "*********************"
+echo ""
+
 eval $(egrep -v '^#' .env | xargs)
 
 sudo docker-compose -p ${TERRAMA2_PROJECT_NAME} down

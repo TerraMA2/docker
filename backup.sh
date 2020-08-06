@@ -18,9 +18,9 @@ if test -d "/var/lib/docker/volumes/terrama2_pg_vol/_data/"; then
     
     docker exec -it terrama2_pg bash -c "
         echo \"\"; \
-        echo \"**************\"; \
-        echo \"* Backing up *\"; \
-        echo \"**************\"; \
+        echo \"********************************************\"; \
+        echo \"* Backing up database ${POSTGRES_DATABASE} *\"; \
+        echo \"********************************************\"; \
 
         echo \"\"; \
         echo \"******************************\"; \
