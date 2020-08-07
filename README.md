@@ -19,26 +19,26 @@ cd docker
 
 ### Folders
 
-`conf` - Folder with all the configuration files of TerraMA² webapp and monitor;
-`geoserver` - Dockerfile to build the Geoserver image;
-`satalertas` - Dockerfiles and `docker-compose-yml` for the SatAlertas application;
-`terrama2` - Dockerfile and scripts to build the terrama2 image;
-`webapp` - Dockerfile to build the webapp image;
-`webmonitor` - Dockerfile to build the webmonitor image.
+- `conf` - Folder with all the configuration files of TerraMA² webapp and monitor;
+- `geoserver` - Dockerfile to build the Geoserver image;
+- `satalertas` - Dockerfiles and `docker-compose-yml` for the SatAlertas application;
+- `terrama2` - Dockerfile and scripts to build the terrama2 image;
+- `webapp` - Dockerfile to build the webapp image;
+- `webmonitor` - Dockerfile to build the webmonitor image.
 
 ### Scripts
 
-`backup.sh` - Saves a backup of the Geoserver, database and SatAlertas documents on the folder configured on the `.env` file;
-`build-images.sh` - Build the images for TerraMA² project;
-`build-images-satalertas.sh` - Build the images for SatAlertas project;
-`configure.sh` - Generates the TerraMA² configuration files (running `configure-version.sh` script) and containers, including the Geoserver;
-`configure-version.sh` - Generate configuration files of the projects, `Dockerfiles` and `docker-compose.yml` files using the `.env` variables;
-`create-postgres.sh` - Generates PostgreSQL container;
-`deploy-terrama2.sh` - Updates TerraMA² images;
-`deploy-satalertas.sh` - Updates SatAlertas images;
-`push-satalertas.sh` - Pushes the SatAlertas images to the DockerHub;
-`push-terrama2.sh` - Pushes the TerraMA² images to the DockerHub;
-`restore.sh` - Restores the backup generated with the `backup.sh` script.
+- `backup.sh` - Saves a backup of the Geoserver, database and SatAlertas documents on the folder configured on the `.env` file;
+- `build-images.sh` - Build the images for TerraMA² project;
+- `build-images-satalertas.sh` - Build the images for SatAlertas project;
+- `configure.sh` - Generates the TerraMA² configuration files (running `configure-version.sh` script) and containers, including the Geoserver;
+- `configure-version.sh` - Generate configuration files of the projects, `Dockerfiles` and `docker-compose.yml` files using the `.env` variables;
+- `create-postgres.sh` - Generates PostgreSQL container;
+- `deploy-terrama2.sh` - Updates TerraMA² images;
+- `deploy-satalertas.sh` - Updates SatAlertas images;
+- `push-satalertas.sh` - Pushes the SatAlertas images to the DockerHub;
+- `push-terrama2.sh` - Pushes the TerraMA² images to the DockerHub;
+- `restore.sh` - Restores the backup generated with the `backup.sh` script.
 
 ### Environment variables file
 
