@@ -15,7 +15,7 @@ if test -d "/var/lib/docker/volumes/terrama2_pg_vol/_data/"; then
     echo "**************"
     echo "* PostgreSQL *"
     echo "**************"
-    
+
     docker exec -it terrama2_pg bash -c "
         echo \"\"; \
         echo \"********************************************\"; \
@@ -79,7 +79,7 @@ if test -d "/var/lib/docker/volumes/terrama2_pg_vol/_data/"; then
     echo ""
 
     tar cvf - dump-alertas-${DATE}.sql | gzip -9 - > ${BACKUP_DIR}/postgresql/dump-alertas-${DATE}.tar.gz
-    
+
     rm -f dump-terrama2-${DATE}.sql
     rm -f dump-public-${DATE}.sql
     rm -f dump-alertas-${DATE}.sql

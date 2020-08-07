@@ -3,7 +3,6 @@ echo ""
 echo "********************"
 echo "* Restore TerraMA² *"
 echo "********************"
-echo ""
 
 eval $(egrep -v '^#' .env | xargs)
 
@@ -90,7 +89,6 @@ if test -d "/var/lib/docker/volumes/${TERRAMA2_PROJECT_NAME}_geoserver_vol/_data
     echo "*************"
     echo "* Geoserver *"
     echo "*************"
-    echo ""
 
     cd ${BACKUP_DIR}/geoserver
 
@@ -118,11 +116,11 @@ if test -d "/var/lib/docker/volumes/${TERRAMA2_PROJECT_NAME}_satalertas_document
     echo "**************"
     echo "* SatAlertas *"
     echo "**************"
-    echo ""
 
     cd ${BACKUP_DIR}/satalertas
 
     latestDocumentBackupFile=$(ls -t1 | head -n 1)
+    
     echo ""
     echo "*********************"
     echo "* Removing old data *"
