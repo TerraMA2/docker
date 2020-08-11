@@ -1,14 +1,14 @@
 #!/bin/bash
 
+eval $(egrep -v '^#' .env | xargs)
+
+DATE=$(date +%d-%m-%Y-%H-%M)
+
 echo ""
 echo "*******************"
 echo "* Backup TerraMA² *"
 echo "*******************"
 echo ""
-
-eval $(egrep -v '^#' .env | xargs)
-
-DATE=$(date +%d-%m-%Y-%H-%M)
 
 if test -d "/var/lib/docker/volumes/terrama2_pg_vol/_data/"; then
     echo ""
@@ -16,37 +16,35 @@ if test -d "/var/lib/docker/volumes/terrama2_pg_vol/_data/"; then
     echo "* PostgreSQL *"
     echo "**************"
 
-    docker exec -it terrama2_pg bash -c "
-        echo \"\"; \
-        echo \"********************************************\"; \
-        echo \"* Backing up database ${POSTGRES_DATABASE} *\"; \
-        echo \"********************************************\"; \
+    echo "";
+    echo "********************************************"
+    echo "* Backing up database ${POSTGRES_DATABASE} *"
+    echo "********************************************"
 
-        echo \"\"; \
-        echo \"******************************\"; \
-        echo \"* Backing up schema terrama2 *\"; \
-        echo \"******************************\"; \
-        echo \"\"; \
+    echo ""
+    echo "******************************"
+    echo "* Backing up schema terrama2 *"
+    echo "******************************"
+    echo ""
 
-        pg_dump -U postgres -h localhost -d ${POSTGRES_DATABASE} -n terrama2 -f /var/lib/postgresql/data/dump-terrama2-${DATE}.sql -v; \
+    docker exec -it terrama2_pg bash -c "pg_dump -U postgres -h localhost -d ${POSTGRES_DATABASE} -n terrama2 -f /var/lib/postgresql/data/dump-terrama2-${DATE}.sql -v"
 
-        echo \"\"; \
-        echo \"****************************\"; \
-        echo \"* Backing up schema public *\"; \
-        echo \"****************************\"; \
-        echo \"\"; \
+    echo ""
+    echo "****************************"
+    echo "* Backing up schema public *"
+    echo "****************************"
+    echo ""
 
-        pg_dump -U postgres -h localhost -d ${POSTGRES_DATABASE} -n public -f /var/lib/postgresql/data/dump-public-${DATE}.sql -v; \
+    docker exec -it terrama2_pg bash -c "pg_dump -U postgres -h localhost -d ${POSTGRES_DATABASE} -n public -f /var/lib/postgresql/data/dump-public-${DATE}.sql -v"
 
-        echo \"\"; \
-        echo \"*****************************\"; \
-        echo \"* Backing up schema alertas *\"; \
-        echo \"*****************************\"; \
-        echo \"\"; \
+    echo ""
+    echo "*****************************"
+    echo "* Backing up schema alertas *"
+    echo "*****************************"
+    echo ""
 
-        pg_dump -U postgres -h localhost -d ${POSTGRES_DATABASE} -n alertas -f /var/lib/postgresql/data/dump-alertas-${DATE}.sql -v
-    "
-    
+    docker exec -it terrama2_pg bash -c "pg_dump -U postgres -h localhost -d ${POSTGRES_DATABASE} -n alertas -f /var/lib/postgresql/data/dump-alertas-${DATE}.sql -v"
+
     mkdir -vp ${BACKUP_DIR}/postgresql
 
     echo ""

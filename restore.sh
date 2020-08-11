@@ -1,10 +1,11 @@
 #!/bin/bash
+
+eval $(egrep -v '^#' .env | xargs)
+
 echo ""
 echo "********************"
 echo "* Restore TerraMA² *"
 echo "********************"
-
-eval $(egrep -v '^#' .env | xargs)
 
 if test -d "/var/lib/docker/volumes/terrama2_pg_vol/_data/"; then
     echo ""
@@ -29,60 +30,55 @@ if test -d "/var/lib/docker/volumes/terrama2_pg_vol/_data/"; then
     tar xvf ${latestAlertasBackupFile}.tar.gz -C /var/lib/docker/volumes/terrama2_pg_vol/_data/
     tar xvf ${latestPublicBackupFile}.tar.gz -C /var/lib/docker/volumes/terrama2_pg_vol/_data/
 
-    docker exec -it terrama2_pg bash -c "
-        cd /var/lib/postgresql/data; \
+    echo ""
+    echo "********************"
+    echo "* Dropping schemas *"
+    echo "********************"
+    echo ""
 
-        echo ""
-        echo \"********************\"; \
-        echo \"* Dropping schemas *\"; \
-        echo \"********************\"; \
-        echo \"\"; \
+    docker exec -it terrama2_pg bash -c "psql -a -U postgres -h localhost -d ${POSTGRES_DATABASE} -c 'DROP SCHEMA terrama2 CASCADE'"
+    docker exec -it terrama2_pg bash -c "psql -a -U postgres -h localhost -d ${POSTGRES_DATABASE} -c 'DROP TABLE alertas.reports CASCADE;DROP TABLE alertas.SequelizeMeta CASCADE;DROP SCHEMA alertas CASCADE'"
+    docker exec -it terrama2_pg bash -c "psql -a -U postgres -h localhost -d ${POSTGRES_DATABASE} -c 'DROP SCHEMA public CASCADE'"
 
-        psql -a -U postgres -h localhost -d ${POSTGRES_DATABASE} -c 'DROP SCHEMA terrama2 CASCADE'; \
-        psql -a -U postgres -h localhost -d ${POSTGRES_DATABASE} -c 'DROP TABLE alertas.reports CASCADE;DROP TABLE alertas.SequelizeMeta CASCADE;DROP SCHEMA alertas CASCADE'; \
-        psql -a -U postgres -h localhost -d ${POSTGRES_DATABASE} -c 'DROP SCHEMA public CASCADE'; \
+    echo ""
+    echo "****************************************************"
+    echo "* Importing dumps to database ${POSTGRES_DATABASE} *"
+    echo "****************************************************"
+    echo ""
 
-        echo ""
-        echo \"****************************************************\"; \
-        echo \"* Importing dumps to database ${POSTGRES_DATABASE} *\"; \
-        echo \"****************************************************\"; \
-        echo \"\"; \
+    echo ""
+    echo "*****************************"
+    echo "* Importing schema terrama2 *"
+    echo "*****************************"
+    echo ""
 
-        echo ""
-        echo \"*****************************\"; \
-        echo \"* Importing schema terrama2 *\"; \
-        echo \"*****************************\"; \
-        echo \"\"; \
+    docker exec -it terrama2_pg bash -c "cd /var/lib/postgresql/data/;psql -a -U postgres -h localhost -d ${POSTGRES_DATABASE} < ${latestTerrama2BackupFile}.sql"
 
-        psql -a -U postgres -h localhost -d ${POSTGRES_DATABASE} < ${latestTerrama2BackupFile}.sql; \
+    echo ""
+    echo "****************************"
+    echo "* Importing schema alertas *"
+    echo "****************************"
+    echo ""
 
-        echo ""
-        echo \"****************************\"; \
-        echo \"* Importing schema alertas *\"; \
-        echo \"****************************\"; \
-        echo \"\"; \
+    docker exec -it terrama2_pg bash -c "cd /var/lib/postgresql/data/;psql -a -U postgres -h localhost -d ${POSTGRES_DATABASE} < ${latestAlertasBackupFile}.sql"
 
-        psql -a -U postgres -h localhost -d ${POSTGRES_DATABASE} < ${latestAlertasBackupFile}.sql; \
+    echo ""
+    echo "***************************"
+    echo "* Importing schema public *"
+    echo "***************************"
+    echo ""
 
-        echo ""
-        echo \"***************************\"; \
-        echo \"* Importing schema public *\"; \
-        echo \"***************************\"; \
-        echo \"\"; \
+    docker exec -it terrama2_pg bash -c "cd /var/lib/postgresql/data/;psql -a -U postgres -h localhost -d ${POSTGRES_DATABASE} < ${latestPublicBackupFile}.sql"
 
-        psql -a -U postgres -h localhost -d ${POSTGRES_DATABASE} < ${latestPublicBackupFile}.sql; \
+    echo ""
+    echo "******************"
+    echo "* Removing dumps *"
+    echo "******************"
+    echo ""
 
-        echo ""
-        echo \"******************\"; \
-        echo \"* Removing dumps *\"; \
-        echo \"******************\"; \
-        echo \"\"; \
-
-        rm -vf ${latestTerrama2BackupFile}.sql; \
-        rm -vf ${latestAlertasBackupFile}.sql; \
-        rm -vf ${latestPublicBackupFile}.sql;
-    "
-fi
+    rm -vf /var/lib/docker/volumes/terrama2_pg_vol/_data/${latestTerrama2BackupFile}.sql
+    rm -vf /var/lib/docker/volumes/terrama2_pg_vol/_data/${latestAlertasBackupFile}.sql
+    rm -vf /var/lib/docker/volumes/terrama2_pg_vol/_data/${latestPublicBackupFile}.sql
 
 if test -d "/var/lib/docker/volumes/${TERRAMA2_PROJECT_NAME}_geoserver_vol/_data/"; then
     echo ""
