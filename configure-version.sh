@@ -43,5 +43,7 @@ for image in conf/terrama2_webapp_settings.json.in \
         -e 's!%%POSTGRES_DATABASE%%!'"${POSTGRES_DATABASE}"'!g' \
         -e 's!%%TERRAMA2_SSL%%!'"${TERRAMA2_SSL}"'!g' \
         -e 's!%%BACKUP_DIR%%!'"${BACKUP_DIR}"'!g' \
+        -e 's!%%TERRAMA2_PUBLIC_WEBAPP%%!'"${TERRAMA2_PUBLIC_WEBAPP}"'!g' \
+        -e 's!%%TERRAMA2_PRIVATE_WEBAPP%%!'"${TERRAMA2_PRIVATE_WEBAPP}"'!g' \
       "${image}" > "${image::-3}"
 done
