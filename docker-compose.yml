@@ -25,6 +25,8 @@ services:
       - "${TERRAMA2_WEBMONITOR_ADDRESS}:36001"
     depends_on:
       - webapp
+    environment:
+      - "NODE_TLS_REJECT_UNAUTHORIZED=0"
     volumes:
       - "${TERRAMA2_DATA_DIR}:/data"
       - "terrama2_shared_vol:/shared-data"
