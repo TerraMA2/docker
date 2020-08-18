@@ -4,10 +4,8 @@
     "port": 36001
   },
   "webadmin": {
-    "protocol": "%%TERRAMA2_PROTOCOL%%",
-    "basePath": "%%TERRAMA2_BASE_PATH%%adm/",
-    "port": 80,
-    "host": "%%TERRAMA2_DNS%%"
+    "internal_uri": "%%TERRAMA2_PRIVATE_WEBAPP%%",
+    "public_uri": "%%TERRAMA2_PUBLIC_WEBAPP%%"
   },
   "ssl": %%TERRAMA2_SSL%%
 }
