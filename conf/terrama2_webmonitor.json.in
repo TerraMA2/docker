@@ -4,8 +4,7 @@
     "port": 36001
   },
   "webadmin": {
-    "internal_uri": "%%TERRAMA2_PRIVATE_WEBAPP%%",
-    "public_uri": "%%TERRAMA2_PUBLIC_WEBAPP%%"
-  },
-  "ssl": %%TERRAMA2_SSL%%
+    "internal_uri": "http://%%TERRAMA2_PROJECT_NAME%%_webapp_1:36000%%TERRAMA2_BASE_PATH%%adm",
+    "public_uri": "%%TERRAMA2_DNS%%%%TERRAMA2_BASE_PATH%%adm"
+  }
 }

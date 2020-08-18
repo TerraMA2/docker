@@ -55,11 +55,11 @@ The `.env` file contains configurable variables used on all scripts and `docker-
 - `TERRAMA2_GEOSERVER_ADDRESS` - Host and port to access the geoserver container;
 - `SATALERTAS_CLIENT_PORT` - Port to access the SatAlertas client container;
 - `SATALERTAS_SERVER_PORT` - Port to access the SatAlertas server container;
-- `TERRAMA2_DNS` - DNS of the server;
+- `TERRAMA2_DNS` - DNS of the server including protocol;
 - `TERRAMA2_BASE_PATH` - Base URL of the application included after the DNS (default is '/');
 - `POSTGRES_DATABASE` - Name of the database;
-- `TERRAMA2_SSL` - If server uses SSL or not (true or false);
-- `BACKUP_DIR` - Directory used to store backup files.
+- `BACKUP_DIR` - Directory used to store backup files;
+- `PUBLIC_URI` - Server DNS including the protocol (HTTP or HTTPS).
 
 ## Usage
 
