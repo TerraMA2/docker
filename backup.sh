@@ -16,12 +16,12 @@ if test -d "/var/lib/docker/volumes/terrama2_pg_vol/_data/"; then
     echo "* PostgreSQL *"
     echo "**************"
 
-    echo "";
+    echo ""
     echo "********************************************"
     echo "* Backing up database ${POSTGRES_DATABASE} *"
     echo "********************************************"
 
-    docker exec -it terrama2_pg bash -c "psql -U postgres -h localhost -d ${POSTGRES_DATABASE} > /var/lib/postgresql/data/dump-${DATE}.sql -v"
+    docker exec -it terrama2_pg bash -c "pg_dump -U postgres -h localhost -d ${POSTGRES_DATABASE} -f /var/lib/postgresql/data/dump-${DATE}.sql -v"
 
     mkdir -vp ${BACKUP_DIR}/postgresql
 

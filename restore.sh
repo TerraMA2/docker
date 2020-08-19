@@ -16,7 +16,7 @@ if test -d "/var/lib/docker/volumes/terrama2_pg_vol/_data/"; then
 
     cd ${BACKUP_DIR}/postgresql
 
-    latestTerrama2BackupFile=$(basename -s .tar.gz $(ls -t1 | grep terrama2 | head -n 1))
+    latestTerrama2BackupFile=$(basename -s .tar.gz $(ls -t1 | head -n 1))
     
     echo ""
     echo "********************"
