@@ -1,14 +1,14 @@
 #!/bin/bash
 
+eval $(egrep -v '^#' .env | xargs)
+
+DATE=$(date +%d-%m-%Y-%H-%M)
+
 echo ""
 echo "*******************"
 echo "* Backup TerraMA² *"
 echo "*******************"
 echo ""
-
-eval $(egrep -v '^#' .env | xargs)
-
-DATE=$(date +%d-%m-%Y-%H-%M)
 
 if test -d "/var/lib/docker/volumes/terrama2_pg_vol/_data/"; then
     echo ""
@@ -16,37 +16,13 @@ if test -d "/var/lib/docker/volumes/terrama2_pg_vol/_data/"; then
     echo "* PostgreSQL *"
     echo "**************"
 
-    docker exec -it terrama2_pg bash -c "
-        echo \"\"; \
-        echo \"********************************************\"; \
-        echo \"* Backing up database ${POSTGRES_DATABASE} *\"; \
-        echo \"********************************************\"; \
+    echo "";
+    echo "********************************************"
+    echo "* Backing up database ${POSTGRES_DATABASE} *"
+    echo "********************************************"
 
-        echo \"\"; \
-        echo \"******************************\"; \
-        echo \"* Backing up schema terrama2 *\"; \
-        echo \"******************************\"; \
-        echo \"\"; \
+    docker exec -it terrama2_pg bash -c "pg_dump -U postgres -h localhost -d ${POSTGRES_DATABASE} > /var/lib/postgresql/data/dump-${DATE}.sql -v"
 
-        pg_dump -U postgres -h localhost -d ${POSTGRES_DATABASE} -n terrama2 -f /var/lib/postgresql/data/dump-terrama2-${DATE}.sql -v; \
-
-        echo \"\"; \
-        echo \"****************************\"; \
-        echo \"* Backing up schema public *\"; \
-        echo \"****************************\"; \
-        echo \"\"; \
-
-        pg_dump -U postgres -h localhost -d ${POSTGRES_DATABASE} -n public -f /var/lib/postgresql/data/dump-public-${DATE}.sql -v; \
-
-        echo \"\"; \
-        echo \"*****************************\"; \
-        echo \"* Backing up schema alertas *\"; \
-        echo \"*****************************\"; \
-        echo \"\"; \
-
-        pg_dump -U postgres -h localhost -d ${POSTGRES_DATABASE} -n alertas -f /var/lib/postgresql/data/dump-alertas-${DATE}.sql -v
-    "
-    
     mkdir -vp ${BACKUP_DIR}/postgresql
 
     echo ""
@@ -56,33 +32,9 @@ if test -d "/var/lib/docker/volumes/terrama2_pg_vol/_data/"; then
 
     cd /var/lib/docker/volumes/terrama2_pg_vol/_data/
 
-    echo ""
-    echo "***********************"
-    echo "* Compacting terrama2 *"
-    echo "***********************"
-    echo ""
+    tar cvf - dump-${DATE}.sql | gzip -9 - > ${BACKUP_DIR}/postgresql/dump-${DATE}.tar.gz
 
-    tar cvf - dump-terrama2-${DATE}.sql | gzip -9 - > ${BACKUP_DIR}/postgresql/dump-terrama2-${DATE}.tar.gz
-
-    echo ""
-    echo "*********************"
-    echo "* Compacting public *"
-    echo "*********************"
-    echo ""
-
-    tar cvf - dump-public-${DATE}.sql | gzip -9 - > ${BACKUP_DIR}/postgresql/dump-public-${DATE}.tar.gz
-
-    echo ""
-    echo "**********************"
-    echo "* Compacting alertas *"
-    echo "**********************"
-    echo ""
-
-    tar cvf - dump-alertas-${DATE}.sql | gzip -9 - > ${BACKUP_DIR}/postgresql/dump-alertas-${DATE}.tar.gz
-
-    rm -f dump-terrama2-${DATE}.sql
-    rm -f dump-public-${DATE}.sql
-    rm -f dump-alertas-${DATE}.sql
+    rm -f dump-${DATE}.sql
 fi
 
 echo ""

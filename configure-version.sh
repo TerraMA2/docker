@@ -32,7 +32,6 @@ for image in conf/terrama2_webapp_settings.json.in \
         -e 's!%%TERRAMA2_DOCKER_REGISTRY%%!'"${TERRAMA2_DOCKER_REGISTRY}"'!g' \
         -e 's!%%TERRAMA2_TAG%%!'"${TERRAMA2_TAG}"'!g' \
         -e 's!%%SATALERTAS_TAG%%!'"${SATALERTAS_TAG}"'!g' \
-        -e 's!%%TERRAMA2_PROTOCOL%%!'"${TERRAMA2_PROTOCOL}"'!g' \
         -e 's!%%TERRAMA2_DNS%%!'"${TERRAMA2_DNS}"'!g' \
         -e 's!%%TERRAMA2_BASE_PATH%%!'"${TERRAMA2_BASE_PATH}"'!g' \
         -e 's!%%TERRAMA2_WEBAPP_ADDRESS%%!'"${TERRAMA2_WEBAPP_ADDRESS}"'!g' \
@@ -41,9 +40,7 @@ for image in conf/terrama2_webapp_settings.json.in \
         -e 's!%%SATALERTAS_CLIENT_PORT%%!'"${SATALERTAS_CLIENT_PORT}"'!g' \
         -e 's!%%SATALERTAS_SERVER_PORT%%!'"${SATALERTAS_SERVER_PORT}"'!g' \
         -e 's!%%POSTGRES_DATABASE%%!'"${POSTGRES_DATABASE}"'!g' \
-        -e 's!%%TERRAMA2_SSL%%!'"${TERRAMA2_SSL}"'!g' \
         -e 's!%%BACKUP_DIR%%!'"${BACKUP_DIR}"'!g' \
-        -e 's!%%TERRAMA2_PUBLIC_WEBAPP%%!'"${TERRAMA2_PUBLIC_WEBAPP}"'!g' \
-        -e 's!%%TERRAMA2_PRIVATE_WEBAPP%%!'"${TERRAMA2_PRIVATE_WEBAPP}"'!g' \
+        -e 's!%%PUBLIC_URI%%!'"${PUBLIC_URI}"'!g' \
       "${image}" > "${image::-3}"
 done
