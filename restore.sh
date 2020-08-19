@@ -15,11 +15,9 @@ if test -d "/var/lib/docker/volumes/terrama2_pg_vol/_data/"; then
     echo ""
 
     cd ${BACKUP_DIR}/postgresql
-    
-    latestTerrama2BackupFile=$(basename -s .tar.gz $(ls -t1 | grep terrama2 | head -n 1))
-    latestAlertasBackupFile=$(basename -s .tar.gz $(ls -t1 | grep alertas | head -n 1))
-    latestPublicBackupFile=$(basename -s .tar.gz $(ls -t1 | grep public | head -n 1))
 
+    latestTerrama2BackupFile=$(basename -s .tar.gz $(ls -t1 | grep terrama2 | head -n 1))
+    
     echo ""
     echo "********************"
     echo "* Extracting dumps *"
@@ -27,8 +25,6 @@ if test -d "/var/lib/docker/volumes/terrama2_pg_vol/_data/"; then
     echo ""
 
     tar xvf ${latestTerrama2BackupFile}.tar.gz -C /var/lib/docker/volumes/terrama2_pg_vol/_data/
-    tar xvf ${latestAlertasBackupFile}.tar.gz -C /var/lib/docker/volumes/terrama2_pg_vol/_data/
-    tar xvf ${latestPublicBackupFile}.tar.gz -C /var/lib/docker/volumes/terrama2_pg_vol/_data/
 
     echo ""
     echo "********************"
@@ -46,29 +42,7 @@ if test -d "/var/lib/docker/volumes/terrama2_pg_vol/_data/"; then
     echo "****************************************************"
     echo ""
 
-    echo ""
-    echo "*****************************"
-    echo "* Importing schema terrama2 *"
-    echo "*****************************"
-    echo ""
-
-    docker exec -it terrama2_pg bash -c "cd /var/lib/postgresql/data/;psql -a -U postgres -h localhost -d ${POSTGRES_DATABASE} < ${latestTerrama2BackupFile}.sql"
-
-    echo ""
-    echo "****************************"
-    echo "* Importing schema alertas *"
-    echo "****************************"
-    echo ""
-
-    docker exec -it terrama2_pg bash -c "cd /var/lib/postgresql/data/;psql -a -U postgres -h localhost -d ${POSTGRES_DATABASE} < ${latestAlertasBackupFile}.sql"
-
-    echo ""
-    echo "***************************"
-    echo "* Importing schema public *"
-    echo "***************************"
-    echo ""
-
-    docker exec -it terrama2_pg bash -c "cd /var/lib/postgresql/data/;psql -a -U postgres -h localhost -d ${POSTGRES_DATABASE} < ${latestPublicBackupFile}.sql"
+    docker exec -it terrama2_pg bash -c "cd /var/lib/postgresql/data/;psql -a -U postgres -h localhost < ${latestTerrama2BackupFile}.sql"
 
     echo ""
     echo "******************"
@@ -77,8 +51,6 @@ if test -d "/var/lib/docker/volumes/terrama2_pg_vol/_data/"; then
     echo ""
 
     rm -vf /var/lib/docker/volumes/terrama2_pg_vol/_data/${latestTerrama2BackupFile}.sql
-    rm -vf /var/lib/docker/volumes/terrama2_pg_vol/_data/${latestAlertasBackupFile}.sql
-    rm -vf /var/lib/docker/volumes/terrama2_pg_vol/_data/${latestPublicBackupFile}.sql
 
 if test -d "/var/lib/docker/volumes/${TERRAMA2_PROJECT_NAME}_geoserver_vol/_data/"; then
     echo ""
