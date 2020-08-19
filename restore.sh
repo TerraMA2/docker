@@ -42,7 +42,7 @@ if test -d "/var/lib/docker/volumes/terrama2_pg_vol/_data/"; then
     echo "****************************************************"
     echo ""
 
-    docker exec -it terrama2_pg bash -c "cd /var/lib/postgresql/data/;psql -a -U postgres -h localhost < ${latestTerrama2BackupFile}.sql"
+    docker exec -it terrama2_pg bash -c "cd /var/lib/postgresql/data/;psql -a -U postgres -h localhost -d ${POSTGRES_DATABASE} < ${latestTerrama2BackupFile}.sql"
 
     echo ""
     echo "******************"
