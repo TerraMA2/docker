@@ -1,5 +1,5 @@
 {
-  "basePath": "%%TERRAMA2_BASE_PATH%%adm/",
+  "basePath": "%%TERRAMA2_BASE_PATH%%%%WEBAPP_BASE_PATH%%",
   "port": 36000,
   "defaultFilePathList": [
     "/data",
@@ -13,11 +13,11 @@
   "SHP2PGSQL": "shp2pgsql",
   "toolsMenu": [
     {
-      "textEn": "Example",
-      "textEs": "Ejemplo",
-      "textFr": "Exemple",
-      "textPt": "Exemplo",
-      "url": "http://example.com/",
+      "textEn": "TerraMA² Homepage",
+      "textEs": "TerraMA² Homepage",
+      "textFr": "TerraMA² Homepage",
+      "textPt": "TerraMA² Homepage",
+      "url": "http://www.terrama2.dpi.inpe.br/",
       "openInNewTab": true
     }
   ]

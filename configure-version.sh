@@ -42,5 +42,7 @@ for image in conf/terrama2_webapp_settings.json.in \
         -e 's!%%POSTGRES_DATABASE%%!'"${POSTGRES_DATABASE}"'!g' \
         -e 's!%%BACKUP_DIR%%!'"${BACKUP_DIR}"'!g' \
         -e 's!%%PUBLIC_URI%%!'"${PUBLIC_URI}"'!g' \
+        -e 's!%%WEBMONITOR_BASE_PATH%%!'"${WEBMONITOR_BASE_PATH}"'!g' \
+        -e 's!%%WEBAPP_BASE_PATH%%!'"${WEBAPP_BASE_PATH}"'!g' \
       "${image}" > "${image::-3}"
 done

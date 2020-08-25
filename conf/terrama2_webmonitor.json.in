@@ -1,10 +1,10 @@
 {
   "webmonitor": {
-    "basePath": "%%TERRAMA2_BASE_PATH%%monitor/",
+    "basePath": "%%TERRAMA2_BASE_PATH%%%%WEBMONITOR_BASE_PATH%%",
     "port": 36001
   },
   "webadmin": {
-    "internal_uri": "http://%%TERRAMA2_PROJECT_NAME%%_webapp_1:36000%%TERRAMA2_BASE_PATH%%adm",
-    "public_uri": "%%TERRAMA2_DNS%%%%TERRAMA2_BASE_PATH%%adm"
+    "internal_uri": "http://%%TERRAMA2_PROJECT_NAME%%_webapp_1:36000%%TERRAMA2_BASE_PATH%%%%WEBAPP_BASE_PATH%%",
+    "public_uri": "%%PUBLIC_URI%%"
   }
 }
