@@ -59,7 +59,9 @@ The `.env` file contains configurable variables used on all scripts and `docker-
 - `TERRAMA2_BASE_PATH` - Base URL of the application included after the DNS (default is '/');
 - `POSTGRES_DATABASE` - Name of the database;
 - `BACKUP_DIR` - Directory used to store backup files;
-- `PUBLIC_URI` - Server DNS including the protocol (HTTP or HTTPS).
+- `PUBLIC_URI` - Server DNS including the protocol (HTTP or HTTPS);
+- `WEBMONITOR_BASE_PATH` - Webmonitor base path;
+- `WEBAPP_BASE_PATH` - Webapp base path.
 
 ## Usage
 
