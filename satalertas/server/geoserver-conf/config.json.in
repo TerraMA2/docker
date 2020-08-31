@@ -4,8 +4,8 @@
     "password": "geoserver",
     "workspace": "mpmt_alertas",
     "datastore": "mpmt_alertas_datastore",
-    "baseHost": "%%TERRAMA2_DNS%%%%TERRAMA2_BASE_PATH%%geoserver",
-    "host": "%%TERRAMA2_DNS%%%%TERRAMA2_BASE_PATH%%geoserver/rest/",
+    "baseHost": "%%TERRAMA2_PROTOCOL%%%%TERRAMA2_DNS%%%%TERRAMA2_BASE_PATH%%geoserver",
+    "host": "%%TERRAMA2_PROTOCOL%%%%TERRAMA2_DNS%%%%TERRAMA2_BASE_PATH%%geoserver/rest/",
     "mosaic": {
       "wmsStore": {
         "name": "MosaicSpot2008",
@@ -35,17 +35,17 @@
         "styles": []
       }
     },
-    "legendUrl": "%%TERRAMA2_DNS%%%%TERRAMA2_BASE_PATH%%geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&legend_options=forceLabels:on&LAYER="
+    "legendUrl": "%%TERRAMA2_PROTOCOL%%%%TERRAMA2_DNS%%%%TERRAMA2_BASE_PATH%%geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&legend_options=forceLabels:on&LAYER="
   },
   "test": {
     "username": "admin",
     "password": "geoserver",
     "workspace": "mpmt_alertas",
     "datastore": "mpmt_alertas_datastore",
-    "baseHost1": "%%TERRAMA2_DNS%%%%TERRAMA2_BASE_PATH%%geoserver",
-    "host1": "##%%TERRAMA2_DNS%%%%TERRAMA2_BASE_PATH%%geoserver/rest/",
-    "baseHost": "%%TERRAMA2_DNS%%%%TERRAMA2_BASE_PATH%%geoserver",
-    "host": "%%TERRAMA2_DNS%%%%TERRAMA2_BASE_PATH%%geoserver/rest/",
+    "baseHost1": "%%TERRAMA2_PROTOCOL%%%%TERRAMA2_DNS%%%%TERRAMA2_BASE_PATH%%geoserver",
+    "host1": "##%%TERRAMA2_PROTOCOL%%%%TERRAMA2_DNS%%%%TERRAMA2_BASE_PATH%%geoserver/rest/",
+    "baseHost": "%%TERRAMA2_PROTOCOL%%%%TERRAMA2_DNS%%%%TERRAMA2_BASE_PATH%%geoserver",
+    "host": "%%TERRAMA2_PROTOCOL%%%%TERRAMA2_DNS%%%%TERRAMA2_BASE_PATH%%geoserver/rest/",
     "mosaic": {
       "wmsStore": {
         "name": "MosaicSpot2008",
@@ -75,15 +75,15 @@
         "styles": []
       }
     },
-    "legendUrl": "%%TERRAMA2_DNS%%%%TERRAMA2_BASE_PATH%%geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&legend_options=forceLabels:on&LAYER="
+    "legendUrl": "%%TERRAMA2_PROTOCOL%%%%TERRAMA2_DNS%%%%TERRAMA2_BASE_PATH%%geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&legend_options=forceLabels:on&LAYER="
   },
   "production": {
     "username": "admin",
     "password": "geoserver",
     "workspace": "mpmt_alertas",
     "datastore": "mpmt_alertas_datastore",
-    "baseHost": "%%TERRAMA2_DNS%%%%TERRAMA2_BASE_PATH%%geoserver",
-    "host": "%%TERRAMA2_DNS%%%%TERRAMA2_BASE_PATH%%geoserver/rest/",
+    "baseHost": "%%TERRAMA2_PROTOCOL%%%%TERRAMA2_DNS%%%%TERRAMA2_BASE_PATH%%geoserver",
+    "host": "%%TERRAMA2_PROTOCOL%%%%TERRAMA2_DNS%%%%TERRAMA2_BASE_PATH%%geoserver/rest/",
     "mosaic": {
       "wmsStore": {
         "name": "MosaicSpot2008",
@@ -113,6 +113,6 @@
         "styles": []
       }
     },
-    "legendUrl": "%%TERRAMA2_DNS%%%%TERRAMA2_BASE_PATH%%geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&legend_options=forceLabels:on&LAYER="
+    "legendUrl": "%%TERRAMA2_PROTOCOL%%%%TERRAMA2_DNS%%%%TERRAMA2_BASE_PATH%%geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&legend_options=forceLabels:on&LAYER="
   }
 }
