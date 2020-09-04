@@ -116,7 +116,7 @@ services:
 
   # Geoserver
   geoserver:
-    container_name: "${TERRAMA2_PROJECT_NAME}_geoserver"
+    container_name: "${COMPOSE_PROJECT_NAME}_geoserver"
     image: "${TERRAMA2_DOCKER_REGISTRY}/geoserver:2.12"
     restart: always
     ports:

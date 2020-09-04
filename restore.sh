@@ -52,7 +52,7 @@ if test -d "/var/lib/docker/volumes/terrama2_pg_vol/_data/"; then
 
     rm -vf /var/lib/docker/volumes/terrama2_pg_vol/_data/${latestTerrama2BackupFile}.sql
 
-if test -d "/var/lib/docker/volumes/${TERRAMA2_PROJECT_NAME}_geoserver_vol/_data/"; then
+if test -d "/var/lib/docker/volumes/${COMPOSE_PROJECT_NAME}_geoserver_vol/_data/"; then
     echo ""
     echo "*************"
     echo "* Geoserver *"
@@ -68,7 +68,7 @@ if test -d "/var/lib/docker/volumes/${TERRAMA2_PROJECT_NAME}_geoserver_vol/_data
     echo "*********************"
     echo ""
 
-    rm -vrf /var/lib/docker/volumes/${TERRAMA2_PROJECT_NAME}_geoserver_vol/_data/*
+    rm -vrf /var/lib/docker/volumes/${COMPOSE_PROJECT_NAME}_geoserver_vol/_data/*
 
     echo ""
     echo "**************"
@@ -76,10 +76,10 @@ if test -d "/var/lib/docker/volumes/${TERRAMA2_PROJECT_NAME}_geoserver_vol/_data
     echo "**************"
     echo ""
 
-    tar xvf ${latestGeoserverBackupFile} -C /var/lib/docker/volumes/${TERRAMA2_PROJECT_NAME}_geoserver_vol/_data/
+    tar xvf ${latestGeoserverBackupFile} -C /var/lib/docker/volumes/${COMPOSE_PROJECT_NAME}_geoserver_vol/_data/
 fi
 
-if test -d "/var/lib/docker/volumes/${TERRAMA2_PROJECT_NAME}_satalertas_documents_vol/_data/"; then
+if test -d "/var/lib/docker/volumes/${COMPOSE_PROJECT_NAME}_satalertas_documents_vol/_data/"; then
     echo ""
     echo "**************"
     echo "* SatAlertas *"
@@ -95,7 +95,7 @@ if test -d "/var/lib/docker/volumes/${TERRAMA2_PROJECT_NAME}_satalertas_document
     echo "*********************"
     echo ""
 
-    rm -vrf /var/lib/docker/volumes/${TERRAMA2_PROJECT_NAME}_satalertas_documents_vol/_data/*
+    rm -vrf /var/lib/docker/volumes/${COMPOSE_PROJECT_NAME}_satalertas_documents_vol/_data/*
 
     echo ""
     echo "**************"
@@ -103,5 +103,5 @@ if test -d "/var/lib/docker/volumes/${TERRAMA2_PROJECT_NAME}_satalertas_document
     echo "**************"
     echo ""
 
-    tar xvf ${latestDocumentBackupFile} -C /var/lib/docker/volumes/${TERRAMA2_PROJECT_NAME}_satalertas_documents_vol/_data/
+    tar xvf ${latestDocumentBackupFile} -C /var/lib/docker/volumes/${COMPOSE_PROJECT_NAME}_satalertas_documents_vol/_data/
 fi

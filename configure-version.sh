@@ -28,7 +28,7 @@ for image in conf/terrama2_webapp_settings.json.in \
              satalertas/client/Dockerfile.in \
              satalertas/docker-compose.yml.in; do
   sed -r \
-        -e 's!%%TERRAMA2_PROJECT_NAME%%!'"${TERRAMA2_PROJECT_NAME}"'!g' \
+        -e 's!%%COMPOSE_PROJECT_NAME%%!'"${COMPOSE_PROJECT_NAME}"'!g' \
         -e 's!%%TERRAMA2_DOCKER_REGISTRY%%!'"${TERRAMA2_DOCKER_REGISTRY}"'!g' \
         -e 's!%%TERRAMA2_TAG%%!'"${TERRAMA2_TAG}"'!g' \
         -e 's!%%SATALERTAS_TAG%%!'"${SATALERTAS_TAG}"'!g' \

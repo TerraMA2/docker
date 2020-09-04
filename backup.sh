@@ -43,10 +43,10 @@ echo "* Geoserver *"
 echo "*************"
 echo ""
 
-if test -d "/var/lib/docker/volumes/${TERRAMA2_PROJECT_NAME}_geoserver_vol/_data/"; then
+if test -d "/var/lib/docker/volumes/${COMPOSE_PROJECT_NAME}_geoserver_vol/_data/"; then
     mkdir -vp ${BACKUP_DIR}/geoserver
 
-    cd /var/lib/docker/volumes/${TERRAMA2_PROJECT_NAME}_geoserver_vol/_data/
+    cd /var/lib/docker/volumes/${COMPOSE_PROJECT_NAME}_geoserver_vol/_data/
 
     tar cvf - * | gzip -9 - > ${BACKUP_DIR}/geoserver/geoserver-${DATE}.tar.gz
 fi
@@ -57,10 +57,10 @@ echo "* SatAlertas *"
 echo "**************"
 echo ""
 
-if test -d "/var/lib/docker/volumes/${TERRAMA2_PROJECT_NAME}_satalertas_documents_vol/_data/"; then
+if test -d "/var/lib/docker/volumes/${COMPOSE_PROJECT_NAME}_satalertas_documents_vol/_data/"; then
     mkdir -vp ${BACKUP_DIR}/satalertas
 
-    cd /var/lib/docker/volumes/${TERRAMA2_PROJECT_NAME}_satalertas_documents_vol/_data/
+    cd /var/lib/docker/volumes/${COMPOSE_PROJECT_NAME}_satalertas_documents_vol/_data/
 
     tar cvf - *.pdf | gzip -9 - > ${BACKUP_DIR}/satalertas/satalertas_documents-${DATE}.tar.gz
 fi
