@@ -156,14 +156,6 @@ Link the BDqueimadas container in `terrama2_net`:
 docker network connect terrama2_net terrama2_bdq
 ```
 
-### SatAlertas
-
-To configure SatAlertas, navigate to `satalertas` folder and run:
-
-```
-docker-compose -p terrama2 up -d
-```
-
 The `docker-composer.yml` file uses the `.env` file, so, it's necessary to run `./configure-version.sh` script.
 
 ## Post Installation Tips
