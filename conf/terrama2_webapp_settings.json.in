@@ -3,27 +3,27 @@
   "port": 36000,
   "services": {
     "alert": {
-      "host": "%%TERRAMA2_PROJECT_NAME%%_alert_1",
+      "host": "%%COMPOSE_PROJECT_NAME%%_alert_1",
       "sshPort": 22,
       "sshUser": "terrama2"
     },
     "analysis": {
-      "host": "%%TERRAMA2_PROJECT_NAME%%_analysis_1",
+      "host": "%%COMPOSE_PROJECT_NAME%%_analysis_1",
       "sshPort": 22,
       "sshUser": "terrama2"
     },
     "collector": {
-      "host": "%%TERRAMA2_PROJECT_NAME%%_collector_1",
+      "host": "%%COMPOSE_PROJECT_NAME%%_collector_1",
       "sshPort": 22,
       "sshUser": "terrama2"
     },
     "interpolator": {
-      "host": "%%TERRAMA2_PROJECT_NAME%%_interpolator_1",
+      "host": "%%COMPOSE_PROJECT_NAME%%_interpolator_1",
       "sshPort": 22,
       "sshUser": "terrama2"
     },
     "view": {
-      "host": "%%TERRAMA2_PROJECT_NAME%%_view_1",
+      "host": "%%COMPOSE_PROJECT_NAME%%_view_1",
       "sshPort": 22,
       "sshUser": "terrama2",
       "geoserver": "%%TERRAMA2_PROTOCOL%%admin:geoserver@%%TERRAMA2_DNS%%:%%GEOSERVER_PORT%%%%TERRAMA2_BASE_PATH%%geoserver"

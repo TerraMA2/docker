@@ -4,7 +4,7 @@
     "port": 36001
   },
   "webadmin": {
-    "internal_uri": "http://%%TERRAMA2_PROJECT_NAME%%_webapp_1:36000%%TERRAMA2_BASE_PATH%%%%WEBAPP_BASE_PATH%%",
+    "internal_uri": "http://%%COMPOSE_PROJECT_NAME%%_webapp_1:36000%%TERRAMA2_BASE_PATH%%%%WEBAPP_BASE_PATH%%",
     "public_uri": "%%PUBLIC_URI%%"
   }
 }

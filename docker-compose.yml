@@ -13,7 +13,6 @@ services:
       - "terrama2_shared_vol:/shared-data"
       - "${TERRAMA2_CONFIG_DIR}/terrama2_webapp_db.json:/opt/terrama2/${TERRAMA2_TAG}/webapp/config/db.json"
       - "${TERRAMA2_CONFIG_DIR}/terrama2_webapp_settings.json:/opt/terrama2/${TERRAMA2_TAG}/webapp/config/settings.json"
-      - "${TERRAMA2_CONFIG_DIR}/.pgpass:/root/.pgpass"
     networks:
       - net
 
@@ -33,7 +32,6 @@ services:
       - "${TERRAMA2_CONFIG_DIR}/terrama2_webmonitor.json:/opt/terrama2/${TERRAMA2_TAG}/webmonitor/config/instances/default.json"
       - "${TERRAMA2_CONFIG_DIR}/terrama2_webmonitor_user_conf.json:/opt/terrama2/${TERRAMA2_TAG}/webmonitor/config/instances/user_conf.json"
       - "webmonitor_images:/opt/terrama2/${TERRAMA2_TAG}/webmonitor/public/images"
-      - "${TERRAMA2_CONFIG_DIR}/.pgpass:/root/.pgpass"
     networks:
       - net
     links:
@@ -116,7 +114,7 @@ services:
 
   # Geoserver
   geoserver:
-    container_name: "${TERRAMA2_PROJECT_NAME}_geoserver"
+    container_name: "${COMPOSE_PROJECT_NAME}_geoserver"
     image: "${TERRAMA2_DOCKER_REGISTRY}/geoserver:2.12"
     restart: always
     ports:
