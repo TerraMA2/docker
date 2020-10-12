@@ -27,6 +27,7 @@ RUN apt-get update && \
                        screen \
                        openssh-server \
                        gdal-bin \
+		               libgsasl7 \
                        # VMime Dependencies
                        doxygen \
                        # Process Control
@@ -70,7 +71,6 @@ RUN cd ${TERRAMA2_3RDPARTY_PATH} && \
     apt-get update && \
     apt-get install -y nodejs && \
     cd ${TERRAMA2_CODEBASE_PATH} && \
-    apt-get install -y libgsasl7 && \
     rm -rf terrama2-vmime-${TERRAMA2_TAG}_0.9.2-ubuntu16.04_amd64.deb* v* ${TERRAMA2_CODEBASE_PATH} && \
     rm -rf /var/lib/apt/lists/*
 

@@ -14,4 +14,4 @@ docker run -d \
            -p 127.0.0.1:5433:5432 \
            -v terrama2_pg_vol:/var/lib/postgresql/data \
            -e POSTGRES_PASSWORD="postgres" \
-           mdillon/postgis
+           postgis/postgis:11-2.5
