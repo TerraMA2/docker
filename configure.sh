@@ -1,8 +1,10 @@
 #!/bin/bash
 
+./configure-version.sh
+
 eval $(egrep -v '^#' .env | xargs)
 
-./configure-version.sh
+./create-postgres.sh
 
 docker volume create terrama2_shared_vol
 
