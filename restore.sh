@@ -20,33 +20,23 @@ if test -d "/var/lib/docker/volumes/terrama2_pg_vol/_data/"; then
     
     echo ""
     echo "********************"
-    echo "* Extracting dumps *"
+    echo "* Extracting dump  *"
     echo "********************"
     echo ""
 
     tar xvf ${latestTerrama2BackupFile}.tar.gz -C /var/lib/docker/volumes/terrama2_pg_vol/_data/
 
     echo ""
-    echo "********************"
-    echo "* Dropping schemas *"
-    echo "********************"
-    echo ""
-
-    docker exec -it terrama2_pg bash -c "psql -a -U postgres -h localhost -d ${POSTGRES_DATABASE} -c 'DROP SCHEMA terrama2 CASCADE'"
-    docker exec -it terrama2_pg bash -c "psql -a -U postgres -h localhost -d ${POSTGRES_DATABASE} -c 'DROP TABLE alertas.reports CASCADE;DROP TABLE alertas.SequelizeMeta CASCADE;DROP SCHEMA alertas CASCADE'"
-    docker exec -it terrama2_pg bash -c "psql -a -U postgres -h localhost -d ${POSTGRES_DATABASE} -c 'DROP SCHEMA public CASCADE'"
-
-    echo ""
     echo "****************************************************"
-    echo "* Importing dumps to database ${POSTGRES_DATABASE} *"
+    echo "* Importing dump to database ${POSTGRES_DATABASE}  *"
     echo "****************************************************"
     echo ""
 
-    docker exec -it terrama2_pg bash -c "cd /var/lib/postgresql/data/;psql -a -U postgres -h localhost -d ${POSTGRES_DATABASE} < ${latestTerrama2BackupFile}.sql"
+    docker exec -it terrama2_pg bash -c "cd /var/lib/postgresql/data/;psql -a -U postgres -h localhost < ${latestTerrama2BackupFile}.sql"
 
     echo ""
     echo "******************"
-    echo "* Removing dumps *"
+    echo "* Removing dump  *"
     echo "******************"
     echo ""
 
