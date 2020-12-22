@@ -5,7 +5,7 @@ services:
   # TerraMA2 Web Application
   webapp:
     image: "${TERRAMA2_DOCKER_REGISTRY}/terrama2-webapp:${TERRAMA2_TAG}"
-    restart: "unless-stopped"
+    restart: "no"
     ports:
       - "${TERRAMA2_WEBAPP_ADDRESS}:36000"
     volumes:
@@ -19,7 +19,7 @@ services:
   # TerraMA2 Web Monitor
   webmonitor:
     image: "${TERRAMA2_DOCKER_REGISTRY}/terrama2-webmonitor:${TERRAMA2_TAG}"
-    restart: "unless-stopped"
+    restart: "no"
     ports:
       - "${TERRAMA2_WEBMONITOR_ADDRESS}:36001"
     depends_on:
