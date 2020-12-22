@@ -1,34 +1,6 @@
 {
   "basePath": "%%TERRAMA2_BASE_PATH%%%%WEBAPP_BASE_PATH%%",
   "port": 36000,
-  "services": {
-    "alert": {
-      "host": "%%COMPOSE_PROJECT_NAME%%_alert_1",
-      "sshPort": 22,
-      "sshUser": "terrama2"
-    },
-    "analysis": {
-      "host": "%%COMPOSE_PROJECT_NAME%%_analysis_1",
-      "sshPort": 22,
-      "sshUser": "terrama2"
-    },
-    "collector": {
-      "host": "%%COMPOSE_PROJECT_NAME%%_collector_1",
-      "sshPort": 22,
-      "sshUser": "terrama2"
-    },
-    "interpolator": {
-      "host": "%%COMPOSE_PROJECT_NAME%%_interpolator_1",
-      "sshPort": 22,
-      "sshUser": "terrama2"
-    },
-    "view": {
-      "host": "%%COMPOSE_PROJECT_NAME%%_view_1",
-      "sshPort": 22,
-      "sshUser": "terrama2",
-      "geoserver": "%%TERRAMA2_PROTOCOL%%admin:geoserver@%%TERRAMA2_DNS%%:%%GEOSERVER_PORT%%%%TERRAMA2_BASE_PATH%%geoserver"
-    }
-  },
   "defaultFilePathList": [
     "/data",
     "/shared-data"
