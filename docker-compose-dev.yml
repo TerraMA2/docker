@@ -5,7 +5,7 @@ services:
   # TerraMA2 Web Application
   webapp:
     image: "${TERRAMA2_DOCKER_REGISTRY}/terrama2-webapp:${TERRAMA2_TAG}"
-    restart: "no"
+    restart: "always"
     ports:
       - "${TERRAMA2_WEBAPP_ADDRESS}:36000"
     volumes:
@@ -19,7 +19,7 @@ services:
   # TerraMA2 Web Monitor
   webmonitor:
     image: "${TERRAMA2_DOCKER_REGISTRY}/terrama2-webmonitor:${TERRAMA2_TAG}"
-    restart: "no"
+    restart: "always"
     ports:
       - "${TERRAMA2_WEBMONITOR_ADDRESS}:36001"
     depends_on:
@@ -37,11 +37,30 @@ services:
     links:
       - webapp
 
+  # Geoserver
+  geoserver:
+    container_name: "${COMPOSE_PROJECT_NAME}_geoserver"
+    image: "${TERRAMA2_DOCKER_REGISTRY}/geoserver:2.18.1"
+    restart: "always"
+    ports:
+      - "${TERRAMA2_GEOSERVER_ADDRESS}:8080"
+    volumes:
+      - "${TERRAMA2_DATA_DIR}:/data"
+      - "terrama2_shared_vol:/shared-data"
+      - "geoserver_vol:/opt/geoserver/data_dir"
+      - "${TERRAMA2_CONFIG_DIR}/terrama2_geoserver_setenv.sh:/usr/local/tomcat/bin/setenv.sh"
+    environment:
+      - "GEOSERVER_URL=${TERRAMA2_BASE_PATH}geoserver"
+      - "GEOSERVER_DATA_DIR=/opt/geoserver/data_dir"
+    networks:
+      - net
+
 networks:
   net:
 
 volumes:
   data_vol:
+  geoserver_vol:
   webmonitor_images:
   terrama2_shared_vol:
     external:
