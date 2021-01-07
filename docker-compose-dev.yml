@@ -39,7 +39,7 @@ services:
 
   # Geoserver
   geoserver:
-    container_name: "${COMPOSE_PROJECT_NAME}_geoserver"
+    container_name: "${COMPOSE_PROJECT_NAME}-geoserver"
     image: "${TERRAMA2_DOCKER_REGISTRY}/geoserver:2.18.1"
     restart: "always"
     ports:

@@ -16,10 +16,10 @@ if [ ! -d "${PLUGINS_DIR}" ]; then
 
   # Just download ImagePyramid Plugin if does not exist
 if [ ! -f "${PLUGINS_DIR}/gt-imagepyramid*.jar" ]; then
-    wget --no-verbose -O geoserver-2.18.0-pyramid-plugin.zip -L "https://sourceforge.net/projects/geoserver/files/GeoServer/2.18.0/extensions/geoserver-2.18.0-pyramid-plugin.zip/download"
-    unzip -d /tmp/_geoserver_docker geoserver-2.18.0-pyramid-plugin.zip
+    wget --no-verbose -O geoserver-2.18.1-pyramid-plugin.zip -L "https://sourceforge.net/projects/geoserver/files/GeoServer/2.18.1/extensions/geoserver-2.18.1-pyramid-plugin.zip/download"
+    unzip -d /tmp/_geoserver_docker geoserver-2.18.1-pyramid-plugin.zip
     mv /tmp/_geoserver_docker/gt-imagepyramid*.jar ${PLUGINS_DIR}
-    rm -rf /tmp/_geoserver_docker geoserver-2.18.0-pyramid-plugin.zip
+    rm -rf /tmp/_geoserver_docker geoserver-2.18.1-pyramid-plugin.zip
   fi
 fi
 

@@ -15,6 +15,11 @@ docker network connect ${COMPOSE_PROJECT_NAME}_net terrama2_pg
 chown 1000:1000 conf/terrama2_webapp_settings.json
 chown 1000:1000 conf/terrama2_webapp_db.json
 
+echo -e '
+127.0.0.1       terrama2_webapp_1
+127.0.0.1       terrama2_webmonitor_1
+127.0.0.1       terrama2-geoserver' | sudo tee -a /etc/hosts > /dev/null
+
 # Using Geoserver without docker
 #cd /home/$(id -nu 1000) || exit
 
