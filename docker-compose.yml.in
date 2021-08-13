@@ -1,37 +1,37 @@
-version: "3"
+version: "3.8"
 
 services:
 
   # TerraMA2 Web Application
   webapp:
-    image: "${TERRAMA2_DOCKER_REGISTRY}/terrama2-webapp:${TERRAMA2_TAG}"
+    image: %%TERRAMA2_DOCKER_REGISTRY%%/terrama2-webapp:%%TERRAMA2_TAG%%
     restart: unless-stopped
     ports:
-      - "${TERRAMA2_WEBAPP_ADDRESS}:36000"
+      - %%TERRAMA2_WEBAPP_ADDRESS%%:36000
     volumes:
-      - "${TERRAMA2_DATA_DIR}:/data"
+      - %%TERRAMA2_DATA_DIR%%:/data
       - "terrama2_shared_vol:/shared-data"
-      - "${TERRAMA2_CONFIG_DIR}/terrama2_webapp_db.json:/opt/terrama2/${TERRAMA2_TAG}/webapp/config/db.json"
-      - "${TERRAMA2_CONFIG_DIR}/terrama2_webapp_settings.json:/opt/terrama2/${TERRAMA2_TAG}/webapp/config/settings.json"
+      - %%TERRAMA2_CONFIG_DIR%%/terrama2_webapp_db.json:/opt/terrama2/%%TERRAMA2_TAG%%/webapp/config/db.json
+      - %%TERRAMA2_CONFIG_DIR%%/terrama2_webapp_settings.json:/opt/terrama2/%%TERRAMA2_TAG%%/webapp/config/settings.json
     networks:
       - net
 
   # TerraMA2 Web Monitor
   webmonitor:
-    image: "${TERRAMA2_DOCKER_REGISTRY}/terrama2-webmonitor:${TERRAMA2_TAG}"
+    image: %%TERRAMA2_DOCKER_REGISTRY%%/terrama2-webmonitor:%%TERRAMA2_TAG%%
     restart: unless-stopped
     ports:
-      - "${TERRAMA2_WEBMONITOR_ADDRESS}:36001"
+      - %%TERRAMA2_WEBMONITOR_ADDRESS%%:36001
     depends_on:
       - webapp
     environment:
       - "NODE_TLS_REJECT_UNAUTHORIZED=0"
     volumes:
-      - "${TERRAMA2_DATA_DIR}:/data"
+      - %%TERRAMA2_DATA_DIR%%:/data
       - "terrama2_shared_vol:/shared-data"
-      - "${TERRAMA2_CONFIG_DIR}/terrama2_webmonitor.json:/opt/terrama2/${TERRAMA2_TAG}/webmonitor/config/instances/default.json"
-      - "${TERRAMA2_CONFIG_DIR}/terrama2_webmonitor_user_conf.json:/opt/terrama2/${TERRAMA2_TAG}/webmonitor/config/instances/user_conf.json"
-      - "webmonitor_images:/opt/terrama2/${TERRAMA2_TAG}/webmonitor/public/images"
+      - %%TERRAMA2_CONFIG_DIR%%/terrama2_webmonitor.json:/opt/terrama2/%%TERRAMA2_TAG%%/webmonitor/config/instances/default.json
+      - %%TERRAMA2_CONFIG_DIR%%/terrama2_webmonitor_user_conf.json:/opt/terrama2/%%TERRAMA2_TAG%%/webmonitor/config/instances/user_conf.json
+      - "webmonitor_images:/opt/terrama2/%%TERRAMA2_TAG%%/webmonitor/public/images"
     networks:
       - net
     links:
@@ -39,14 +39,14 @@ services:
 
   # TerraMA2 Collector Service using TerraMA2 Base
   collector:
-    image: "${TERRAMA2_DOCKER_REGISTRY}/terrama2:${TERRAMA2_TAG}"
+    image: %%TERRAMA2_DOCKER_REGISTRY%%/terrama2:%%TERRAMA2_TAG%%
     restart: unless-stopped
     entrypoint:
       - /usr/local/bin/start_terrama2_service.sh
       - COLLECTOR
       - "6543"
     volumes:
-      - "${TERRAMA2_DATA_DIR}:/data"
+      - %%TERRAMA2_DATA_DIR%%:/data"
       - "terrama2_shared_vol:/shared-data"
     tty: true
     networks:
@@ -54,14 +54,14 @@ services:
 
   # TerraMA2 Analysis Service using TerraMA2 Base
   analysis:
-    image: "${TERRAMA2_DOCKER_REGISTRY}/terrama2:${TERRAMA2_TAG}"
+    image: %%TERRAMA2_DOCKER_REGISTRY%%/terrama2:%%TERRAMA2_TAG%%
     restart: unless-stopped
     entrypoint:
       - /usr/local/bin/start_terrama2_service.sh
       - ANALYSIS
       - "6544"
     volumes:
-      - "${TERRAMA2_DATA_DIR}:/data"
+      - %%TERRAMA2_DATA_DIR%%:/data"
       - "terrama2_shared_vol:/shared-data"
     tty: true
     networks:
@@ -69,14 +69,14 @@ services:
 
   # TerraMA2 View Service using TerraMA2 Base
   view:
-    image: "${TERRAMA2_DOCKER_REGISTRY}/terrama2:${TERRAMA2_TAG}"
+    image: %%TERRAMA2_DOCKER_REGISTRY%%/terrama2:%%TERRAMA2_TAG%%
     restart: unless-stopped
     entrypoint:
       - /usr/local/bin/start_terrama2_service.sh
       - VIEW
       - "6545"
     volumes:
-      - "${TERRAMA2_DATA_DIR}:/data"
+      - %%TERRAMA2_DATA_DIR%%:/data"
       - "terrama2_shared_vol:/shared-data"
     tty: true
     networks:
@@ -84,14 +84,14 @@ services:
 
   # TerraMA2 Alert Service using TerraMA2 Base
   alert:
-    image: "${TERRAMA2_DOCKER_REGISTRY}/terrama2:${TERRAMA2_TAG}"
+    image: %%TERRAMA2_DOCKER_REGISTRY%%/terrama2:%%TERRAMA2_TAG%%
     restart: unless-stopped
     entrypoint:
       - /usr/local/bin/start_terrama2_service.sh
       - ALERT
       - "6546"
     volumes:
-      - "${TERRAMA2_DATA_DIR}:/data"
+      - %%TERRAMA2_DATA_DIR%%:/data"
       - "terrama2_shared_vol:/shared-data"
     tty: true
     networks:
@@ -99,14 +99,14 @@ services:
 
   # TerraMA2 Interpolator Service using TerraMA2 Base
   interpolator:
-    image: "${TERRAMA2_DOCKER_REGISTRY}/terrama2:${TERRAMA2_TAG}"
+    image: %%TERRAMA2_DOCKER_REGISTRY%%/terrama2:%%TERRAMA2_TAG%%
     restart: unless-stopped
     entrypoint:
       - /usr/local/bin/start_terrama2_service.sh
       - INTERPOLATOR
       - "6547"
     volumes:
-      - "${TERRAMA2_DATA_DIR}:/data"
+      - %%TERRAMA2_DATA_DIR%%:/data"
       - "terrama2_shared_vol:/shared-data"
     tty: true
     networks:
@@ -114,18 +114,18 @@ services:
 
   # Geoserver
   geoserver:
-    container_name: "${COMPOSE_PROJECT_NAME}_geoserver"
-    image: "${TERRAMA2_DOCKER_REGISTRY}/geoserver:2.18"
+    container_name: %%COMPOSE_PROJECT_NAME%%_geoserver
+    image: %%TERRAMA2_DOCKER_REGISTRY%%/geoserver:2.18
     restart: always
     ports:
-      - "${TERRAMA2_GEOSERVER_ADDRESS}:8080"
+      - %%TERRAMA2_GEOSERVER_ADDRESS%%:8080
     volumes:
-      - "${TERRAMA2_DATA_DIR}:/data"
+      - %%TERRAMA2_DATA_DIR%%:/data
       - terrama2_shared_vol:/shared-data
       - geoserver_vol:/opt/geoserver/data_dir
-      - ${TERRAMA2_CONFIG_DIR}/terrama2_geoserver_setenv.sh:/usr/local/tomcat/bin/setenv.sh
+      - %%TERRAMA2_CONFIG_DIR%%/terrama2_geoserver_setenv.sh:/usr/local/tomcat/bin/setenv.sh
     environment:
-      - "GEOSERVER_URL=${TERRAMA2_BASE_PATH}geoserver"
+      - GEOSERVER_URL=%%TERRAMA2_BASE_PATH%%geoserver
       - "GEOSERVER_DATA_DIR=/opt/geoserver/data_dir"
     networks:
       - net
