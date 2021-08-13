@@ -6,6 +6,12 @@ services:
   webapp:
     image: %%TERRAMA2_DOCKER_REGISTRY%%/terrama2-webapp:%%TERRAMA2_TAG%%
     restart: unless-stopped
+    deploy:
+        mode: global
+        restart_policy:
+          delay: 10s
+          max_attempts: 2
+          condition: on-failure
     ports:
       - %%TERRAMA2_WEBAPP_ADDRESS%%:36000
     volumes:
@@ -20,6 +26,12 @@ services:
   webmonitor:
     image: %%TERRAMA2_DOCKER_REGISTRY%%/terrama2-webmonitor:%%TERRAMA2_TAG%%
     restart: unless-stopped
+    deploy:
+        mode: global
+        restart_policy:
+          delay: 10s
+          max_attempts: 2
+          condition: on-failure
     ports:
       - %%TERRAMA2_WEBMONITOR_ADDRESS%%:36001
     depends_on:
@@ -41,6 +53,12 @@ services:
   collector:
     image: %%TERRAMA2_DOCKER_REGISTRY%%/terrama2:%%TERRAMA2_TAG%%
     restart: unless-stopped
+    deploy:
+        mode: global
+        restart_policy:
+          delay: 10s
+          max_attempts: 2
+          condition: on-failure
     entrypoint:
       - /usr/local/bin/start_terrama2_service.sh
       - COLLECTOR
@@ -56,6 +74,12 @@ services:
   analysis:
     image: %%TERRAMA2_DOCKER_REGISTRY%%/terrama2:%%TERRAMA2_TAG%%
     restart: unless-stopped
+    deploy:
+        mode: global
+        restart_policy:
+          delay: 10s
+          max_attempts: 2
+          condition: on-failure
     entrypoint:
       - /usr/local/bin/start_terrama2_service.sh
       - ANALYSIS
@@ -71,6 +95,12 @@ services:
   view:
     image: %%TERRAMA2_DOCKER_REGISTRY%%/terrama2:%%TERRAMA2_TAG%%
     restart: unless-stopped
+    deploy:
+        mode: global
+        restart_policy:
+          delay: 10s
+          max_attempts: 2
+          condition: on-failure
     entrypoint:
       - /usr/local/bin/start_terrama2_service.sh
       - VIEW
@@ -86,6 +116,12 @@ services:
   alert:
     image: %%TERRAMA2_DOCKER_REGISTRY%%/terrama2:%%TERRAMA2_TAG%%
     restart: unless-stopped
+    deploy:
+        mode: global
+        restart_policy:
+          delay: 10s
+          max_attempts: 2
+          condition: on-failure
     entrypoint:
       - /usr/local/bin/start_terrama2_service.sh
       - ALERT
@@ -101,6 +137,12 @@ services:
   interpolator:
     image: %%TERRAMA2_DOCKER_REGISTRY%%/terrama2:%%TERRAMA2_TAG%%
     restart: unless-stopped
+    deploy:
+        mode: global
+        restart_policy:
+          delay: 10s
+          max_attempts: 2
+          condition: on-failure
     entrypoint:
       - /usr/local/bin/start_terrama2_service.sh
       - INTERPOLATOR
@@ -117,6 +159,12 @@ services:
     container_name: %%COMPOSE_PROJECT_NAME%%_geoserver
     image: %%TERRAMA2_DOCKER_REGISTRY%%/geoserver:2.18
     restart: always
+    deploy:
+        mode: global
+        restart_policy:
+          delay: 10s
+          max_attempts: 2
+          condition: on-failure
     ports:
       - %%TERRAMA2_GEOSERVER_ADDRESS%%:8080
     volumes:
