@@ -9,7 +9,7 @@ echo ""
 eval $(egrep -v '^#' .env | xargs)
 
 # GeoServer
-#docker push ${TERRAMA2_DOCKER_REGISTRY}/geoserver:2.18
+#docker push ${TERRAMA2_DOCKER_REGISTRY}/geoserver:2.19.2
 # _geoserver_code=$?
 
 # TerraMA²

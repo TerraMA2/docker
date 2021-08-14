@@ -157,7 +157,7 @@ services:
   # Geoserver
   geoserver:
     container_name: %%COMPOSE_PROJECT_NAME%%_geoserver
-    image: %%TERRAMA2_DOCKER_REGISTRY%%/geoserver:2.18
+    image: %%TERRAMA2_DOCKER_REGISTRY%%/geoserver:2.19.2
     restart: always
     deploy:
         mode: global
