@@ -3,7 +3,7 @@
     "username": "postgres",
     "password": "postgres",
     "database": "%%POSTGRES_DATABASE%%",
-    "host": "terrama2_pg",
+    "host": "terrama2_postgres",
     "port": 5432,
     "dialect": "postgres",
     "define": {

@@ -57,16 +57,16 @@ If you don't have a running version of PostgreSQL with the PostGIS extension or 
 Create a new volume to store the PostgreSQL data files:
 
 ```bash
-docker volume create terrama2_pg_vol
+docker volume create terrama2_postgres_vol
 ```
 
-Pull the PostgreSQL image and run a new container named `terrama2_pg`:
+Pull the PostgreSQL image and run a new container named `terrama2_postgres`:
 
 ```bash
 docker run -d \
-           --restart unless-stopped --name terrama2_pg \
+           --restart unless-stopped --name terrama2_postgres \
            -p 127.0.0.1:5433:5432 \
-           -v terrama2_pg_vol:/var/lib/postgresql/data \
+           -v terrama2_postgres_vol:/var/lib/postgresql/data \
            -e POSTGRES_PASSWORD=mysecretpassword \
            mdillon/postgis
 ```
@@ -91,7 +91,7 @@ If you have installed the GeoServer and PostgreSQL as docker containers, as expl
 
 ```bash
 docker network connect terrama2_net terrama2_geoserver
-docker network connect terrama2_net terrama2_pg
+docker network connect terrama2_net terrama2_postgres
 ```
 
 Edit the file `conf/terrama2_webapp_db.json` with database credentials.

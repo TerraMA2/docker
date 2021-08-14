@@ -10,7 +10,7 @@ echo "* Backup TerraMA² *"
 echo "*******************"
 echo ""
 
-if test -d "/var/lib/docker/volumes/terrama2_pg_vol/_data/"; then
+if test -d "/var/lib/docker/volumes/terrama2_postgres_vol/_data/"; then
     echo ""
     echo "**************"
     echo "* PostgreSQL *"
@@ -21,7 +21,7 @@ if test -d "/var/lib/docker/volumes/terrama2_pg_vol/_data/"; then
     echo "* Backing up database ${POSTGRES_DATABASE} *"
     echo "********************************************"
 
-    docker exec -it terrama2_pg bash -c "pg_dump -f /var/lib/postgresql/data/dump-${DATE}.sql -h localhost -p 5432 -U postgres --quote-all-identifiers --no-password -v --role=postgres -Fp -b -c -C ${POSTGRES_DATABASE}"
+    docker exec -it terrama2_postgres bash -c "pg_dump -f /var/lib/postgresql/data/dump-${DATE}.sql -h localhost -p 5432 -U postgres --quote-all-identifiers --no-password -v --role=postgres -Fp -b -c -C ${POSTGRES_DATABASE}"
 
     mkdir -vp ${BACKUP_DIR}/postgresql
 
@@ -30,7 +30,7 @@ if test -d "/var/lib/docker/volumes/terrama2_pg_vol/_data/"; then
     echo "* Compacting dumps *"
     echo "********************"
 
-    cd /var/lib/docker/volumes/terrama2_pg_vol/_data/
+    cd /var/lib/docker/volumes/terrama2_postgres_vol/_data/
 
     tar cvf - dump-${DATE}.sql | gzip -9 - > ${BACKUP_DIR}/postgresql/dump-${DATE}.tar.gz
 

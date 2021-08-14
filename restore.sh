@@ -7,7 +7,7 @@ echo "********************"
 echo "* Restore TerraMA² *"
 echo "********************"
 
-if test -d "/var/lib/docker/volumes/terrama2_pg_vol/_data/"; then
+if test -d "/var/lib/docker/volumes/terrama2_postgres_vol/_data/"; then
     echo ""
     echo "**************"
     echo "* PostgreSQL *"
@@ -24,7 +24,7 @@ if test -d "/var/lib/docker/volumes/terrama2_pg_vol/_data/"; then
     echo "********************"
     echo ""
 
-    tar xvf ${latestTerrama2BackupFile}.tar.gz -C /var/lib/docker/volumes/terrama2_pg_vol/_data/
+    tar xvf ${latestTerrama2BackupFile}.tar.gz -C /var/lib/docker/volumes/terrama2_postgres_vol/_data/
 
     echo ""
     echo "****************************************************"
@@ -32,7 +32,7 @@ if test -d "/var/lib/docker/volumes/terrama2_pg_vol/_data/"; then
     echo "****************************************************"
     echo ""
 
-    docker exec -it terrama2_pg bash -c "cd /var/lib/postgresql/data/;psql -a -U postgres -h localhost < ${latestTerrama2BackupFile}.sql"
+    docker exec -it terrama2_postgres bash -c "cd /var/lib/postgresql/data/;psql -a -U postgres -h localhost < ${latestTerrama2BackupFile}.sql"
 
     echo ""
     echo "******************"
@@ -40,7 +40,7 @@ if test -d "/var/lib/docker/volumes/terrama2_pg_vol/_data/"; then
     echo "******************"
     echo ""
 
-    rm -vf /var/lib/docker/volumes/terrama2_pg_vol/_data/${latestTerrama2BackupFile}.sql
+    rm -vf /var/lib/docker/volumes/terrama2_postgres_vol/_data/${latestTerrama2BackupFile}.sql
 
 if test -d "/var/lib/docker/volumes/${COMPOSE_PROJECT_NAME}_geoserver_vol/_data/"; then
     echo ""
