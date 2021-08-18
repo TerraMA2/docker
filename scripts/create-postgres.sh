@@ -14,9 +14,10 @@ eval $(egrep -v '^#' .env | xargs)
 
 docker volume create terrama2_postgres_vol
 
-docker run -d \
-           --restart unless-stopped --name terrama2_postgres \
-           -p 0.0.0.0:5433:5432 \
+docker run --name terrama2_postgres -d \
+           --restart always \
+           -p 0.0.0.0:5435:5432 \
+           --network terrama2_net \
            -v terrama2_postgres_vol:/var/lib/postgresql/data \
            -e POSTGRES_PASSWORD="postgres" \
            --ipc=host \
