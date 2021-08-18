@@ -64,7 +64,7 @@ services:
       - COLLECTOR
       - "6543"
     volumes:
-      - %%TERRAMA2_DATA_DIR%%:/data"
+      - %%TERRAMA2_DATA_DIR%%:/data
       - "terrama2_shared_vol:/shared-data"
     tty: true
     networks:
@@ -85,7 +85,7 @@ services:
       - ANALYSIS
       - "6544"
     volumes:
-      - %%TERRAMA2_DATA_DIR%%:/data"
+      - %%TERRAMA2_DATA_DIR%%:/data
       - "terrama2_shared_vol:/shared-data"
     tty: true
     networks:
@@ -106,7 +106,7 @@ services:
       - VIEW
       - "6545"
     volumes:
-      - %%TERRAMA2_DATA_DIR%%:/data"
+      - %%TERRAMA2_DATA_DIR%%:/data
       - "terrama2_shared_vol:/shared-data"
     tty: true
     networks:
@@ -127,7 +127,7 @@ services:
       - ALERT
       - "6546"
     volumes:
-      - %%TERRAMA2_DATA_DIR%%:/data"
+      - %%TERRAMA2_DATA_DIR%%:/data
       - "terrama2_shared_vol:/shared-data"
     tty: true
     networks:
@@ -148,7 +148,7 @@ services:
       - INTERPOLATOR
       - "6547"
     volumes:
-      - %%TERRAMA2_DATA_DIR%%:/data"
+      - %%TERRAMA2_DATA_DIR%%:/data
       - "terrama2_shared_vol:/shared-data"
     tty: true
     networks:

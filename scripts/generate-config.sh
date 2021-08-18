@@ -5,17 +5,18 @@ echo "* Configuring config files *"
 echo "****************************"
 echo ""
 
-# To debug each command, uncomment next line
-# set -x
+CURRENT_FOLDER=$(basename $(pwd))
+if [ "$CURRENT_FOLDER" == 'scripts' ] ; then
+  cd ..
+fi
 
-# Expand variables defined in file ".env" to current script execution
-if [ ! -e ".env" ]
-then
+if [ ! -e ".env" ]; then
       cp .env.example .env
 fi
+
 eval $(egrep -v '^#' .env | xargs)
 
-for image in conf/terrama2_webapp_settings.json.in \
+for file in conf/terrama2_webapp_settings.json.in \
              conf/terrama2_webapp_db.json.in \
              conf/terrama2_webmonitor.json.in \
              terrama2/Dockerfile.in \
@@ -40,5 +41,5 @@ for image in conf/terrama2_webapp_settings.json.in \
         -e 's!%%WEBMONITOR_BASE_PATH%%!'"${WEBMONITOR_BASE_PATH}"'!g' \
         -e 's!%%WEBAPP_BASE_PATH%%!'"${WEBAPP_BASE_PATH}"'!g' \
         -e 's!%%GEOSERVER_PORT%%!'"${GEOSERVER_PORT}"'!g' \
-      "${image}" > "${image::-3}"
+      "${file}" > "${file::-3}"
 done

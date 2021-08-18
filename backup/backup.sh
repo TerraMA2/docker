@@ -1,6 +1,6 @@
 #!/bin/bash
 
-eval $(egrep -v '^#' .env | xargs)
+eval $(egrep -v '^#' ../.env | xargs)
 
 DATE=$(date +%d-%m-%Y-%H-%M)
 

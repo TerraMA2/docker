@@ -5,6 +5,11 @@ echo "* Creating PostgreSQL container *"
 echo "*********************************"
 echo ""
 
+CURRENT_FOLDER=$(basename $(pwd))
+if [ "$CURRENT_FOLDER" == 'scripts' ] ; then
+  cd ..
+fi
+
 eval $(egrep -v '^#' .env | xargs)
 
 docker volume create terrama2_postgres_vol

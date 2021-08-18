@@ -1,9 +1,14 @@
 #!/bin/bash
 
-echo "**********************************"
-echo "* Pushing TerraMA² to Docker Hub *"
-echo "**********************************"
+echo "************************************"
+echo "* Pushing SatAlertas to Docker Hub *"
+echo "************************************"
 echo ""
+
+CURRENT_FOLDER=$(basename $(pwd))
+if [ "$CURRENT_FOLDER" == 'scripts' ] ; then
+  cd ..
+fi
 
 # Variables
 eval $(egrep -v '^#' .env | xargs)

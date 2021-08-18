@@ -1,0 +1,49 @@
+pipeline {
+    agent any
+    parameters {
+        choice(name: 'VERSION', choices: ['develop'], description: 'TerraMA² branch')
+        string(name: 'COMPOSE_PROJECT_NAME', defaultValue: 'develop', description: 'Compose project name (used on docker-compose "-p" parameter)')
+        string(name: 'BASE_URL', defaultValue: 'http://www.terrama2.dpi.inpe.br', description: 'Server url')
+        string(name: 'BASE_PATH', defaultValue: '/develop/', description: 'Server URL base path')
+        booleanParam(name: 'DEPLOY', defaultValue: true, description: 'Should deploy after build?')
+    }
+    stages {
+        stage('Build') {
+            steps {
+                script {
+                    docker.withRegistry('https://registry.hub.docker.com/', 'dockerhub') {
+                        echo 'Creating .env file..'
+                        sh './scripts/create-env.sh $VERSION $COMPOSE_PROJECT_NAME'
+                        echo 'Generating config files..'
+                        sh './scripts/generate-config.sh'
+                        echo 'Building images..'
+                        def terrama2Image = docker.build("terrama2/$COMPOSE_PROJECT_NAME-terrama2:$VERSION", './terrama2')
+                        def webappImage = docker.build("terrama2/$COMPOSE_PROJECT_NAME-terrama2-webapp:$VERSION", './webapp')
+                        def webmonitorImage = docker.build("terrama2/$COMPOSE_PROJECT_NAME-terrama2-webmonitor:$VERSION", './webmonitor')
+                        echo 'Pushing images to the registry..'
+                        terrama2Image.push()
+                        webappImage.push()
+                        webmonitorImage.push()
+                    }
+                }
+            }
+        }
+        stage('Deploy') {
+            when {
+                expression {
+                    params.DEPLOY
+                }
+            }
+            agent {
+                docker {
+                    image 'python:3.8'
+                    args '-u root --network admin-net'
+                }
+            }
+            steps {
+                sh 'pip install requests && python3 portainer/update-stack.py $COMPOSE_PROJECT_NAME b$VERSION http://portainer:9000/'
+            }
+        }
+    }
+}
+

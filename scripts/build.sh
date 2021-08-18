@@ -1,8 +1,8 @@
 #!/bin/bash
 
-echo "****************************"
-echo "* Building TerraMA² images *"
-echo "****************************"
+echo "******************************"
+echo "* Building SatAlertas images *"
+echo "******************************"
 echo ""
 
 function is_valid() {
@@ -15,8 +15,11 @@ function is_valid() {
   fi
 }
 
-# Variables
-_current_dir=${PWD}
+CURRENT_FOLDER=$(basename $(pwd))
+if [ "$CURRENT_FOLDER" == 'scripts' ] ; then
+  cd ..
+fi
+
 eval $(egrep -v '^#' .env | xargs)
 
 # GeoServer
