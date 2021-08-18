@@ -11,7 +11,7 @@ terrama2/Dockerfile
 webapp/Dockerfile
 webmonitor/Dockerfile
 .env
-docker-compose.yml
+/docker-compose.yml
 
 # C extensions
 *.so

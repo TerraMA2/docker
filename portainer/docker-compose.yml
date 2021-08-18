@@ -1,0 +1,172 @@
+version: "3.8"
+
+services:
+
+  # TerraMA2 Web Application
+  webapp:
+    image: ${TERRAMA2_DOCKER_REGISTRY}/terrama2-webapp:${COMPOSE_PROJECT_NAME}
+    deploy:
+      restart_policy:
+        delay: 10s
+        max_attempts: 2
+        condition: on-failure
+    ports:
+      - ${TERRAMA2_WEBAPP_ADDRESS}:36000
+    volumes:
+      - ${TERRAMA2_DATA_DIR}:/data
+      - "terrama2_shared_vol:/shared-data"
+    networks:
+      - backend
+      - frontend
+
+  # TerraMA2 Web Monitor
+  webmonitor:
+    image: ${TERRAMA2_DOCKER_REGISTRY}/terrama2-webmonitor:${COMPOSE_PROJECT_NAME}
+    deploy:
+      restart_policy:
+        delay: 10s
+        max_attempts: 2
+        condition: on-failure
+    ports:
+      - ${TERRAMA2_WEBMONITOR_ADDRESS}:36001
+    depends_on:
+      - webapp
+    environment:
+      - "NODE_TLS_REJECT_UNAUTHORIZED=0"
+    volumes:
+      - ${TERRAMA2_DATA_DIR}:/data
+      - "terrama2_shared_vol:/shared-data"
+      - webmonitor_images:/opt/terrama2/${TERRAMA2_TAG}/webmonitor/public/images
+    networks:
+      - frontend
+
+  # TerraMA2 Collector Service using TerraMA2 Base
+  collector:
+    image: ${TERRAMA2_DOCKER_REGISTRY}/terrama2:${COMPOSE_PROJECT_NAME}
+    deploy:
+      restart_policy:
+        delay: 10s
+        max_attempts: 2
+        condition: on-failure
+    entrypoint:
+      - /usr/local/bin/start_terrama2_service.sh
+      - COLLECTOR
+      - "6543"
+    volumes:
+      - ${TERRAMA2_DATA_DIR}:/data"
+      - "terrama2_shared_vol:/shared-data"
+    tty: true
+    networks:
+      - backend
+
+  # TerraMA2 Analysis Service using TerraMA2 Base
+  analysis:
+    image: ${TERRAMA2_DOCKER_REGISTRY}/terrama2:${COMPOSE_PROJECT_NAME}
+    deploy:
+      restart_policy:
+        delay: 10s
+        max_attempts: 2
+        condition: on-failure
+    entrypoint:
+      - /usr/local/bin/start_terrama2_service.sh
+      - ANALYSIS
+      - "6544"
+    volumes:
+      - ${TERRAMA2_DATA_DIR}:/data
+      - "terrama2_shared_vol:/shared-data"
+    tty: true
+    networks:
+      - backend
+
+  # TerraMA2 View Service using TerraMA2 Base
+  view:
+    image: ${TERRAMA2_DOCKER_REGISTRY}/terrama2:${COMPOSE_PROJECT_NAME}
+    deploy:
+      restart_policy:
+        delay: 10s
+        max_attempts: 2
+        condition: on-failure
+    entrypoint:
+      - /usr/local/bin/start_terrama2_service.sh
+      - VIEW
+      - "6545"
+    volumes:
+      - ${TERRAMA2_DATA_DIR}:/data
+      - "terrama2_shared_vol:/shared-data"
+    tty: true
+    networks:
+      - backend
+
+  # TerraMA2 Alert Service using TerraMA2 Base
+  alert:
+    image: ${TERRAMA2_DOCKER_REGISTRY}/terrama2:${COMPOSE_PROJECT_NAME}
+    deploy:
+      restart_policy:
+        delay: 10s
+        max_attempts: 2
+        condition: on-failure
+    entrypoint:
+      - /usr/local/bin/start_terrama2_service.sh
+      - ALERT
+      - "6546"
+    volumes:
+      - ${TERRAMA2_DATA_DIR}:/data
+      - "terrama2_shared_vol:/shared-data"
+    tty: true
+    networks:
+      - backend
+
+  # TerraMA2 Interpolator Service using TerraMA2 Base
+  interpolator:
+    image: ${TERRAMA2_DOCKER_REGISTRY}/terrama2:${COMPOSE_PROJECT_NAME}
+    deploy:
+      restart_policy:
+        delay: 10s
+        max_attempts: 2
+        condition: on-failure
+    entrypoint:
+      - /usr/local/bin/start_terrama2_service.sh
+      - INTERPOLATOR
+      - "6547"
+    volumes:
+      - ${TERRAMA2_DATA_DIR}:/data
+      - "terrama2_shared_vol:/shared-data"
+    tty: true
+    networks:
+      - backend
+
+  # Geoserver
+  geoserver:
+    image: ${TERRAMA2_DOCKER_REGISTRY}/geoserver:2.19.2
+    deploy:
+      restart_policy:
+        delay: 10s
+        max_attempts: 2
+        condition: on-failure
+    ports:
+      - 8080:8080
+    volumes:
+      - ${TERRAMA2_DATA_DIR}:/data
+      - terrama2_shared_vol:/shared-data
+      - geoserver_vol:/opt/geoserver/data_dir
+    environment:
+      - GEOSERVER_URL=/${COMPOSE_PROJECT_NAME}/geoserver
+      - "GEOSERVER_DATA_DIR=/opt/geoserver/data_dir"
+    networks:
+      - backend
+      - frontend
+
+networks:
+  backend:
+    driver: bridge
+    internal: true
+
+  frontend:
+    driver: bridge
+    internal: true
+
+volumes:
+  data_vol:
+  geoserver_vol:
+  webmonitor_images:
+  terrama2_shared_vol:
