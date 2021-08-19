@@ -41,7 +41,9 @@ pipeline {
                 }
             }
             steps {
-                sh 'pip install requests && python3 portainer/update-stack.py $COMPOSE_PROJECT_NAME b$VERSION http://portainer:9000/'
+                withCredentials([usernamePassword(credentialsId: 'portainer-admin', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                   sh 'pip install requests && python3 portainer/update-stack.py $COMPOSE_PROJECT_NAME_terrama2 b$VERSION http://portainer:9000/ $USERNAME $PASSWORD'
+                }
             }
         }
     }

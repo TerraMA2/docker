@@ -1,6 +1,7 @@
 import json
-import requests
 import sys
+
+import requests
 
 
 def send_request(url, method, headers, body):
@@ -14,6 +15,113 @@ def send_request(url, method, headers, body):
     return json.loads(response.text)
 
 
+def authenticate(url, userName, password):
+    print("Logging in...")
+    auth = send_request(
+        f"{url}/api/auth", 'POST',
+        {
+            'Content-Type': 'application/json',
+            'accept': 'application/json'
+        },
+        json.dumps(
+            {
+                "password": password,
+                "username": userName
+            }
+        ).encode('utf-8')
+    )
+    if 'jwt' in auth:
+        print("Logged in...")
+        return auth['jwt']
+
+    print("Couldn't log in")
+
+
+def findStack(url, jwtToken, projectId):
+    stacks = send_request(f"{url}/api/stacks", 'GET', {
+        'accept': 'application/json',
+        'Authorization': jwtToken
+    }, '')
+
+    if len(stacks) == 0:
+        print("No stacks found...")
+        exit()
+
+    for stack in stacks:
+        if stack['Name'] == projectId:
+            return stack
+
+
+def getStackFile(url, stack, jwtToken):
+    print("Getting stack file...")
+    stackId = stack['Id']
+    response = send_request(
+        f"{url}/api/stacks/{stackId}/file", 'GET',
+        {
+            'accept': 'application/json',
+            'Authorization': jwtToken
+        },
+        ''
+    )
+
+    if 'StackFileContent' in response:
+        return response['StackFileContent']
+
+    print("Couldn't get the stack file")
+    exit()
+
+
+def updateStackGit(url, jwtToken, stack, version):
+    print("Updating stack...")
+    stackId = stack['Id']
+    endpointId = stack['EndpointId']
+    response = send_request(f"{url}/api/stacks/{stackId}/git?endpointId={endpointId}", 'PUT',
+                            {
+                                'Content-Type': 'application/json',
+                                'accept': 'application/json',
+                                'Authorization': jwtToken
+                            },
+                            json.dumps(
+                                {
+                                    "repositoryReferenceName": f"refs/heads/{version}"
+                                }
+                            ).encode('utf-8')
+                            )
+
+    if 'message' in response:
+        print("Couldn't update the stack")
+        exit()
+
+    print("Stack updated!")
+
+
+def updateStack(url, jwtToken, stack):
+    print("Updating stack...")
+    stackId = stack['Id']
+    endpointId = stack['EndpointId']
+    env = stack['Env']
+    stackFile = getStackFile(url, stack, jwtToken)
+    response = send_request(f"{url}/api/stacks/{stackId}?endpointId={endpointId}", 'PUT',
+                            {
+                                'accept': 'application/json',
+                                'Authorization': jwtToken
+                            },
+                            json.dumps(
+                                {
+                                    "env": env,
+                                    "prune": False,
+                                    "stackFileContent": stackFile
+                                }
+                            ).encode('utf-8')
+                            )
+
+    if 'message' in response:
+        print("Couldn't update the stack")
+        exit()
+
+    print("Stack updated!")
+
+
 if len(sys.argv) < 4:
     print("Missing parameters")
     exit()
@@ -21,66 +129,12 @@ if len(sys.argv) < 4:
 projectId = sys.argv[1]
 version = sys.argv[2]
 url = sys.argv[3]
+userName = sys.argv[4]
+password = sys.argv[5]
 
-print("Logging in...")
-auth = send_request(f"{url}/api/auth", 'POST',
-                    {
-                        'Content-Type': 'application/json',
-                        'accept': 'application/json'
-                    },
-                    json.dumps(
-                        {
-                            "password": "250691mp",
-                            "username": "admin"
-                        }
-                    ).encode('utf-8')
-                    )
-if 'message' in auth:
-    print("Couldn't log in")
-    exit()
+jwtToken = authenticate(url, userName, password)
 
-jwtToken = auth['jwt']
-if jwtToken:
-    print("Logged in...")
+stack = findStack(url, jwtToken, projectId)
 
-stacks = send_request(f"{url}/api/stacks", 'GET', {
-    'accept': 'application/json',
-    'Authorization': jwtToken
-}, '')
-
-stackId = ''
-endpointId = ''
-if len(stacks) == 0:
-    print("No stacks found...")
-    exit()
-
-for stack in stacks:
-    if stack['Name'] == projectId:
-        stackId = stack['Id']
-        endpointId = stack['EndpointId']
-
-
-if stackId == "" and endpointId == "":
-    print("Stack not found...")
-    exit()
-
-print("Updating stack...")
-response = send_request(f"{url}/api/stacks/{stackId}/git?endpointId={endpointId}", 'PUT',
-                        {
-                            'Content-Type': 'application/json',
-                            'accept': 'application/json',
-                            'Authorization': jwtToken
-                        },
-                        json.dumps(
-                            {
-                                "repositoryReferenceName": f"refs/heads/{version}"
-                            }
-                        ).encode('utf-8')
-                        )
-
-if 'message' in response:
-    print("Couldn't update the stack")
-    exit()
-
-print("Stack updated!")
-
+# updateStackGit(url, jwtToken, stack, version)
+updateStack(url, jwtToken, stack)
