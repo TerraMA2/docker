@@ -169,12 +169,10 @@ services:
 networks:
   backend:
     driver: overlay
-    internal: true
     attachable: true
 
   frontend:
     driver: overlay
-    internal: true
     attachable: true
 
 configs:
