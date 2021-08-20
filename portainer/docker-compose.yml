@@ -183,15 +183,15 @@ networks:
     driver: overlay
     attachable: true
 
-configs:
-  develop_terrama2_db_config:
-    external: true
-  develop_terrama2_userconf_config:
-    external: true
-  develop_terrama2_webapp_config:
-    external: true
-  develop_terrama2_webmonitor_config:
-    external: true
+#configs:
+#  terrama2_db_config:
+#    external: true
+#  terrama2_userconf_config:
+#    external: true
+#  terrama2_webapp_config:
+#    external: true
+#  terrama2_webmonitor_config:
+#    external: true
 
 volumes:
   data_vol:
