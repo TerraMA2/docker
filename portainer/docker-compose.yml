@@ -10,6 +10,7 @@ services:
         delay: 10s
         max_attempts: 2
         condition: on-failure
+    hostname: ${COMPOSE_PROJECT_NAME}_webapp
     ports:
       - ${TERRAMA2_WEBAPP_ADDRESS}:36000
     volumes:
@@ -17,9 +18,9 @@ services:
       - "terrama2_shared_vol:/shared-data"
     configs:
       - source: ${COMPOSE_PROJECT_NAME}_terrama2_db_config
-        target: /opt/terrama2/${TERRAMA2_TAG}/webapp/db.json
+        target: /opt/terrama2/${TERRAMA2_TAG}/webapp/config/db.json
       - source: ${COMPOSE_PROJECT_NAME}_terrama2_webapp_config
-        target: /opt/terrama2/${TERRAMA2_TAG}/webapp/settings.json
+        target: /opt/terrama2/${TERRAMA2_TAG}/webapp/config/settings.json
     networks:
       - backend
       - frontend
@@ -32,6 +33,7 @@ services:
         delay: 10s
         max_attempts: 2
         condition: on-failure
+    hostname: ${COMPOSE_PROJECT_NAME}_webmonitor
     ports:
       - ${TERRAMA2_WEBMONITOR_ADDRESS}:36001
     depends_on:
@@ -58,6 +60,7 @@ services:
         delay: 10s
         max_attempts: 2
         condition: on-failure
+    hostname: ${COMPOSE_PROJECT_NAME}_collector
     entrypoint:
       - /usr/local/bin/start_terrama2_service.sh
       - COLLECTOR
@@ -77,6 +80,7 @@ services:
         delay: 10s
         max_attempts: 2
         condition: on-failure
+    hostname: ${COMPOSE_PROJECT_NAME}_analysis
     entrypoint:
       - /usr/local/bin/start_terrama2_service.sh
       - ANALYSIS
@@ -96,6 +100,7 @@ services:
         delay: 10s
         max_attempts: 2
         condition: on-failure
+    hostname: ${COMPOSE_PROJECT_NAME}_view
     entrypoint:
       - /usr/local/bin/start_terrama2_service.sh
       - VIEW
@@ -115,6 +120,7 @@ services:
         delay: 10s
         max_attempts: 2
         condition: on-failure
+    hostname: ${COMPOSE_PROJECT_NAME}_alert
     entrypoint:
       - /usr/local/bin/start_terrama2_service.sh
       - ALERT
@@ -134,6 +140,7 @@ services:
         delay: 10s
         max_attempts: 2
         condition: on-failure
+    hostname: ${COMPOSE_PROJECT_NAME}_interpolator
     entrypoint:
       - /usr/local/bin/start_terrama2_service.sh
       - INTERPOLATOR
@@ -153,6 +160,7 @@ services:
         delay: 10s
         max_attempts: 2
         condition: on-failure
+    hostname: ${COMPOSE_PROJECT_NAME}_geoserver
     ports:
       - 8130:8080
     volumes:
