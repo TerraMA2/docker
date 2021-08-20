@@ -13,9 +13,6 @@ function valid()
 apt-get update
 
 TERRAMA2_VERSION="${TERRAMA2_TAG}-release";
-if [[ "$TERRAMA2_TAG" == *dev* || "$TERRAMA2_TAG" == *master* || "$TERRAMA2_TAG" == *beta* ]]; then
-  TERRAMA2_VERSION=${TERRAMA2_TAG}
-fi;
 
 echo -ne "Downloading TerraMA² ... "
 curl -O http://www.dpi.inpe.br/jenkins-data/terrama2/installers/linux/TerraMA2-${TERRAMA2_VERSION}-linux-x64-Ubuntu-16.04.deb --silent

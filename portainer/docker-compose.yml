@@ -4,7 +4,7 @@ services:
 
   # TerraMA2 Web Application
   webapp:
-    image: ${TERRAMA2_DOCKER_REGISTRY}/terrama2-webapp:${COMPOSE_PROJECT_NAME}
+    image: ${TERRAMA2_DOCKER_REGISTRY}/terrama2-webapp:${TERRAMA2_TAG}
     deploy:
       restart_policy:
         delay: 10s
@@ -17,16 +17,16 @@ services:
       - "terrama2_shared_vol:/shared-data"
     configs:
       - source: ${COMPOSE_PROJECT_NAME}_terrama2_db_config
-        target: /opt/terrama2/${COMPOSE_PROJECT_NAME}/webapp/db.json
+        target: /opt/terrama2/${TERRAMA2_TAG}/webapp/db.json
       - source: ${COMPOSE_PROJECT_NAME}_terrama2_webapp_config
-        target: /opt/terrama2/${COMPOSE_PROJECT_NAME}/webapp/settings.json
+        target: /opt/terrama2/${TERRAMA2_TAG}/webapp/settings.json
     networks:
       - backend
       - frontend
 
   # TerraMA2 Web Monitor
   webmonitor:
-    image: ${TERRAMA2_DOCKER_REGISTRY}/terrama2-webmonitor:${COMPOSE_PROJECT_NAME}
+    image: ${TERRAMA2_DOCKER_REGISTRY}/terrama2-webmonitor:${TERRAMA2_TAG}
     deploy:
       restart_policy:
         delay: 10s
@@ -40,19 +40,19 @@ services:
       - "NODE_TLS_REJECT_UNAUTHORIZED=0"
     volumes:
       - ${TERRAMA2_DATA_DIR}:/data
-      - "shared_vol:/shared-data"
+      - "terrama2_shared_vol:/shared-data"
       - webmonitor_images:/opt/terrama2/${TERRAMA2_TAG}/webmonitor/public/images
     configs:
       - source: ${COMPOSE_PROJECT_NAME}_terrama2_userconf_config
-        target: /opt/terrama2/${COMPOSE_PROJECT_NAME}/webmonitor/config/instances/user_conf.json
+        target: /opt/terrama2/${TERRAMA2_TAG}/webmonitor/config/instances/user_conf.json
       - source: ${COMPOSE_PROJECT_NAME}_terrama2_webmonitor_config
-        target: /opt/terrama2/${COMPOSE_PROJECT_NAME}/webmonitor/config/instances/default.json
+        target: /opt/terrama2/${TERRAMA2_TAG}/webmonitor/config/instances/default.json
     networks:
       - frontend
 
   # TerraMA2 Collector Service using TerraMA2 Base
   collector:
-    image: ${TERRAMA2_DOCKER_REGISTRY}/terrama2:${COMPOSE_PROJECT_NAME}
+    image: ${TERRAMA2_DOCKER_REGISTRY}/terrama2:${TERRAMA2_TAG}
     deploy:
       restart_policy:
         delay: 10s
@@ -71,7 +71,7 @@ services:
 
   # TerraMA2 Analysis Service using TerraMA2 Base
   analysis:
-    image: ${TERRAMA2_DOCKER_REGISTRY}/terrama2:${COMPOSE_PROJECT_NAME}
+    image: ${TERRAMA2_DOCKER_REGISTRY}/terrama2:${TERRAMA2_TAG}
     deploy:
       restart_policy:
         delay: 10s
@@ -90,7 +90,7 @@ services:
 
   # TerraMA2 View Service using TerraMA2 Base
   view:
-    image: ${TERRAMA2_DOCKER_REGISTRY}/terrama2:${COMPOSE_PROJECT_NAME}
+    image: ${TERRAMA2_DOCKER_REGISTRY}/terrama2:${TERRAMA2_TAG}
     deploy:
       restart_policy:
         delay: 10s
@@ -109,7 +109,7 @@ services:
 
   # TerraMA2 Alert Service using TerraMA2 Base
   alert:
-    image: ${TERRAMA2_DOCKER_REGISTRY}/terrama2:${COMPOSE_PROJECT_NAME}
+    image: ${TERRAMA2_DOCKER_REGISTRY}/terrama2:${TERRAMA2_TAG}
     deploy:
       restart_policy:
         delay: 10s
@@ -128,7 +128,7 @@ services:
 
   # TerraMA2 Interpolator Service using TerraMA2 Base
   interpolator:
-    image: ${TERRAMA2_DOCKER_REGISTRY}/terrama2:${COMPOSE_PROJECT_NAME}
+    image: ${TERRAMA2_DOCKER_REGISTRY}/terrama2:${TERRAMA2_TAG}
     deploy:
       restart_policy:
         delay: 10s
@@ -154,7 +154,7 @@ services:
         max_attempts: 2
         condition: on-failure
     ports:
-      - 8080:8080
+      - 8130:8080
     volumes:
       - ${TERRAMA2_DATA_DIR}:/data
       - terrama2_shared_vol:/shared-data
