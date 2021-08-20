@@ -40,6 +40,5 @@ for file in conf/terrama2_webapp_settings.json.in \
         -e 's!%%PUBLIC_URI%%!'"${PUBLIC_URI}"'!g' \
         -e 's!%%WEBMONITOR_BASE_PATH%%!'"${WEBMONITOR_BASE_PATH}"'!g' \
         -e 's!%%WEBAPP_BASE_PATH%%!'"${WEBAPP_BASE_PATH}"'!g' \
-        -e 's!%%GEOSERVER_PORT%%!'"${GEOSERVER_PORT}"'!g' \
       "${file}" > "${file::-3}"
 done
