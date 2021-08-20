@@ -136,5 +136,5 @@ jwtToken = authenticate(url, userName, password)
 
 stack = findStack(url, jwtToken, projectId)
 
-# updateStackGit(url, jwtToken, stack, version)
-updateStack(url, jwtToken, stack)
+updateStackGit(url, jwtToken, stack, version)
+# updateStack(url, jwtToken, stack)

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-./scripts/configure-version.sh
+./scripts/generate-config.sh
 
 eval $(egrep -v '^#' .env | xargs)
 

@@ -99,7 +99,7 @@ Edit the file `conf/terrama2_webapp_db.json` with database credentials.
 After that, configure files version properly:
 
 ```bash
-./configure-version.sh
+./generate-config.sh
 ```
 
 This command will generate **conf/terrama2_webapp.json** file. You may edit this file for connection parameters.
@@ -156,7 +156,7 @@ Link the BDqueimadas container in `terrama2_net`:
 docker network connect terrama2_net terrama2_bdq
 ```
 
-The `docker-composer.yml` file uses the `.env` file, so, it's necessary to run `./configure-version.sh` script.
+The `docker-composer.yml` file uses the `.env` file, so, it's necessary to run `./generate-config.sh` script.
 
 ## Post Installation Tips
 
