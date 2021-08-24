@@ -3,16 +3,6 @@
 docker volume create jenkins_home
 docker network create --scope swarm --attachable admin_net
 
-#docker run --name=jenkins -d \
-#      --privileged \
-#      --restart=always \
-#      --env JENKINS_OPTS="--prefix=/jenkins" \
-#      -v jenkins_home:/var/jenkins_home \
-#      --mount type=bind,src=/var/run/docker.sock,dst=/var/run/docker.sock \
-#      -v $(which docker):$(which docker) \
-#      --network admin_net \
-#      -p 36062:8080 jenkins/jenkins:latest-jdk11
-
 docker service create --name jenkins -d \
         --hostname=jenkins \
         --restart-condition=on-failure \
@@ -20,6 +10,7 @@ docker service create --name jenkins -d \
         --env JENKINS_OPTS="--prefix=/jenkins" \
         --mount type=volume,src=jenkins_home,dst=/var/jenkins_home \
         --mount type=bind,src=/var/run/docker.sock,dst=/var/run/docker.sock \
+        --mount type=bind,src=/var/lib/docker/volumes,dst=/var/lib/docker/volumes \
         --mount type=bind,src=$(which docker),dst=$(which docker) \
         --network admin_net \
         --publish 36062:8080 jenkins/jenkins:2.307-jdk11

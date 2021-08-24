@@ -1,0 +1,57 @@
+pipeline {
+    agent any
+    parameters {
+        choice(name: 'VERSION', choices: ['b4.1.2-dev', 'b4.1.2-beta', 'b4.1.2'], description: 'TerraMA² branch')
+        string(name: 'COMPOSE_PROJECT_NAME', defaultValue: 'develop', description: 'Compose project name (used on docker-compose "-p" parameter)')
+        string(name: 'HOST', defaultValue: 'localhost', description: 'Database hostname')
+        string(name: 'PORT', defaultValue: '5432', description: 'Database port')
+        string(name: 'DATABASE', description: 'Database name')
+        string(name: 'BACKUP-DIR', defaultValue: '/data/backup', description: 'Hostname')
+        string(name: 'HOST', defaultValue: 'localhost', description: 'Hostname')
+        booleanParam(name: 'DEPLOY', defaultValue: true, description: 'Should deploy after build?')
+    }
+    environment {
+        GIT_BRANCH = 'b${VERSION}'
+    }
+    stages {
+        stage('Build') {
+            steps {
+                script {
+                    echo 'Creating .env file..'
+                    sh './scripts/create-env.sh $VERSION $COMPOSE_PROJECT_NAME'
+                    echo 'Generating config files..'
+                    sh './scripts/generate-config.sh'
+                    docker.withRegistry('https://registry.hub.docker.com/', 'dockerhub') {
+                        echo 'Building images..'
+                        def terrama2Image = docker.build("terrama2/$COMPOSE_PROJECT_NAME-terrama2:$VERSION", './terrama2')
+                        def webappImage = docker.build("terrama2/$COMPOSE_PROJECT_NAME-terrama2-webapp:$VERSION", './webapp')
+                        def webmonitorImage = docker.build("terrama2/$COMPOSE_PROJECT_NAME-terrama2-webmonitor:$VERSION", './webmonitor')
+                        echo 'Pushing images to the registry..'
+                        terrama2Image.push()
+                        webappImage.push()
+                        webmonitorImage.push()
+                    }
+                }
+            }
+        }
+        stage('Deploy') {
+            when {
+                expression {
+                    params.DEPLOY
+                }
+            }
+            agent {
+                docker {
+                    image 'python:3.8'
+                    args '-u root --network admin_net'
+                }
+            }
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'portainer-admin', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                   sh 'pip install requests && python3 ./portainer/update-stack.py ${COMPOSE_PROJECT_NAME}_terrama2 b$VERSION http://portainer:9000 $USERNAME $PASSWORD'
+                }
+            }
+        }
+    }
+}
+
