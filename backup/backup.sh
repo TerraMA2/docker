@@ -107,10 +107,10 @@ echo "* Geoserver *"
 echo "*************"
 echo ""
 
-if test -d "/var/lib/docker/volumes/${COMPOSE_PROJECT_NAME}_geoserver_vol/_data/"; then
+if test -d "/var/lib/docker/volumes/${COMPOSE_PROJECT_NAME}_terrama2_geoserver_vol/_data/"; then
   mkdir -vp ${BACKUP_DIR}/${COMPOSE_PROJECT_NAME}/geoserver
 
-  cd /var/lib/docker/volumes/${COMPOSE_PROJECT_NAME}_geoserver_vol/_data/ || exit
+  cd /var/lib/docker/volumes/${COMPOSE_PROJECT_NAME}_terrama2_geoserver_vol/_data/ || exit
 
   tar cvf - * | gzip -9 - >${BACKUP_DIR}/${COMPOSE_PROJECT_NAME}/geoserver/geoserver-${DATE}.tar.gz
 fi
