@@ -15,12 +15,19 @@ if [ ! -d "${PLUGINS_DIR}" ]; then
   unzip -d ${GEO_ROOT_DIR} /root/geoserver.war
 
   # Just download ImagePyramid Plugin if does not exist
-if [ ! -f "${PLUGINS_DIR}/gt-imagepyramid*.jar" ]; then
-    wget --no-verbose -O geoserver-2.19.2-pyramid-plugin.zip -L "https://sourceforge.net/projects/geoserver/files/GeoServer/2.19.2/extensions/geoserver-2.19.2-pyramid-plugin.zip/download"
-    unzip -d /tmp/_geoserver_docker geoserver-2.19.2-pyramid-plugin.zip
+  if [ ! -f "${PLUGINS_DIR}/gt-imagepyramid*.jar" ]; then
+    wget --no-verbose -O geoserver-2.20.0-pyramid-plugin.zip -L "https://sourceforge.net/projects/geoserver/files/GeoServer/2.20.0/extensions/geoserver-2.20.0-pyramid-plugin.zip/download"
+    unzip -d /tmp/_geoserver_docker geoserver-2.20.0-pyramid-plugin.zip
     mv /tmp/_geoserver_docker/gt-imagepyramid*.jar ${PLUGINS_DIR}
-    rm -rf /tmp/_geoserver_docker geoserver-2.19.2-pyramid-plugin.zip
+    rm -rf /tmp/_geoserver_docker geoserver-2.20.0-pyramid-plugin.zip
   fi
+  if [ ! -f "${PLUGINS_DIR}/gs-querylayer*.jar" ]; then
+    wget --no-verbose -O geoserver-2.20.0-querylayer-plugin.zip -L "https://sourceforge.net/projects/geoserver/files/GeoServer/2.20.0/extensions/geoserver-2.20.0-querylayer-plugin.zip/download"
+    unzip -d /tmp/_geoserver_docker geoserver-2.20.0-querylayer-plugin.zip
+    mv /tmp/_geoserver_docker/gs-querylayer*.jar ${PLUGINS_DIR}
+    rm -rf /tmp/_geoserver_docker geoserver-2.20.0-querylayer-plugin.zip
+  fi
+
 fi
 
 # Start Tomcat8
