@@ -170,6 +170,7 @@ services:
     environment:
       - GEOSERVER_URL=/${COMPOSE_PROJECT_NAME}/geoserver
       - "GEOSERVER_DATA_DIR=/opt/geoserver/data_dir"
+      - "GEOMETRY_COLLECT_MAX_COORDINATES=100000"
     networks:
       - backend
       - frontend
